@@ -208,7 +208,7 @@ async function uploadImageToServer(file) {
   formData.append("file", file);
 
   try {
-    const response = await fetch("/api/cloudinary", {
+    const response = await fetch("https://tbakpl.vercel.app/api/cloudinary", {
       // URL backend diperbaiki
       method: "POST",
       body: formData,
