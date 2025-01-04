@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ABXY Outdoor</title>
+    <link href="./output.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Saira+Condensed:wght@100;200;300;400;500;600;700;800;900&family=Skranji:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.cdnfonts.com/css/tw-cen-mt-std"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="font-skranji">
+    <div class="p-10 bg-black w-full h-screen">
+      <div
+        class="bg-[url('/./assets/img/bg.jpg')] w-full h-full bg-cover bg-center bg-no-repeat"
+      >
+        <div class="w-full h-full bg-gray-900/50">
+          <div
+            class="w-full h-full flex justify-center items-center p-5 gap-x-1"
+          >
+            <div class="w-1/2 flex flex-col items-center gap-y-4">
+              <img src="/assets/img/logo.png" class="h-[150px]" alt="logo" />
+              <p class="text-center text-[32px] text-[#FFFF00]">
+                Group 5 Rental Camp <br />
+                Teman Setia Petualanganmu!
+              </p>
+              <p class="text-center text-white text-[24px]">
+                Sewa Alat Camping dan Berkualitas <br />
+                Di <br />
+                Jl. Mayor Samsu No. 1, Jayaraga, Tarogong Kidul
+              </p>
+            </div>
+            <div class="w-1/2 flex flex-col items-center gap-y-4 font-tw">
+              <p class="text-white text-[32px] font-bold">LOGIN</p>
+              <div
+                class="bg-white rounded-xl p-2 py-6 gap-y-2 flex flex-col w-1/2 shadow-md"
+              >
+                <form id="loginForm">
+                  <p id="errorMessage" class="hidden text-red-500 text-center bg-red-300 rounded-lg"></p>
+                  <div class="flex flex-col py-2 w-full">
+                    <p class="mb-2">Username</p>
+                    <input
+                      type="text"
+                      name="username"
+                      id="username"
+                      class="p-2 border rounded-xl shadow-md"
+                      placeholder="Enter your username"
+                    />
+                  </div>
+                  <div class="flex flex-col py-5">
+                    <label for="password" class="mb-2">Password</label>
+                    <div class="relative">
+                      <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        class="p-2 border rounded-xl w-full shadow-md"
+                        placeholder="Enter your password"
+                      />
+                      <button
+                        type="button"
+                        id="togglePassword"
+                        class="absolute right-2 top-2 text-sm"
+                        aria-label="Toggle password visibility"
+                      >
+                        <svg
+                          id="eyeClosed"
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="w-5 h-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M3 3l18 18M9.88 9.88c-.25.32-.48.66-.67 1.05m-.98-2.49L4.1 8.1a11.954 11.954 0 000 7.8m6.4 2.4a12.093 12.093 0 01-6.4-2.4m16.2 0a11.937 11.937 0 01-6.6 2.4m-2.52-6.44a3 3 0 114.243 4.243m-.212-1.631a3 3 0 00-4.03-4.03m6.5-1.97c1.196.75 2.152 1.778 2.81 2.99m-1.3 6.3l1.3 1.3"
+                          />
+                        </svg>
+                        <svg
+                          id="eyeOpen"
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="w-5 h-5 hidden"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                          />
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="flex w-full justify-center">
+                    <button type="submit"
+                      class="rounded-xl bg-[#0000FF] px-10 py-1 text-white mt-5 flex justify-center w-1/2"
+                    >
+                      LOGIN
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const passwordInput = document.getElementById("password");
+      const togglePasswordButton = document.getElementById("togglePassword");
+      const eyeOpen = document.getElementById("eyeOpen");
+      const eyeClosed = document.getElementById("eyeClosed");
+
+      togglePasswordButton.addEventListener("click", () => {
+        const isPassword = passwordInput.type === "password";
+        passwordInput.type = isPassword ? "text" : "password";
+
+        eyeOpen.classList.toggle("hidden", !isPassword);
+        eyeClosed.classList.toggle("hidden", isPassword);
+      });
+    </script>
+    <script type="module" src="../index.js"></script>
+  </body>
+</html>

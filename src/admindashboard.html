@@ -1,0 +1,1796 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Admin</title>
+    <link href="./output.css" rel="stylesheet" />
+    <link
+      href="https://fonts.cdnfonts.com/css/tw-cen-mt-std"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="font-tw">
+    <nav
+      class="flex w-full h-[50px] justify-between shadow-md items-center px-[10%] py-10"
+    >
+      <div>
+        <div class="">
+          <input type="checkbox" id="menuToggle" class="peer hidden" />
+          <label
+            for="menuToggle"
+            class="flex items-center h-full w-full p-1 rounded bg-transparent cursor-pointer peer-checked:bg-gray-50/50"
+          >
+            <svg
+              height="24"
+              viewBox="0 0 6 7"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <line y1="0.5" x2="6" y2="0.5" stroke="black" />
+              <line y1="3.5" x2="6" y2="3.5" stroke="black" />
+              <line y1="6.5" x2="6" y2="6.5" stroke="black" />
+            </svg>
+          </label>
+          <div
+            class="fixed animate-fade-right animate-duration-300 left-0 top-0 min-h-[100vh] w-1/2 md:w-[25vw] hidden bg-[#C0C0C0] border peer-checked:block shadow-md z-10"
+          >
+            <div
+              class="flex w-full justify-between items-center border-b border-black px-5 py-1"
+            >
+              <div></div>
+              <img src="../assets/img/logoabxy.png" class="h-7 my-5" alt="" />
+              <div>
+                <label
+                  for="menuToggle"
+                  class="flex items-center h-full w-full p-1 rounded bg-transparent cursor-pointer peer-checked:bg-gray-50/50"
+                >
+                  <svg
+                    height="24"
+                    viewBox="0 0 6 7"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <line
+                      x1="0.615889"
+                      y1="6.67991"
+                      x2="5.61589"
+                      y2="0.679908"
+                      stroke="black"
+                    />
+                    <line
+                      x1="0.384111"
+                      y1="0.679908"
+                      x2="5.38411"
+                      y2="6.67991"
+                      stroke="black"
+                    />
+                  </svg>
+                </label>
+              </div>
+            </div>
+            <ul class="flex flex-col gap-y-2 p-2 pl-10 text-lg mt-4 navbar">
+              <li
+                class="tab w-full flex p-1 rounded-lg text-[#003CD3] hover:cursor-pointer hover:bg-blue-200/20"
+                data-target="dashboard,dashboardHeader"
+              >
+                <button>
+                  <div class="flex items-center gap-x-4">
+                    <svg
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                      style="fill: currentColor"
+                      class="h-6 w-6"
+                    >
+                      <path d="M0 0h24v24H0z" fill="none"></path>
+                      <path
+                        d="M13 21V11h8v10h-8zM3 13V3h8v10H3zm6-2V5H5v6h4zM3 21v-6h8v6H3zm2-2h4v-2H5v2zm10 0h4v-6h-4v6zM13 3h8v6h-8V3zm2 2v2h4V5h-4z"
+                        fill="currentColor"
+                      ></path>
+                    </svg>
+
+                    Dashboard
+                  </div>
+                </button>
+              </li>
+              <ul>
+                <li
+                  class="w-full flex p-1 rounded-lg hover:cursor-pointer hover:bg-blue-200/20"
+                  id="kelolaUserTab"
+                >
+                  <button>
+                    <div class="flex items-center gap-x-4 hover:cursor-pointer">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        class="w-6 h-6"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M7 6a5 5 0 1 1 10 0A5 5 0 0 1 7 6Zm5-3a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"
+                          class="fill-000000"
+                        ></path>
+                        <path
+                          d="M4.062 21a8.001 8.001 0 0 1 11.201-6.307l.913.409.817-1.826-.913-.408A9.968 9.968 0 0 0 12 12C6.477 12 2 16.477 2 22v1h12.354v-2H4.062Z"
+                          class="fill-000000"
+                        ></path>
+                        <path
+                          d="M20 15v3h3v2h-3v3h-2v-3h-3v-2h3v-3h2Z"
+                          class="fill-000000"
+                        ></path>
+                      </svg>
+                      Kelola User
+                    </div>
+                  </button>
+                </li>
+                <ul
+                  class="sub-menu hidden pl-6 space-y-3"
+                  id="kelolaUserSubmenu"
+                >
+                  <li
+                    data-target="kelolaAdmin,kelolaAdminHeader"
+                    class="tab flex gap-x-4 hover:bg-blue-200/20 hover:cursor-pointer"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      class="w-6 h-6"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M7 6a5 5 0 1 1 10 0A5 5 0 0 1 7 6Zm5-3a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"
+                        class="fill-000000"
+                      ></path>
+                      <path
+                        d="M4.062 21a8.001 8.001 0 0 1 11.201-6.307l.913.409.817-1.826-.913-.408A9.968 9.968 0 0 0 12 12C6.477 12 2 16.477 2 22v1h12.354v-2H4.062Z"
+                        class="fill-000000"
+                      ></path>
+                      <path
+                        d="M20 15v3h3v2h-3v3h-2v-3h-3v-2h3v-3h2Z"
+                        class="fill-000000"
+                      ></path>
+                    </svg>
+                    <button>Kelola Admin/Pegawai</button>
+                  </li>
+                  <li
+                    data-target="kelolaPenyewa,kelolaPenyewaHeader"
+                    class="tab flex gap-x-4 hover:bg-blue-200/20 hover:cursor-pointer"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      class="w-6 h-6"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M7 6a5 5 0 1 1 10 0A5 5 0 0 1 7 6Zm5-3a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"
+                        class="fill-000000"
+                      ></path>
+                      <path
+                        d="M4.062 21a8.001 8.001 0 0 1 11.201-6.307l.913.409.817-1.826-.913-.408A9.968 9.968 0 0 0 12 12C6.477 12 2 16.477 2 22v1h12.354v-2H4.062Z"
+                        class="fill-000000"
+                      ></path>
+                      <path
+                        d="M20 15v3h3v2h-3v3h-2v-3h-3v-2h3v-3h2Z"
+                        class="fill-000000"
+                      ></path>
+                    </svg>
+                    <button>Kelola Penyewa</button>
+                  </li>
+                </ul>
+              </ul>
+
+              <li
+                class="w-full flex p-1 rounded-lg hover:cursor-pointer hover:bg-blue-200/20"
+                id="masterBarangTab"
+              >
+                <button>
+                  <div class="flex items-center gap-x-4">
+                    <svg
+                      viewBox="0 0 768 768"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-6 h-6"
+                    >
+                      <path
+                        d="M579.008 260.496 534 97.504l-262.992 74 41.984 162.992zM245.968 436.352l.032.144 42.992-12.992-104-404H7.008v56.992h128.768l90.72 365.76zM749.376 497.104 744 474.496l-274.336 76.32 21.2 66.528 270.128-78.688-9.984-42zM408.496 529.392l19.52-19.52-35.392-35.408L373.12 494c-11.344-7.52-24.016-13.12-37.568-16.64v-29.168h-62.816v29.168c-13.84 3.584-26.8 9.344-38.336 17.104l-18.72-18.736-35.392 35.392 19.04 19.04c-7.28 11.136-12.736 23.568-16.176 36.784H154v62.784h29.152c3.52 13.552 9.12 26.256 16.656 37.616l-19.52 19.504 35.392 35.376 19.52-19.52c11.376 7.552 24.096 13.168 37.68 16.672v29.12h62.576v-29.12a124.523 124.523 0 0 0 36.896-16.176l20.288 20.272 35.392-35.36-19.984-20.016c7.808-11.6 13.6-24.64 17.152-38.544h29.12v-62.368H425.2c-3.504-13.616-9.12-26.384-16.704-37.792zM304.16 649.824c-28.432 0-51.472-23.04-51.472-51.488 0-28.416 23.04-51.472 51.472-51.472 28.416 0 51.472 23.04 51.472 51.472 0 28.448-23.056 51.488-51.472 51.488zM342.848 442.256c63.344-11.248 95.648 32.448 95.648 32.448l.336.336c.48.512.864.992 1.312 1.488 6.352 7.84 10.944 19.44 10.944 19.44l2.672 8.384 307.248-84.864-44-163.008-394 108 19.84 77.776z"
+                        fill="currentColor"
+                        class="fill-000000"
+                      ></path>
+                    </svg>
+                    Master Barang
+                  </div>
+                </button>
+              </li>
+              <ul
+                class="sub-menu hidden pl-6 space-y-3"
+                id="masterBarangSubmenu"
+              >
+                <li
+                  data-target="pengadaanBarang,pengadaanBarangHeader"
+                  class="tab flex gap-x-4"
+                >
+                  <svg
+                    viewBox="0 0 768 768"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      d="M579.008 260.496 534 97.504l-262.992 74 41.984 162.992zM245.968 436.352l.032.144 42.992-12.992-104-404H7.008v56.992h128.768l90.72 365.76zM749.376 497.104 744 474.496l-274.336 76.32 21.2 66.528 270.128-78.688-9.984-42zM408.496 529.392l19.52-19.52-35.392-35.408L373.12 494c-11.344-7.52-24.016-13.12-37.568-16.64v-29.168h-62.816v29.168c-13.84 3.584-26.8 9.344-38.336 17.104l-18.72-18.736-35.392 35.392 19.04 19.04c-7.28 11.136-12.736 23.568-16.176 36.784H154v62.784h29.152c3.52 13.552 9.12 26.256 16.656 37.616l-19.52 19.504 35.392 35.376 19.52-19.52c11.376 7.552 24.096 13.168 37.68 16.672v29.12h62.576v-29.12a124.523 124.523 0 0 0 36.896-16.176l20.288 20.272 35.392-35.36-19.984-20.016c7.808-11.6 13.6-24.64 17.152-38.544h29.12v-62.368H425.2c-3.504-13.616-9.12-26.384-16.704-37.792zM304.16 649.824c-28.432 0-51.472-23.04-51.472-51.488 0-28.416 23.04-51.472 51.472-51.472 28.416 0 51.472 23.04 51.472 51.472 0 28.448-23.056 51.488-51.472 51.488zM342.848 442.256c63.344-11.248 95.648 32.448 95.648 32.448l.336.336c.48.512.864.992 1.312 1.488 6.352 7.84 10.944 19.44 10.944 19.44l2.672 8.384 307.248-84.864-44-163.008-394 108 19.84 77.776z"
+                      fill="currentColor"
+                      class="fill-000000"
+                    ></path>
+                  </svg>
+                  <button>Pengadaan Barang</button>
+                </li>
+                <li
+                  data-target="kategori,kategoriHeader"
+                  class="tab flex gap-x-4"
+                >
+                  <svg
+                    viewBox="0 0 768 768"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      d="M579.008 260.496 534 97.504l-262.992 74 41.984 162.992zM245.968 436.352l.032.144 42.992-12.992-104-404H7.008v56.992h128.768l90.72 365.76zM749.376 497.104 744 474.496l-274.336 76.32 21.2 66.528 270.128-78.688-9.984-42zM408.496 529.392l19.52-19.52-35.392-35.408L373.12 494c-11.344-7.52-24.016-13.12-37.568-16.64v-29.168h-62.816v29.168c-13.84 3.584-26.8 9.344-38.336 17.104l-18.72-18.736-35.392 35.392 19.04 19.04c-7.28 11.136-12.736 23.568-16.176 36.784H154v62.784h29.152c3.52 13.552 9.12 26.256 16.656 37.616l-19.52 19.504 35.392 35.376 19.52-19.52c11.376 7.552 24.096 13.168 37.68 16.672v29.12h62.576v-29.12a124.523 124.523 0 0 0 36.896-16.176l20.288 20.272 35.392-35.36-19.984-20.016c7.808-11.6 13.6-24.64 17.152-38.544h29.12v-62.368H425.2c-3.504-13.616-9.12-26.384-16.704-37.792zM304.16 649.824c-28.432 0-51.472-23.04-51.472-51.488 0-28.416 23.04-51.472 51.472-51.472 28.416 0 51.472 23.04 51.472 51.472 0 28.448-23.056 51.488-51.472 51.488zM342.848 442.256c63.344-11.248 95.648 32.448 95.648 32.448l.336.336c.48.512.864.992 1.312 1.488 6.352 7.84 10.944 19.44 10.944 19.44l2.672 8.384 307.248-84.864-44-163.008-394 108 19.84 77.776z"
+                      fill="currentColor"
+                      class="fill-000000"
+                    ></path>
+                  </svg>
+                  <button>Kategori</button>
+                </li>
+
+                <li
+                  data-target="stokBarang,stokBarangHeader"
+                  class="tab flex gap-x-4"
+                >
+                  <svg
+                    viewBox="0 0 768 768"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      d="M579.008 260.496 534 97.504l-262.992 74 41.984 162.992zM245.968 436.352l.032.144 42.992-12.992-104-404H7.008v56.992h128.768l90.72 365.76zM749.376 497.104 744 474.496l-274.336 76.32 21.2 66.528 270.128-78.688-9.984-42zM408.496 529.392l19.52-19.52-35.392-35.408L373.12 494c-11.344-7.52-24.016-13.12-37.568-16.64v-29.168h-62.816v29.168c-13.84 3.584-26.8 9.344-38.336 17.104l-18.72-18.736-35.392 35.392 19.04 19.04c-7.28 11.136-12.736 23.568-16.176 36.784H154v62.784h29.152c3.52 13.552 9.12 26.256 16.656 37.616l-19.52 19.504 35.392 35.376 19.52-19.52c11.376 7.552 24.096 13.168 37.68 16.672v29.12h62.576v-29.12a124.523 124.523 0 0 0 36.896-16.176l20.288 20.272 35.392-35.36-19.984-20.016c7.808-11.6 13.6-24.64 17.152-38.544h29.12v-62.368H425.2c-3.504-13.616-9.12-26.384-16.704-37.792zM304.16 649.824c-28.432 0-51.472-23.04-51.472-51.488 0-28.416 23.04-51.472 51.472-51.472 28.416 0 51.472 23.04 51.472 51.472 0 28.448-23.056 51.488-51.472 51.488zM342.848 442.256c63.344-11.248 95.648 32.448 95.648 32.448l.336.336c.48.512.864.992 1.312 1.488 6.352 7.84 10.944 19.44 10.944 19.44l2.672 8.384 307.248-84.864-44-163.008-394 108 19.84 77.776z"
+                      fill="currentColor"
+                      class="fill-000000"
+                    ></path>
+                  </svg>
+                  <button>Stok Barang</button>
+                </li>
+                <li
+                  data-target="stokOpname,stokOpnameHeader"
+                  class="tab flex gap-x-4"
+                >
+                  <svg
+                    viewBox="0 0 768 768"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      d="M579.008 260.496 534 97.504l-262.992 74 41.984 162.992zM245.968 436.352l.032.144 42.992-12.992-104-404H7.008v56.992h128.768l90.72 365.76zM749.376 497.104 744 474.496l-274.336 76.32 21.2 66.528 270.128-78.688-9.984-42zM408.496 529.392l19.52-19.52-35.392-35.408L373.12 494c-11.344-7.52-24.016-13.12-37.568-16.64v-29.168h-62.816v29.168c-13.84 3.584-26.8 9.344-38.336 17.104l-18.72-18.736-35.392 35.392 19.04 19.04c-7.28 11.136-12.736 23.568-16.176 36.784H154v62.784h29.152c3.52 13.552 9.12 26.256 16.656 37.616l-19.52 19.504 35.392 35.376 19.52-19.52c11.376 7.552 24.096 13.168 37.68 16.672v29.12h62.576v-29.12a124.523 124.523 0 0 0 36.896-16.176l20.288 20.272 35.392-35.36-19.984-20.016c7.808-11.6 13.6-24.64 17.152-38.544h29.12v-62.368H425.2c-3.504-13.616-9.12-26.384-16.704-37.792zM304.16 649.824c-28.432 0-51.472-23.04-51.472-51.488 0-28.416 23.04-51.472 51.472-51.472 28.416 0 51.472 23.04 51.472 51.472 0 28.448-23.056 51.488-51.472 51.488zM342.848 442.256c63.344-11.248 95.648 32.448 95.648 32.448l.336.336c.48.512.864.992 1.312 1.488 6.352 7.84 10.944 19.44 10.944 19.44l2.672 8.384 307.248-84.864-44-163.008-394 108 19.84 77.776z"
+                      fill="currentColor"
+                      class="fill-000000"
+                    ></path>
+                  </svg>
+                  <button>Stok Opname</button>
+                </li>
+              </ul>
+
+              <li
+                class="tab w-full flex p-1 rounded-lg hover:cursor-pointer hover:bg-blue-200/20"
+                data-target="transaksi,transaksiHeader"
+              >
+                <button>
+                  <div class="flex items-center gap-x-4">
+                    <svg
+                      viewBox="0 0 64 64"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-6 h-6"
+                    >
+                      <path
+                        d="M52 7H12a6 6 0 0 0-6 6v38a6 6 0 0 0 6 6h40a6 6 0 0 0 6-6V13a6 6 0 0 0-6-6Zm2 44a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2V13a2 2 0 0 1 2-2h40a2 2 0 0 1 2 2Z"
+                        fill="currentColor"
+                        class="fill-231f20"
+                      ></path>
+                      <path
+                        d="M45 29a2 2 0 0 0 0-4H22.83l2.58-2.59a2 2 0 0 0-2.82-2.82l-6 6a2 2 0 0 0-.44 2.18A2 2 0 0 0 18 29ZM47 36H20a2 2 0 0 0 0 4h22.17l-2.58 2.59a2 2 0 1 0 2.82 2.82l6-6a2 2 0 0 0 .44-2.18A2 2 0 0 0 47 36Z"
+                        fill="currentColor"
+                        class="fill-231f20"
+                      ></path>
+                    </svg>
+                    Transaksi
+                  </div>
+                </button>
+              </li>
+              <li
+                class="tab w-full flex p-1 rounded-lg hover:cursor-pointer hover:bg-blue-200/20"
+                data-target="dataPenyewaan,dataPenyewaanHeader"
+              >
+                <button>
+                  <div class="flex items-center gap-x-4">
+                    <svg
+                      viewBox="0 0 32 32"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-6 h-6"
+                    >
+                      <g data-name="Layer 2">
+                        <path
+                          d="M16.88 15.53 7 5.66a1 1 0 0 0-1.41 1.41l9.06 9.06-8.8 8.8a1 1 0 0 0 0 1.41 1 1 0 0 0 1.42 0l9.61-9.61a.85.85 0 0 0 0-1.2Z"
+                          fill="currentColor"
+                          class="fill-231f20"
+                        ></path>
+                        <path
+                          d="m26.46 15.53-9.88-9.87a1 1 0 0 0-1.41 1.41l9.06 9.06-8.8 8.8a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l9.62-9.61a.85.85 0 0 0 0-1.2Z"
+                          fill="currentColor"
+                          class="fill-231f20"
+                        ></path>
+                      </g>
+                    </svg>
+                    Data Penyewaan
+                  </div>
+                </button>
+              </li>
+              <li
+                class="tab w-full flex p-1 rounded-lg hover:cursor-pointer hover:bg-blue-200/20"
+                data-target="dataPengembalian,dataPengembalianHeader"
+              >
+                <button>
+                  <div class="flex items-center gap-x-4">
+                    <svg
+                      viewBox="0 0 32 32"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-6 h-6"
+                    >
+                      <g data-name="Layer 2">
+                        <path
+                          d="M15.12 15.53 25 5.66a1 1 0 0 1 1.41 1.41l-9.06 9.06 8.8 8.8a1 1 0 0 1 0 1.41 1 1 0 0 1-1.42 0l-9.61-9.61a.85.85 0 0 1 0-1.2Z"
+                          fill="currentColor"
+                          class="fill-231f20"
+                        ></path>
+                        <path
+                          d="m5.54 15.53 9.88-9.87a1 1 0 1 1 1.41 1.41l-9.06 9.06 8.8 8.8a1 1 0 0 1 0 1.41 1 1 0 0 1-1.41 0l-9.62-9.61a.85.85 0 0 1 0-1.2Z"
+                          fill="currentColor"
+                          class="fill-231f20"
+                        ></path>
+                      </g>
+                    </svg>
+                    Data Pengembalian
+                  </div>
+                </button>
+              </li>
+              <li
+                class="w-full flex p-1 rounded-lg hover:cursor-pointer hover:bg-blue-200/20"
+                id="riwayatTab"
+              >
+                <button>
+                  <div class="flex items-center gap-x-4">
+                    <svg
+                      viewBox="0 0 20 21"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-6 h-6"
+                    >
+                      <path
+                        d="M10.5.5C7 .5 3.9 2.4 2.3 5.3L0 3v6.5h6.5L3.7 6.7C5 4.2 7.5 2.5 10.5 2.5c4.1 0 7.5 3.4 7.5 7.5s-3.4 7.5-7.5 7.5c-3.3 0-6-2.1-7.1-5H1.3c1.1 4 4.8 7 9.2 7 5.3 0 9.5-4.3 9.5-9.5S15.7.5 10.5.5ZM9 5.5v5.1l4.7 2.8.8-1.3-4-2.4V5.5H9Z"
+                        fill="currentColor"
+                        opacity=".9"
+                        fill-rule="evenodd"
+                        class="fill-000000"
+                      ></path>
+                    </svg>
+                    Riwayat
+                  </div>
+                </button>
+              </li>
+              <ul class="sub-menu hidden pl-6 space-y-3" id="riwayatSubmenu">
+                <li
+                  data-target="riwayatTransaksi,riwayatTransaksiHeader"
+                  class="tab flex gap-x-4"
+                >
+                  <svg
+                    viewBox="0 0 20 21"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      d="M10.5.5C7 .5 3.9 2.4 2.3 5.3L0 3v6.5h6.5L3.7 6.7C5 4.2 7.5 2.5 10.5 2.5c4.1 0 7.5 3.4 7.5 7.5s-3.4 7.5-7.5 7.5c-3.3 0-6-2.1-7.1-5H1.3c1.1 4 4.8 7 9.2 7 5.3 0 9.5-4.3 9.5-9.5S15.7.5 10.5.5ZM9 5.5v5.1l4.7 2.8.8-1.3-4-2.4V5.5H9Z"
+                      fill="currentColor"
+                      opacity=".9"
+                      fill-rule="evenodd"
+                      class="fill-000000"
+                    ></path>
+                  </svg>
+                  <button>Riwayat Transaksi</button>
+                </li>
+                <li
+                  data-target="riwayatPengadaan,riwayatPengadaanHeader"
+                  class="tab flex gap-x-4"
+                >
+                  <svg
+                    viewBox="0 0 20 21"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      d="M10.5.5C7 .5 3.9 2.4 2.3 5.3L0 3v6.5h6.5L3.7 6.7C5 4.2 7.5 2.5 10.5 2.5c4.1 0 7.5 3.4 7.5 7.5s-3.4 7.5-7.5 7.5c-3.3 0-6-2.1-7.1-5H1.3c1.1 4 4.8 7 9.2 7 5.3 0 9.5-4.3 9.5-9.5S15.7.5 10.5.5ZM9 5.5v5.1l4.7 2.8.8-1.3-4-2.4V5.5H9Z"
+                      fill="currentColor"
+                      opacity=".9"
+                      fill-rule="evenodd"
+                      class="fill-000000"
+                    ></path>
+                  </svg>
+                  <button>Riwayat Pengadaan</button>
+                </li>
+              </ul>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="">
+        <div id="dashboardHeader" class="content">
+          <p class="text-[#0000FF] text-[32px] font-bold">Dashboard Admin</p>
+        </div>
+        <div id="kelolaAdminHeader" class="content hidden">
+          <p class="text-[#0000FF] text-[32px] font-bold">Kelola Admin</p>
+        </div>
+        <div id="kelolaPenyewaHeader" class="content hidden">
+          <p class="text-[#0000FF] text-[32px] font-bold">Kelola Penyewa</p>
+        </div>
+        <div id="pengadaanBarangHeader" class="content hidden">
+          <p class="text-[#0000FF] text-[32px] font-bold">Pengadaan Barang</p>
+        </div>
+        <div id="kategoriHeader" class="content hidden">
+          <p class="text-[#0000FF] text-[32px] font-bold">Kategori</p>
+        </div>
+        <div id="stokBarangHeader" class="content hidden">
+          <p class="text-[#0000FF] text-[32px] font-bold">Stok Barang</p>
+        </div>
+        <div id="stokOpnameHeader" class="content hidden">
+          <p class="text-[#0000FF] text-[32px] font-bold">Stok Opname</p>
+        </div>
+        <div id="transaksiHeader" class="content hidden">
+          <p class="text-[#0000FF] text-[32px] font-bold">Transaksi</p>
+        </div>
+        <div id="dataPenyewaanHeader" class="content hidden">
+          <p class="text-[#0000FF] text-[32px] font-bold">Data Penyewaan</p>
+        </div>
+        <div id="dataPengembalianHeader" class="content hidden">
+          <p class="text-[#0000FF] text-[32px] font-bold">Data Pengembalian</p>
+        </div>
+        <div id="riwayatTransaksiHeader" class="content hidden">
+          <p class="text-[#0000FF] text-[32px] font-bold">Riwayat Transaksi</p>
+        </div>
+        <div id="riwayatPengadaanHeader" class="content hidden">
+          <p class="text-[#0000FF] text-[32px] font-bold">Riwayat Pengadaan</p>
+        </div>
+      </div>
+      <div class="flex p-1 items-center relative">
+        <input type="checkbox" id="profilToggle" class="peer hidden" />
+
+        <label
+          for="profilToggle"
+          class="h-full w-full border p-1 rounded bg-transparent cursor-pointer peer-checked:bg-gray-300"
+        >
+          <div class="flex gap-x-2 lex items-center">
+            <svg
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+            >
+              <path
+                d="M10 0C4.5 0 0 4.5 0 10s4.5 10 10 10 10-4.5 10-10S15.5 0 10 0Zm0 3c1.7 0 3 1.3 3 3s-1.3 3-3 3-3-1.3-3-3 1.3-3 3-3Zm0 14.2c-2.5 0-4.7-1.3-6-3.2 0-2 4-3.1 6-3.1s6 1.1 6 3.1c-1.3 1.9-3.5 3.2-6 3.2Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+                class="fill-000000"
+              ></path>
+            </svg>
+
+            <div id="userName" class="text-[20px]"></div>
+            <svg
+              viewBox="0 0 512 512"
+              xml:space="preserve"
+              xmlns="http://www.w3.org/2000/svg"
+              enable-background="new 0 0 512 512"
+              class="h-6 w-6"
+            >
+              <path
+                d="m396.6 160 19.4 20.7L256 352 96 180.7l19.3-20.7L256 310.5z"
+                fill="currentColor"
+                class="fill-000000"
+              ></path>
+            </svg>
+          </div>
+        </label>
+
+        <div
+          class="absolute right-0 top-11 hidden w-[180px] bg-[#C0C0C0] borderrounded shadow-md border-gray-200 peer-checked:block rounded-lg z-10"
+        >
+          <div
+            class="flex justify-between p-1 px-4 items-center border-b border-black"
+          >
+            <svg
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+            >
+              <path
+                d="M10 0C4.5 0 0 4.5 0 10s4.5 10 10 10 10-4.5 10-10S15.5 0 10 0Zm0 3c1.7 0 3 1.3 3 3s-1.3 3-3 3-3-1.3-3-3 1.3-3 3-3Zm0 14.2c-2.5 0-4.7-1.3-6-3.2 0-2 4-3.1 6-3.1s6 1.1 6 3.1c-1.3 1.9-3.5 3.2-6 3.2Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+                class="fill-000000"
+              ></path>
+            </svg>
+            <div id="secondaryUserName" class="text-[20px]"></div>
+            <div></div>
+          </div>
+          <ul class="flex flex-col gap-y-2 p-2 text-white text-sm">
+            <li>
+              <a
+                href=""
+                id="logoutLink"
+                class="block px-4 py-2 bg-red-600 rounded text-center"
+                >Log out</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <div id="dashboard" class="flex w-[80%] content mx-[10%] py-4">
+        <div class="min-h-[80vh] w-full bg-red-400 flex flex-col">
+          <p class="text-[24px] text-[#0000FF] font-bold">DASHBOARD ADMIN</p>
+          <div class="flex w-full">
+            <div class="flex gap-x-4 mt-10 p-2 w-full justify-between">
+              <div
+                class="relative w-1/4 rounded-xl bg-[#C0C0C0] flex text-black text-center p-4 shadow-md border-black border items-center py-14"
+              >
+                <p class="text-[30px]">Total Barang Tersedia</p>
+                <div
+                  class="absolute rounded-full bg-[#C0C0C0] p-5 px-10 -top-10 left-20 shadow-md border-black border"
+                >
+                  <div class="text-lg">1</div>
+                </div>
+              </div>
+              <div
+                class="relative w-1/4 rounded-xl bg-[#C0C0C0] flex text-black text-center p-4 shadow-md border-black border items-center"
+              >
+                <p class="text-[30px]">Total Barang Belum Dikembalikan</p>
+                <div
+                  class="absolute rounded-full bg-[#C0C0C0] p-5 px-10 -top-10 left-20 shadow-md border-black border"
+                >
+                  <div class="text-lg">1</div>
+                </div>
+              </div>
+              <div
+                class="relative w-1/4 rounded-xl bg-[#C0C0C0] flex text-black text-center p-4 shadow-md border-black border items-center"
+              >
+                <p class="text-[30px]">Total Barang Yang Rusak</p>
+                <div
+                  class="absolute rounded-full bg-[#C0C0C0] p-5 px-10 -top-10 left-20 shadow-md border-black border"
+                >
+                  <div class="text-lg">1</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="border-t border-black">
+            <p class="text-[24px] text-[#0000FF] font-bold">Display Barang</p>
+          </div>
+        </div>
+      </div>
+      <div id="kelolaAdmin" class="content hidden flex w-[80%] mx-[10%] py-4">
+        <div class="w-full p-6 bg-white rounded-lg shadow-lg">
+          <div class="flex items-center justify-between mb-4">
+            <input
+              type="text"
+              id="search-bar"
+              class="border rounded-lg px-4 py-2 w-2/3"
+              placeholder="Cari user berdasarkan nama atau username..."
+            />
+            <button
+              id="add-user-btn"
+              data-target="add-user-modal-admin"
+              class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+            >
+              Tambah User
+            </button>
+          </div>
+          <div class="overflow-x-auto max-w-full text-center">
+            <div class="snap-x flex text-[28px] font-bold">
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Jenis User
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-2 bg-[#D9D9D9] border-black"
+              >
+                Username
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Nama User
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-2 bg-[#D9D9D9] border-black"
+              >
+                Email
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Alamat
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-2 bg-[#D9D9D9] border-black"
+              >
+                No HP
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-y-2 bg-[#D9D9D9] border-r-2 border-black"
+              >
+                Tanggal dibuat
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Aksi
+              </div>
+            </div>
+            <div id="user-container" class="space-y-6"></div>
+          </div>
+        </div>
+      </div>
+      <div id="kelolaPenyewa" class="content hidden flex w-[80%] mx-[10%] py-4">
+        <div class="w-full p-6 bg-white rounded-lg shadow-lg">
+          <div class="flex items-center justify-between mb-4">
+            <input
+              type="text"
+              id="search-bar-penyewa"
+              class="border rounded-lg px-4 py-2 w-2/3"
+              placeholder="Cari user berdasarkan nama atau NIK..."
+            />
+            <button
+              id="add-user-btn"
+              data-target="add-user-modal-penyewa"
+              class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+            >
+              Tambah User
+            </button>
+          </div>
+          <div class="overflow-x-auto max-w-full text-center">
+            <div class="snap-x flex text-[28px] font-bold">
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Nama User
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-2 bg-[#D9D9D9] border-black"
+              >
+                No NIK
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Status
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-2 bg-[#D9D9D9] border-black"
+              >
+                Alamat
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                No HP
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-2 bg-[#D9D9D9] border-black"
+              >
+                Tanggal dibuat
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Aksi
+              </div>
+            </div>
+            <div id="user-container-penyewa" class="space-y-6"></div>
+          </div>
+        </div>
+      </div>
+      <div
+        id="pengadaanBarang"
+        class="content hidden flex w-[80%] mx-[10%] py-4"
+      >
+        <div class="w-full p-6 bg-white rounded-lg shadow-lg">
+          <div class="flex items-center justify-between mb-4">
+            <input
+              type="text"
+              id="search-bar-pengadaan-barang"
+              class="border rounded-lg px-4 py-2 w-2/3"
+              placeholder="Cari user berdasarkan nama"
+            />
+            <button
+              id="add-user-btn"
+              data-target="add-user-modal-pengadaan-barang"
+              class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+            >
+              Tambah Barang
+            </button>
+          </div>
+          <div class="overflow-x-auto max-w-full text-center">
+            <div class="snap-x flex text-[24px] font-bold">
+              <div
+                class="snap-start flex-shrink-0 w-[240px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Nama Barang
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[240px] border-y-2 border-l-2 bg-[#D9D9D9] border-black"
+              >
+                Kategori
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[240px] border-2 bg-[#D9D9D9] border-black"
+              >
+                Harga Sewa
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[240px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Denda Hilang
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[240px] border-2 bg-[#D9D9D9] border-black"
+              >
+                Denda Rusak Ringan
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[240px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Denda Rusak Sedang
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[240px] border-2 bg-[#D9D9D9] border-black"
+              >
+                Denda Rusak Berat
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[240px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Status
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[240px] border-2 bg-[#D9D9D9] border-black"
+              >
+                Jumlah
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[240px] border-y-2 border-r-2 bg-[#D9D9D9] border-black"
+              >
+                Gambar
+              </div>
+
+              <div
+                class="snap-start flex-shrink-0 w-[240px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Aksi
+              </div>
+            </div>
+            <div id="pengadaanbarang-container" class="space-y-6"></div>
+          </div>
+        </div>
+      </div>
+      <div id="kategori" class="content hidden flex w-[80%] mx-[10%] py-4">
+        <div class="container mx-auto p-4 flex flex-col w-full">
+          <div class="flex justify-between w-full items-center mb-4">
+            <input
+              type="text"
+              id="searchInputKategori"
+              placeholder="Cari kategori..."
+              class="p-2 border border-gray-300 rounded-lg w-1/2"
+            />
+            <button
+              id="tambahKategoriBtn"
+              class="bg-blue-500 text-white px-4 py-2 rounded-lg"
+            >
+              Tambah Kategori
+            </button>
+          </div>
+
+          <table class="min-w-full table-auto">
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="p-2">Nama Kategori</th>
+                <th class="p-2">Jumlah</th>
+                <th class="p-2">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="kategoriTable"></tbody>
+          </table>
+        </div>
+      </div>
+      <div id="stokBarang" class="content hidden">
+        <p class="flex w-full justify-center">stok barang</p>
+      </div>
+      <div id="stokOpname" class="content hidden">
+        <p class="flex w-full justify-center">stok barang</p>
+      </div>
+      <div id="transaksi" class="content hidden">
+        <p class="flex w-full justify-center">transaksi</p>
+      </div>
+      <div id="dataPenyewaan" class="content hidden">
+        <p class="flex w-full justify-center">data penyewaan</p>
+      </div>
+      <div id="dataPengembalian" class="content hidden">
+        <p class="flex w-full justify-center">data Pengembalian</p>
+      </div>
+      <div id="riwayatTransaksi" class="content hidden">
+        <p class="flex w-full justify-center">riwayatTransaksi</p>
+      </div>
+      <div id="riwayatPengadaan" class="content hidden">
+        <p class="flex w-full justify-center">riwayatPengadaan</p>
+      </div>
+
+      <div
+        id="add-user-modal-admin"
+        class="fixed inset-0 bg-black bg-opacity-50 flex hidden items-center justify-center"
+      >
+        <div class="bg-white p-6 rounded-lg w-full max-w-4xl">
+          <h1
+            class="text-2xl font-bold mb-4 flex justify-center text-[#0000FF]"
+          >
+            Tambah User
+          </h1>
+          <form id="add-user-form">
+            <div class="flex w-full gap-x-2">
+              <div class="flex flex-col w-1/2">
+                <div class="mb-2">
+                  <label class="block text-sm font-medium mb-2">Nama</label>
+                  <input
+                    type="text"
+                    id="name"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    placeholder="Nama Lengkap"
+                    required
+                  />
+                </div>
+                <div class="mb-2">
+                  <label class="block text-sm font-medium mb-2">Username</label>
+                  <input
+                    type="text"
+                    id="username"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    placeholder="Username"
+                    required
+                  />
+                </div>
+                <div class="mb-2">
+                  <label class="block text-sm font-medium mb-2">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    placeholder="Email"
+                    required
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium mb-2">Alamat</label>
+                  <input
+                    type="text"
+                    id="address"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    placeholder="Address"
+                    required
+                  /><br />
+                </div>
+              </div>
+              <div class="flex flex-col w-1/2">
+                <div>
+                  <label class="block text-sm font-medium mb-2"
+                    >No Handphone</label
+                  >
+                  <input
+                    type="text"
+                    id="phoneNumber"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    placeholder="Phone Number"
+                    required
+                  /><br />
+                  <p class="text-xs text-gray-500">Contoh: 628123456789</p>
+                </div>
+                <div class="mb-2">
+                  <label class="block text-sm font-medium mb-2">Password</label>
+                  <input
+                    type="password"
+                    id="password"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    placeholder="Password"
+                    required
+                  />
+                  <p class="text-xs text-gray-500">
+                    Pastikan password terdiri dari 8 karakter dan mengandung
+                    huruf dan angka <br />
+                    Contoh: abxy123
+                  </p>
+                </div>
+                <div class="mb-2">
+                  <label class="block text-sm font-medium mb-2"
+                    >Konfirmasi Password</label
+                  >
+                  <input
+                    type="password"
+                    id="confirm-password"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    placeholder="Konfirmasi Password"
+                    required
+                  />
+                </div>
+                <div class="mb-2">
+                  <label class="block text-sm font-medium mb-2">Role</label>
+                  <select
+                    id="role"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    required
+                  >
+                    <option value="admin">Admin</option>
+                    <option value="pegawai">Pegawai</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex justify-end">
+              <button
+                type="button"
+                id="cancel-btn"
+                class="mr-2 bg-gray-300 px-4 py-2 rounded-lg"
+              >
+                Batal
+              </button>
+              <button
+                type="submit"
+                class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+              >
+                Simpan
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div
+        id="add-user-modal-penyewa"
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden"
+      >
+        <div class="bg-white p-6 rounded-lg w-full max-w-md">
+          <form id="add-user-form-penyewa">
+            <div class="mb-2">
+              <label class="block text-sm font-medium mb-2">Nama</label>
+              <input
+                type="text"
+                id="namePenyewa"
+                class="border rounded-lg px-4 py-2 w-full"
+                placeholder="Nama Lengkap"
+                required
+              />
+            </div>
+            <div class="mb-2">
+              <label class="block text-sm font-medium mb-2">No NIK</label>
+              <input
+                type="text"
+                id="nik"
+                class="border rounded-lg px-4 py-2 w-full"
+                placeholder="No NIK"
+                required
+              />
+            </div>
+            <div class="mb-2">
+              <label class="block text-sm font-medium mb-2">Status</label>
+              <input
+                type="text"
+                id="status"
+                class="border rounded-lg px-4 py-2 w-full"
+                placeholder="Pekerjaan/Status"
+                required
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2">Alamat</label>
+              <input
+                type="text"
+                id="alamat"
+                class="border rounded-lg px-4 py-2 w-full"
+                placeholder="Address"
+                required
+              /><br />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2">No Handphone</label>
+              <input
+                type="text"
+                id="noHpPenyewa"
+                class="border rounded-lg px-4 py-2 w-full"
+                placeholder="Phone Number"
+                required
+              /><br />
+              <p class="text-xs text-gray-500">Contoh: 628123456789</p>
+            </div>
+
+            <div class="flex justify-end">
+              <button
+                type="button"
+                id="cancel-btn-penyewa"
+                class="mr-2 bg-gray-300 px-4 py-2 rounded-lg"
+              >
+                Batal
+              </button>
+              <button
+                type="submit"
+                class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+              >
+                Simpan
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div
+        id="edit-user-modal-admin"
+        class="hidden fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50"
+      >
+        <div class="bg-white p-6 rounded-md flex flex-col w-1/2">
+          <h2 class="text-xl font-bold mb-4">Edit User</h2>
+          <form id="edit-user-form">
+            <div>
+              <label for="edit-name" class="block">Nama</label>
+              <input
+                type="text"
+                id="edit-name"
+                class="border p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mt-2">
+              <label for="edit-username" class="block">Username</label>
+              <input
+                type="text"
+                id="edit-username"
+                class="border p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mt-2">
+              <label for="edit-email" class="block">Email</label>
+              <input
+                type="email"
+                id="edit-email"
+                class="border p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mt-2">
+              <label for="edit-address" class="block">Alamat</label>
+              <input
+                type="text"
+                id="edit-address"
+                class="border p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mt-2">
+              <label for="edit-phoneNumber" class="block">No HP</label>
+              <input
+                type="text"
+                id="edit-phoneNumber"
+                class="border p-2 w-full"
+                required
+              />
+              <p class="text-xs text-gray-500">Contoh: 628123456789</p>
+            </div>
+            <div class="mt-2">
+              <label for="edit-role" class="block">Role</label>
+              <select id="edit-role" class="border p-2 w-full">
+                <option value="admin">Admin</option>
+                <option value="pegawai">Pegawai</option>
+              </select>
+            </div>
+            <div class="mt-4 flex justify-between">
+              <button
+                type="button"
+                id="cancel-edit-btn"
+                class="bg-gray-300 p-2 rounded-md"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                id="save-edit-btn"
+                class="bg-blue-500 p-2 text-white rounded-md"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div
+        id="edit-user-modal-penyewa"
+        class="hidden fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50"
+      >
+        <div class="bg-white p-6 rounded-md flex flex-col w-1/2">
+          <h2 class="text-xl font-bold mb-4">Edit User</h2>
+          <form id="edit-user-form-penyewa">
+            <div>
+              <label for="edit-name-penyewa" class="block">Nama</label>
+              <input
+                type="text"
+                id="edit-name-penyewa"
+                class="border p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mt-2">
+              <label for="edit-nik" class="block">No NIK</label>
+              <input
+                type="text"
+                id="edit-nik"
+                class="border p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mt-2">
+              <label for="edit-status" class="block">Status</label>
+              <input
+                type="text"
+                id="edit-status"
+                class="border p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mt-2">
+              <label for="edit-alamat" class="block">Alamat</label>
+              <input
+                type="text"
+                id="edit-alamat"
+                class="border p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mt-2">
+              <label for="edit-no-hp-penyewa" class="block">No HP</label>
+              <input
+                type="text"
+                id="edit-no-hp-penyewa"
+                class="border p-2 w-full"
+                required
+              />
+              <p class="text-xs text-gray-500">Contoh: 628123456789</p>
+            </div>
+
+            <div class="mt-4 flex justify-between">
+              <button
+                type="button"
+                id="cancel-edit-btn-penyewa"
+                class="bg-gray-300 p-2 rounded-md"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                id="save-edit-btn-penyewa"
+                class="bg-blue-500 p-2 text-white rounded-md"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div
+        id="delete-user-modal-admin"
+        class="hidden fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50"
+      >
+        <div class="bg-white p-6 rounded-md">
+          <h2 class="text-xl font-bold mb-4">Konfirmasi Hapus</h2>
+          <p>Apakah Anda yakin ingin menghapus pengguna berikut?</p>
+          <p
+            id="delete-user-name"
+            class="font-semibold text-lg mt-2 flex w-full justify-center"
+          ></p>
+          <!-- Menampilkan nama pengguna yang akan dihapus -->
+          <div class="mt-4 flex justify-between">
+            <button
+              type="button"
+              id="cancel-delete-btn"
+              class="bg-gray-300 p-2 rounded-md"
+            >
+              Batal
+            </button>
+            <button
+              type="button"
+              id="confirm-delete-btn"
+              class="bg-red-500 p-2 text-white rounded-md"
+            >
+              Hapus
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="delete-user-modal-penyewa"
+        class="hidden fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50"
+      >
+        <div class="bg-white p-6 rounded-md">
+          <h2 class="text-xl font-bold mb-4">Konfirmasi Hapus</h2>
+          <p>Apakah Anda yakin ingin menghapus pengguna berikut?</p>
+          <p
+            id="delete-user-name-penyewa"
+            class="font-semibold text-lg mt-2 flex w-full justify-center"
+          ></p>
+          <!-- Menampilkan nama pengguna yang akan dihapus -->
+          <div class="mt-4 flex justify-between">
+            <button
+              type="button"
+              id="cancel-delete-btn-penyewa"
+              class="bg-gray-300 p-2 rounded-md"
+            >
+              Batal
+            </button>
+            <button
+              type="button"
+              id="confirm-delete-btn-penyewa"
+              class="bg-red-500 p-2 text-white rounded-md"
+            >
+              Hapus
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="kategori-modal"
+        class="hidden fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50"
+      >
+        <div class="bg-white p-6 rounded-lg w-96">
+          <h3 class="text-xl mb-4">Tambah Kategori</h3>
+          <input
+            type="text"
+            id="kategoriInput"
+            placeholder="Nama Kategori"
+            class="p-2 border border-gray-300 rounded-lg w-full mb-4"
+          />
+          <div class="flex justify-between">
+            <button
+              id="closeKategoriBtn"
+              class="bg-red-500 text-white px-4 py-2 rounded-lg"
+            >
+              Tutup
+            </button>
+            <button
+              id="saveKategoriBtn"
+              class="bg-green-500 text-white px-4 py-2 rounded-lg"
+            >
+              Simpan
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="edit-kategori-modal"
+        class="hidden fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50"
+      >
+        <div class="bg-white p-6 rounded-lg w-96">
+          <h3 class="text-xl mb-4">Edit Kategori</h3>
+          <input
+            type="text"
+            id="editKategoriInput"
+            placeholder="Nama Kategori"
+            class="p-2 border border-gray-300 rounded-lg w-full mb-4"
+          />
+          <div class="flex justify-between">
+            <button
+              id="editCloseKategoriBtn"
+              class="bg-red-500 text-white px-4 py-2 rounded-lg"
+            >
+              Tutup
+            </button>
+            <button
+              id="editSaveKategoriBtn"
+              class="bg-green-500 text-white px-4 py-2 rounded-lg"
+            >
+              Simpan
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="delete-kategori-modal"
+        class="hidden fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50"
+      >
+        <div class="bg-white p-6 rounded-md">
+          <h2 class="text-xl font-bold mb-4">Konfirmasi Hapus</h2>
+          <p>Apakah Anda yakin ingin menghapus kategori berikut?</p>
+          <p
+            id="delete-kategori-name"
+            class="font-semibold text-lg mt-2 flex w-full justify-center"
+          ></p>
+          <!-- Menampilkan nama pengguna yang akan dihapus -->
+          <div class="mt-4 flex justify-between">
+            <button
+              type="button"
+              id="cancel-delete-btn-kategori"
+              class="bg-gray-300 p-2 rounded-md"
+            >
+              Batal
+            </button>
+            <button
+              type="button"
+              id="confirm-delete-btn-kategori"
+              class="bg-red-500 p-2 text-white rounded-md"
+            >
+              Hapus
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+  id="edit-barang-modal"
+  class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+>
+  <div class="bg-white rounded-lg p-6 w-1/2">
+    <h2 class="text-xl font-bold mb-4">Edit Barang</h2>
+    <form id="edit-barang-form" class="space-y-4">
+      <input type="hidden" id="edit-barang-id" />
+      <div class="flex w-full gap-x-2">
+        <div class="w-1/2">
+          <div>
+            <label for="edit-nama-barang" class="block text-sm font-medium"
+              >Nama Barang</label
+            >
+            <input
+              type="text"
+              id="edit-nama-barang"
+              class="border rounded-lg px-4 py-2 w-full"
+              required
+            />
+          </div>
+          <div>
+            <label for="edit-kategori-barang" class="block text-sm font-medium"
+              >Kategori</label
+            >
+            <select
+              id="edit-kategori-barang"
+              class="border rounded-lg px-4 py-2 w-full"
+            ></select>
+          </div>
+          <div>
+            <label
+              for="edit-harga-sewa-barang"
+              class="block text-sm font-medium"
+              >Harga Sewa</label
+            >
+            <input
+              type="number"
+              id="edit-harga-sewa-barang"
+              class="border rounded-lg px-4 py-2 w-full"
+              required
+            />
+          </div>
+          <div>
+            <label
+              for="edit-denda-hilang-barang"
+              class="block text-sm font-medium"
+              >Denda Hilang</label
+            >
+            <input
+              type="number"
+              id="edit-denda-hilang-barang"
+              class="border rounded-lg px-4 py-2 w-full"
+              required
+            />
+          </div>
+          <div>
+            <label
+              for="edit-denda-rusak-ringan-barang"
+              class="block text-sm font-medium"
+              >Denda Rusak Ringan</label
+            >
+            <input
+              type="number"
+              id="edit-denda-rusak-ringan-barang"
+              class="border rounded-lg px-4 py-2 w-full"
+              required
+            />
+          </div>
+        </div>
+        <div class="w-1/2">
+          <div>
+            <label
+              for="edit-denda-rusak-sedang-barang"
+              class="block text-sm font-medium"
+              >Denda Rusak Sedang</label
+            >
+            <input
+              type="number"
+              id="edit-denda-rusak-sedang-barang"
+              class="border rounded-lg px-4 py-2 w-full"
+              required
+            />
+          </div>
+          <div>
+            <label
+              for="edit-denda-rusak-berat-barang"
+              class="block text-sm font-medium"
+              >Denda Rusak Berat</label
+            >
+            <input
+              type="number"
+              id="edit-denda-rusak-berat-barang"
+              class="border rounded-lg px-4 py-2 w-full"
+              required
+            />
+          </div>
+          <div>
+            <label for="edit-status-barang" class="block text-sm font-medium"
+              >Status</label
+            >
+            <select
+              id="edit-status-barang"
+              class="border rounded-lg px-4 py-2 w-full"
+            >
+              <option value="Tersedia">Tersedia</option>
+              <option value="Tidak Tersedia">Tidak Tersedia</option>
+            </select>
+          </div>
+          <div>
+            <label for="edit-jumlah-barang" class="block text-sm font-medium"
+              >Jumlah</label
+            >
+            <input
+              type="number"
+              id="edit-jumlah-barang"
+              class="border rounded-lg px-4 py-2 w-full"
+              required
+            />
+          </div>
+          <div class="flex justify-end">
+            <button
+              type="button"
+              class="mr-4 bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
+              onclick="document.getElementById('edit-barang-modal').classList.add('hidden')"
+            >
+              Batal
+            </button>
+            <button
+              type="submit"
+              class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+            >
+              Simpan
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div id="delete-barang-modal" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="bg-white rounded-lg p-6 w-1/3">
+    <h2 class="text-xl font-bold mb-4">Hapus Barang</h2>
+    <p>Apakah Anda yakin ingin menghapus barang ini?</p>
+    <div class="flex justify-end">
+      <button type="button" class="mr-4 bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600" onclick="document.getElementById('delete-barang-modal').classList.add('hidden')">
+        Batal
+      </button>
+      <button id="confirm-delete-btn" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">Hapus</button>
+    </div>
+  </div>
+</div>
+
+
+      <div
+        id="add-user-modal-pengadaan-barang"
+        class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+      >
+        <div class="bg-white rounded-lg p-6 w-1/2">
+          <h2 class="text-xl font-bold mb-4">Tambah Barang</h2>
+          <form id="add-barang-form" class="space-y-4">
+            <div class="flex w-full gap-x-2">
+              <div class="w-1/2">
+                <div >
+                  <label for="nama-barang" class="block text-sm font-medium"
+                    >Nama Barang</label
+                  >
+                  <input type="text" name="" id="nama-barang" class="border rounded-lg px-4 py-2 w-full" required>
+                </div>
+                <div >
+                  <label for="kategori-barang" class="block text-sm font-medium"
+                    >Kategori</label
+                  >
+                  <select
+                    id="kategori-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                  ></select>
+                </div>
+                <div>
+                  <label
+                    for="harga-sewa-barang"
+                    class="block text-sm font-medium"
+                    >Harga Sewa</label
+                  >
+                  <input
+                    type="number"
+                    id="harga-sewa-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    for="denda-hilang-barang"
+                    class="block text-sm font-medium"
+                    >Denda Hilang</label
+                  >
+                  <input
+                    type="number"
+                    id="denda-hilang-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    for="denda-rusak-ringan-barang"
+                    class="block text-sm font-medium"
+                    >Denda Rusak Ringan</label
+                  >
+                  <input
+                    type="number"
+                    id="denda-rusak-ringan-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="w-1/2">
+                <div>
+                  <label
+                    for="denda-rusak-sedang-barang"
+                    class="block text-sm font-medium"
+                    >Denda Rusak Sedang</label
+                  >
+                  <input
+                    type="number"
+                    id="denda-rusak-sedang-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    for="denda-rusak-berat-barang"
+                    class="block text-sm font-medium"
+                    >Denda Rusak Berat</label
+                  >
+                  <input
+                    type="number"
+                    id="denda-rusak-berat-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    required
+                  />
+                </div>
+                <div>
+                  <label for="status-barang" class="block text-sm font-medium"
+                    >Status</label
+                  >
+                  <select
+                    id="status-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                  >
+                    <option value="Tersedia">Tersedia</option>
+                    <option value="Tidak Tersedia">Tidak Tersedia</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="gambar-barang" class="block text-sm font-medium"
+                    >Upload Gambar</label
+                  >
+                  <input
+                    type="file"
+                    id="gambar-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    accept="image/*"
+                  />
+                </div>
+                <div>
+                  <label for="jumlah-barang" class="block text-sm font-medium"
+                    >Jumlah</label
+                  >
+                  <input
+                    type="number"
+                    id="jumlah-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    required
+                  />
+                </div>
+                <div class="flex justify-end">
+                  <button
+                    type="button"
+                    class="mr-4 bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
+                    onclick="document.getElementById('add-user-modal-pengadaan-barang').classList.add('hidden')"
+                  >
+                    Batal
+                  </button>
+                  <button
+                    type="submit"
+                    class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+                  >
+                    Simpan
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <script type="module" src="../userInfo.js"></script>
+    <script type="module" src="../displayUser.js"></script>
+    <script type="module" src="../displayUserPenyewa.js"></script>
+    <script type="module" src="../kategori.js"></script>
+    <script type="module" src="../pengadaanBarang.js"></script>
+    <script type="module">
+      // Get all tab buttons and content sections
+      const tabs = document.querySelectorAll(".tab");
+      const contents = document.querySelectorAll(".content");
+
+      // Add event listener to each tab
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          // Hide all content sections
+          contents.forEach((content) => content.classList.add("hidden"));
+
+          // Get all target content IDs from data-target
+          const targetIds = tab.getAttribute("data-target").split(",");
+
+          // Show the content sections based on the data-target
+          targetIds.forEach((targetId) => {
+            const targetContent = document.getElementById(targetId.trim());
+            if (targetContent) {
+              targetContent.classList.remove("hidden");
+            }
+          });
+
+          // Remove 'active' class from all tabs
+          tabs.forEach((item) => item.classList.remove("text-[#003CD3]"));
+
+          // Add 'active' class to the clicked tab
+          tab.classList.add("text-[#003CD3]");
+        });
+      });
+
+      // Handle submenu toggle
+      document.getElementById("kelolaUserTab").addEventListener("click", () => {
+        const userSubmenu = document.getElementById("kelolaUserSubmenu");
+        userSubmenu.classList.toggle("hidden"); // Toggle visibility
+
+        // Check if submenu is visible, add active class to "Kelola User"
+        if (!userSubmenu.classList.contains("hidden")) {
+          document
+            .getElementById("kelolaUserTab")
+            .classList.add("text-[#003CD3]");
+        } else {
+          document
+            .getElementById("kelolaUserTab")
+            .classList.remove("text-[#003CD3]");
+        }
+      });
+
+      document
+        .getElementById("masterBarangTab")
+        .addEventListener("click", () => {
+          const barangSubmenu = document.getElementById("masterBarangSubmenu");
+          barangSubmenu.classList.toggle("hidden"); // Toggle visibility
+
+          // Check if submenu is visible, add active class to "Kelola User"
+          if (!barangSubmenu.classList.contains("hidden")) {
+            document
+              .getElementById("masterBarangTab")
+              .classList.add("text-[#003CD3]");
+          } else {
+            document
+              .getElementById("masterBarangTab")
+              .classList.remove("text-[#003CD3]");
+          }
+        });
+
+      document.getElementById("riwayatTab").addEventListener("click", () => {
+        const historySubmenu = document.getElementById("riwayatSubmenu");
+        historySubmenu.classList.toggle("hidden"); // Toggle visibility
+
+        // Check if submenu is visible, add active class to "Kelola User"
+        if (!historySubmenu.classList.contains("hidden")) {
+          document.getElementById("riwayatTab").classList.add("text-[#003CD3]");
+        } else {
+          document
+            .getElementById("riwayatTab")
+            .classList.remove("text-[#003CD3]");
+        }
+      });
+
+      // Handle submenu item click
+      document
+        .querySelectorAll("#kelolaUserSubmenu .tab")
+        .forEach((submenu) => {
+          submenu.addEventListener("click", () => {
+            // Remove active class from all submenu items
+            document
+              .querySelectorAll("#kelolaUserSubmenu .tab")
+              .forEach((item) => item.classList.remove("text-[#003CD3]"));
+
+            // Add active class to the clicked submenu item
+            submenu.classList.add("text-[#003CD3]");
+
+            // Ensure "Kelola User" remains active
+            document
+              .getElementById("kelolaUserTab")
+              .classList.add("text-[#003CD3]");
+          });
+        });
+
+      document
+        .querySelectorAll("#masterBarangSubmenu .tab")
+        .forEach((submenu) => {
+          submenu.addEventListener("click", () => {
+            // Remove active class from all submenu items
+            document
+              .querySelectorAll("#masterBarangSubmenu .tab")
+              .forEach((item) => item.classList.remove("text-[#003CD3]"));
+
+            // Add active class to the clicked submenu item
+            submenu.classList.add("text-[#003CD3]");
+
+            // Ensure "Kelola User" remains active
+            document
+              .getElementById("masterBarangTab")
+              .classList.add("text-[#003CD3]");
+          });
+        });
+
+      document.querySelectorAll("#riwayatSubmenu .tab").forEach((submenu) => {
+        submenu.addEventListener("click", () => {
+          // Remove active class from all submenu items
+          document
+            .querySelectorAll("#riwayatSubmenu .tab")
+            .forEach((item) => item.classList.remove("text-[#003CD3]"));
+
+          // Add active class to the clicked submenu item
+          submenu.classList.add("text-[#003CD3]");
+
+          // Ensure "Kelola User" remains active
+          document.getElementById("riwayatTab").classList.add("text-[#003CD3]");
+        });
+      });
+    </script>
+  </body>
+</html>
