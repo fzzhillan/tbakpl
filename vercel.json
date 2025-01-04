@@ -7,7 +7,7 @@
     { "source": "/output.css", "destination": "/src/output.css" },
     { "source": "/firebase.js", "destination": "/src/firebase.js" },
     { "source": "/kategori.js", "destination": "/src/kategori.js" },
-    { "source": "/index.js", "destination": "/src/index.js" },
+    { "source": "/login.js", "destination": "/src/login.js" },
     { "source": "/pengadaanBarang.js", "destination": "/src/pengadaanBarang.js" },
     { "source": "/displayUserPenyewa.js", "destination": "/src/displayUserPenyewa.js" },
     { "source": "/userInfo.js", "destination": "/src/userInfo.js" }
