@@ -13,13 +13,16 @@ const upload = multer({ storage: storage });
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    // Gunakan multer untuk menangani file
     upload.single("file")(req, {}, (err) => {
       if (err) {
+        console.error("Error multer:", err);
         return res.status(400).json({ error: "File upload error" });
       }
 
-      // Upload ke Cloudinary
+      if (!req.file) {
+        return res.status(400).json({ error: "No file provided" });
+      }
+
       cloudinary.uploader
         .upload_stream({ resource_type: "image" }, (error, result) => {
           if (error) {
@@ -37,3 +40,4 @@ export default async function handler(req, res) {
     res.status(405).json({ error: "Method not allowed" });
   }
 }
+

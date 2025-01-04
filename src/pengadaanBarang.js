@@ -32,19 +32,27 @@ const addBarangForm = document.getElementById("add-barang-form");
 
 // Fungsi untuk memuat kategori dari Firestore
 async function fetchKategori(targetSelectId, selectedKategori = "") {
-  const kategoriRef = collection(db, "kategori");
-  const querySnapshot = await getDocs(kategoriRef);
+  const dropdown = document.getElementById(targetSelectId);
+  if (!dropdown) {
+    console.error(`Dropdown dengan ID "${targetSelectId}" tidak ditemukan.`);
+    return;
+  }
 
-  let options = "";
-  querySnapshot.forEach((doc) => {
-    const kategori = doc.data();
-    // Tandai kategori yang sedang dipilih dengan "selected"
-    const isSelected = doc.id === selectedKategori ? "selected" : "";
-    options += `<option value="${doc.id}" ${isSelected}>${kategori.name}</option>`;
-  });
+  try {
+    const kategoriRef = collection(db, "kategori");
+    const querySnapshot = await getDocs(kategoriRef);
 
-  // Masukkan opsi ke dalam <select> yang ditentukan
-  document.getElementById(targetSelectId).innerHTML = options;
+    let options = "";
+    querySnapshot.forEach((doc) => {
+      const kategori = doc.data();
+      const isSelected = doc.id === selectedKategori ? "selected" : "";
+      options += `<option value="${doc.id}" ${isSelected}>${kategori.name}</option>`;
+    });
+
+    dropdown.innerHTML = options;
+  } catch (error) {
+    console.error("Error fetching kategori:", error);
+  }
 }
 
 
@@ -209,13 +217,13 @@ async function uploadImageToServer(file) {
 
   try {
     const response = await fetch("https://tbakpl.vercel.app/api/cloudinary", {
-      // URL backend diperbaiki
       method: "POST",
       body: formData,
     });
 
     if (!response.ok) {
       const errorText = await response.text();
+      console.error("Response Error:", errorText);
       throw new Error(`Error: ${errorText}`);
     }
 
