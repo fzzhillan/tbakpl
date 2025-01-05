@@ -43,7 +43,7 @@ function formatDate(timestamp) {
 async function fetchPenyewa(search = "") {
   const section = document.createElement("div");
   const list = document.createElement("ul");
-  list.className = "space-y-2";
+  list.className = "";
   section.appendChild(list);
 
   try {

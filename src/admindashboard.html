@@ -645,7 +645,7 @@
                 Aksi
               </div>
             </div>
-            <div id="user-container" class="space-y-6"></div>
+            <div id="user-container" class=""></div>
           </div>
         </div>
       </div>
@@ -666,7 +666,7 @@
               Tambah User
             </button>
           </div>
-          <div class="overflow-x-auto max-w-full text-center">
+          <div class="overflow-x-auto overflow-y-auto max-w-full text-center">
             <div class="snap-x flex text-[28px] font-bold">
               <div
                 class="snap-start flex-shrink-0 w-[180px] border-y-2 bg-[#D9D9D9] border-black"
@@ -704,7 +704,7 @@
                 Aksi
               </div>
             </div>
-            <div id="user-container-penyewa" class="space-y-6"></div>
+            <div id="user-container-penyewa" class=" max-h-[300px] border border-black"></div>
           </div>
         </div>
       </div>
@@ -729,7 +729,7 @@
             </button>
           </div>
           <div class="overflow-x-auto max-w-full text-center">
-            <div class="snap-x flex text-[24px] font-bold">
+            <div class="snap-both flex text-[24px] font-bold">
               <div
                 class="snap-start flex-shrink-0 w-[240px] border-y-2 bg-[#D9D9D9] border-black"
               >
@@ -787,7 +787,7 @@
                 Aksi
               </div>
             </div>
-            <div id="pengadaanbarang-container" class="space-y-6"></div>
+            <div id="pengadaanbarang-container" class="overflow-y-scroll max-h-[450px] w-max"></div>
           </div>
         </div>
       </div>
@@ -820,25 +820,61 @@
           </table>
         </div>
       </div>
-      <div id="stokBarang" class="content hidden">
+      <div id="stokBarang" class="content hidden flex w-[80%] mx-[10%] py-4">
         <p class="flex w-full justify-center">stok barang</p>
       </div>
-      <div id="stokOpname" class="content hidden">
-        <p class="flex w-full justify-center">stok barang</p>
+      <div id="stokOpname" class="content hidden flex w-[80%] mx-[10%] py-4">
+        <p class="flex w-full justify-center">stok opname</p>
       </div>
-      <div id="transaksi" class="content hidden">
-        <p class="flex w-full justify-center">transaksi</p>
+      <div id="transaksi" class="content hidden flex w-[80%] mx-[10%] py-4">
+        <div class="w-full shadow-md p-6 bg-white rounded-lg">
+          <div class="flex items-center justify-between mb-4">
+              <input
+                type="text"
+                id="search-bar-transaksi"
+                class="border rounded-lg px-4 py-2 w-full"
+                placeholder="Cari barang"
+              />
+            </div>
+            <div class="flex w-full p-4 gap-x-2 h-[500px]">
+              <div class="flex w-3/4 max-h-full gap-y-2 flex-col overflow-y-auto">
+                <div id="transaksi-container" class="w-full h-[120px] justify-around items-stretch gap-y-2 bg-white flex rounded-xl border flex-col shadow-md">
+                  
+                  
+                </div>
+               
+                
+              </div>
+              <div class="flex w-1/4 h-full items-center justify-center relative">
+  <button class="relative">
+    <div class="bg-blue-500 rounded-full p-2">
+      <svg viewBox="0 0 64 64" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 64 64" class="h-[100px] w-[100px] fill-white">
+        <path d="M-27.5-432.3h-30.3c-.5 0-.9-.2-1.1-.6-.3-.4-.3-.9-.1-1.3l2.6-6.6-2.6-24.6h-8.4v-2.8h9.6c.7 0 1.3.5 1.4 1.2l2.8 26.1c0 .2 0 .4-.1.7l-2 5h28.2v2.9" transform="translate(76 478)" fill="#4154f1" class="fill-white"></path>
+        <path d="m-54.7-439.2-.6-2.7 31.9-6.6v-11.3h-33v-2.8H-22c.8 0 1.4.6 1.4 1.4v13.8c0 .7-.5 1.2-1.1 1.3l-33 6.9M-26.1-424c-3 0-5.5-2.5-5.5-5.5s2.5-5.5 5.5-5.5 5.5 2.5 5.5 5.5-2.5 5.5-5.5 5.5zm0-8.3c-1.5 0-2.8 1.2-2.8 2.8s1.2 2.8 2.8 2.8 2.8-1.2 2.8-2.8-1.3-2.8-2.8-2.8zM-59.1-424c-3 0-5.5-2.5-5.5-5.5s2.5-5.5 5.5-5.5 5.5 2.5 5.5 5.5-2.5 5.5-5.5 5.5zm0-8.3c-1.5 0-2.8 1.2-2.8 2.8s1.2 2.8 2.8 2.8 2.8-1.2 2.8-2.8-1.3-2.8-2.8-2.8z" transform="translate(76 478)" fill="#4154f1" class="fill-white"></path>
+      </svg>
+    </div>
+    
+    <div id="transaksi-badge" class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs font-bold flex items-center justify-center w-10 h-10 transform translate-x-2 -translate-y-2">
+      0
+    </div>
+  </button>
+</div>
+
+            </div>
+
+        </div>
+        </div>
       </div>
-      <div id="dataPenyewaan" class="content hidden">
+      <div id="dataPenyewaan" class="content hidden flex w-[80%] mx-[10%] py-4n">
         <p class="flex w-full justify-center">data penyewaan</p>
       </div>
-      <div id="dataPengembalian" class="content hidden">
+      <div id="dataPengembalian" class="content hidden flex w-[80%] mx-[10%] py-4">
         <p class="flex w-full justify-center">data Pengembalian</p>
       </div>
-      <div id="riwayatTransaksi" class="content hidden">
+      <div id="riwayatTransaksi" class="content hidden flex w-[80%] mx-[10%] py-4">
         <p class="flex w-full justify-center">riwayatTransaksi</p>
       </div>
-      <div id="riwayatPengadaan" class="content hidden">
+      <div id="riwayatPengadaan" class="content hidden flex w-[80%] mx-[10%] py-4">
         <p class="flex w-full justify-center">riwayatPengadaan</p>
       </div>
 
@@ -1659,6 +1695,7 @@
     <script type="module" src="./displayUserPenyewa.js"></script>
     <script type="module" src="./kategori.js"></script>
     <script type="module" src="./pengadaanBarang.js"></script>
+    <script type="module" src="./transaksi.js"></script>
     <script type="module">
       // Get all tab buttons and content sections
       const tabs = document.querySelectorAll(".tab");

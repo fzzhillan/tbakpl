@@ -82,21 +82,27 @@ async function fetchPengadaanBarang(search = "") {
       // Filter pencarian
       if (
         search &&
-        !kategoriMap[barang.kategori]
-          ?.toLowerCase()
-          .includes(search.toLowerCase())
+        !(
+          (
+            barang.nama?.toLowerCase().includes(search.toLowerCase()) || // Pencarian berdasarkan nama barang
+            kategoriMap[barang.kategori]
+              ?.toLowerCase()
+              .includes(search.toLowerCase())
+          ) // Pencarian berdasarkan kategori
+        )
       ) {
-        return;
+        return; // Abaikan barang yang tidak sesuai
       }
+
 
       // Buat elemen untuk setiap barang
       const row = document.createElement("div");
-      row.className = "snap-start flex text-center items-stretch";
+      row.className = "snap-start flex text-center gap-y-0 items-stretch";
       row.innerHTML = `
-      <div class="snap-start flex justify-center items-center flex-shrink-0 w-[240px]  border-y-2 border-black">${
+      <div class="snap-start flex justify-center items-center flex-shrink-0 w-[240px] border-y-2 border-black">${
         barang.nama
       }</div>
-        <div class="snap-start flex justify-center items-center flex-shrink-0 w-[240px] border-y-2 border-l-2 border-black">${
+        <div class="snap-start p-0 flex justify-center items-center flex-shrink-0 w-[240px] border-y-2 border-l-2 border-black">${
           kategoriMap[barang.kategori] || "Tidak Diketahui"
         }</div>
         <div class="snap-start flex justify-center items-center flex-shrink-0 w-[240px] border-2 border-black">${
@@ -122,7 +128,7 @@ async function fetchPengadaanBarang(search = "") {
         }</div>
         <div class="snap-start flex justify-center flex-shrink-0 w-[240px] border-y-2 border-r-2 border-black"><img src="${
           barang.gambar
-        }" alt="Gambar" class="w-10 h-10 rounded flex justify-center items-center object-cover p-1"></div>
+        }" alt="Gambar" class=" rounded flex justify-center items-center object-cover p-1"></div>
         <div class="snap-start flex justify-center gap-x-2 items-center flex-shrink-0 w-[240px] border-y-2 border-black">
           <button class="edit-btn-pengadaan px-4 p-2 rounded bg-blue-500" data-id="${
             doc.id
