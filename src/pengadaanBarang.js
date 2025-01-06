@@ -128,7 +128,7 @@ async function fetchPengadaanBarang(search = "") {
         }</div>
         <div class="snap-start flex justify-center flex-shrink-0 w-[240px] border-y-2 border-r-2 border-black"><img src="${
           barang.gambar
-        }" alt="Gambar" class=" rounded flex justify-center items-center object-cover p-1"></div>
+        }" alt="Gambar" class=" rounded flex justify-center h items-center object-cover p-1"></div>
         <div class="snap-start flex justify-center gap-x-2 items-center flex-shrink-0 w-[240px] border-y-2 border-black">
           <button class="edit-btn-pengadaan px-4 p-2 rounded bg-blue-500" data-id="${
             doc.id

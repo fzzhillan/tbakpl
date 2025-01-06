@@ -10,6 +10,8 @@ import {
   getDocs,
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
+let currentUserData = null;
+
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
     // Jika tidak ada user yang terautentikasi, arahkan ke halaman login
@@ -28,11 +30,13 @@ onAuthStateChanged(auth, async (user) => {
       if (role !== "admin" && role !== "petugas") {
         window.location.href = "index.html"; // Misalnya halaman dashboard pengguna biasa
       }
+      currentUserData = userData;
     }
   }
 });
 
 const userNameElement = document.getElementById("userName");
+
 const logoutLink = document.getElementById("logoutLink");
 
 // Fungsi untuk mendapatkan nama pengguna
@@ -54,6 +58,10 @@ async function fetchUserName(user) {
         if (secondaryUserNameElement) {
           secondaryUserNameElement.textContent = ` ${userData.username}`;
         }
+        const thirdUserNameElement = document.getElementById("thirdUserName");
+        if (thirdUserNameElement) {
+          thirdUserNameElement.textContent = ` ${userData.username}`;
+        }
         
       });
     } else {
@@ -62,6 +70,10 @@ async function fetchUserName(user) {
       if (secondaryUserNameElement) {
         secondaryUserNameElement.textContent = "User not found";
       }
+      const thirdUserNameElement = document.getElementById("thirdUserName");
+      if (thirdUserNameElement) {
+        thirdUserNameElement.textContent = "User not found";
+      }
     }
   } catch (error) {
     console.error("Error fetching user data:", error.message);
@@ -69,6 +81,10 @@ async function fetchUserName(user) {
     const secondaryUserNameElement = document.getElementById("secondaryUserName");
     if (secondaryUserNameElement) {
       secondaryUserNameElement.textContent = "Error loading user";
+    }
+    const thirdUserNameElement = document.getElementById("thirdUserName");
+    if (thirdUserNameElement) {
+      thirdUserNameElement.textContent = "Error loading user";
     }
   }
 }
@@ -102,3 +118,5 @@ logoutLink.addEventListener("click", (event) => {
   event.preventDefault();
   handleLogout();
 });
+
+export { currentUserData };

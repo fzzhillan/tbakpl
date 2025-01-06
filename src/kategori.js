@@ -120,13 +120,34 @@ async function openDeleteModal(id) {
     // Event listener untuk konfirmasi hapus
     document.getElementById("confirm-delete-btn-kategori").onclick =
       async () => {
-        await deleteDoc(docRef);
-        alert("Kategori berhasil dihapus!");
-        document
-          .getElementById("delete-kategori-modal")
-          .classList.add("hidden");
-        renderCategories();
+        // Ambil data kategori terlebih dahulu
+        const docSnapshot = await getDoc(docRef);
+
+        if (docSnapshot.exists()) {
+          const data = docSnapshot.data();
+
+          // Cek apakah jumlah barang adalah 0
+          if (data.jumlah === 0) {
+            // Jika jumlah 0, lakukan penghapusan
+            await deleteDoc(docRef);
+            alert("Kategori berhasil dihapus!");
+
+            // Menyembunyikan modal
+            document
+              .getElementById("delete-kategori-modal")
+              .classList.add("hidden");
+
+            // Render ulang kategori
+            renderCategories();
+          } else {
+            // Jika jumlah tidak 0, tampilkan peringatan
+            alert("Penghapusan gagal. Pastikan jumlah barang adalah 0.");
+          }
+        } else {
+          alert("Kategori tidak ditemukan.");
+        }
       };
+
       document.getElementById("cancel-delete-btn-kategori").onclick =
         async () => {
           document
