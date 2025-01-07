@@ -625,7 +625,7 @@
             </button>
           </div>
           <div class="overflow-x-auto max-w-full text-center">
-            <div class="snap-x flex text-[28px] font-bold">
+            <div class="snap-x flex text-[24px] font-bold">
               <div
                 class="snap-start flex-shrink-0 w-[180px] border-y-2 bg-[#D9D9D9] border-black"
               >
@@ -689,11 +689,11 @@
             </button>
           </div>
           <div class="overflow-x-auto overflow-y-auto max-w-full text-center">
-            <div class="snap-x flex text-[28px] font-bold">
+            <div class="snap-x flex text-[24px] font-bold">
               <div
                 class="snap-start flex-shrink-0 w-[180px] border-y-2 bg-[#D9D9D9] border-black"
               >
-                Nama User
+                Nama Penyewa
               </div>
               <div
                 class="snap-start flex-shrink-0 w-[180px] border-2 bg-[#D9D9D9] border-black"
@@ -1546,7 +1546,7 @@
                 <div class="flex flex-col">
                   <div class="flex gap-x-2 items-center">
                     <label for="transaksi-waktu">Waktu Sewa</label>
-                    <p id="waktu-sewa-hari" class="mt-2" ></p>
+                    <p id="waktu-sewa-hari" class="text-gray-400 text-sm" ></p>
 
                   </div>
   <input type="date" id="transaksi-waktu" class="border rounded-lg px-4 py-2 w-full">
@@ -2796,7 +2796,7 @@
 
             const itemElement = document.createElement("div");
             itemElement.className =
-              "flex items-center justify-between w-full bg-white p-4 border border-gray-200 rounded-md shadow-sm gap-x-4 mb-2";
+              "flex items-center justify-between w-full h-full bg-white p-4 border border-gray-200 rounded-md shadow-sm gap-x-4 mb-2";
 
             itemElement.innerHTML = `
   <!-- Bagian Kiri -->
@@ -2809,7 +2809,7 @@
 
   <!-- Bagian Tengah -->
   <div class="flex flex-1 justify-between gap-x-4 h-full">
-    <div class="flex items-center justify-center w-1/3 border-x border-black px-4 bg-gray-100 h-full">
+    <div class="flex items-center justify-center w-1/3  px-4 bg-gray-100 h-full">
       <p class="text-gray-600 text-center">Stok Tersedia:</p>
       <p class="font-bold text-lg ml-2">${barang.jumlah}</p>
     </div>

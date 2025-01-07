@@ -141,6 +141,11 @@ function renderBarang(barang) {
       console.warn(`Barang dengan ID ${item.id} atau nama tidak valid!`);
       return; // Skip item yang tidak valid
     }
+
+    if (item.jumlah <= 0) {
+      console.warn(`Barang dengan ID ${item.id} tidak tersedia (jumlah <= 0)`);
+      return; // Skip barang yang tidak tersedia
+    }
     console.log(`Rendering item dengan ID ${item.id}:`, item.nama);
     // Validasi nama barang
     const namaBarang =

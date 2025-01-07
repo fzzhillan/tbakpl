@@ -95,7 +95,7 @@
                   ${penyewa.noHpPenyewa}
                 </div>
                 <div
-                  class="snap-start flex-shrink-0 w-[180px] border-2 ] border-black p-2"
+                  class="snap-start flex-shrink-0 w-[180px] border-2  border-black p-2"
                 >
                   ${
                     penyewa.dateRegistered

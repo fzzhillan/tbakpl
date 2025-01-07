@@ -1,0 +1,3368 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Admin</title>
+    <link href="./output.css" rel="stylesheet" />
+    <link
+      href="https://fonts.cdnfonts.com/css/tw-cen-mt-std"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="font-tw">
+    <nav
+      class="flex w-full h-[50px] justify-between shadow-md items-center px-[10%] py-10"
+    >
+      <div>
+        <div class="">
+          <input type="checkbox" id="menuToggle" class="peer hidden" />
+          <label
+            for="menuToggle"
+            class="flex items-center h-full w-full p-1 rounded bg-transparent cursor-pointer peer-checked:bg-gray-50/50"
+          >
+            <svg
+              height="24"
+              viewBox="0 0 6 7"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <line y1="0.5" x2="6" y2="0.5" stroke="black" />
+              <line y1="3.5" x2="6" y2="3.5" stroke="black" />
+              <line y1="6.5" x2="6" y2="6.5" stroke="black" />
+            </svg>
+          </label>
+          <div
+            class="fixed animate-fade-right animate-duration-300 left-0 top-0 min-h-[100vh] w-1/2 md:w-[25vw] hidden bg-[#C0C0C0] border peer-checked:block shadow-md z-10"
+          >
+            <div
+              class="flex w-full justify-between items-center border-b border-black px-5 py-1"
+            >
+              <div></div>
+              <img src="../assets/img/logoabxy.png" class="h-7 my-5" alt="" />
+              <div>
+                <label
+                  for="menuToggle"
+                  class="flex items-center h-full w-full p-1 rounded bg-transparent cursor-pointer peer-checked:bg-gray-50/50"
+                >
+                  <svg
+                    height="24"
+                    viewBox="0 0 6 7"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <line
+                      x1="0.615889"
+                      y1="6.67991"
+                      x2="5.61589"
+                      y2="0.679908"
+                      stroke="black"
+                    />
+                    <line
+                      x1="0.384111"
+                      y1="0.679908"
+                      x2="5.38411"
+                      y2="6.67991"
+                      stroke="black"
+                    />
+                  </svg>
+                </label>
+              </div>
+            </div>
+            <ul class="flex flex-col gap-y-2 p-2 pl-10 text-lg mt-4 navbar">
+              <li
+                class="tab w-full flex p-1 rounded-lg text-[#003CD3] hover:cursor-pointer hover:bg-blue-200/20"
+                data-target="dashboard,dashboardHeader"
+              >
+                <button>
+                  <div class="flex items-center gap-x-4">
+                    <svg
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                      style="fill: currentColor"
+                      class="h-6 w-6"
+                    >
+                      <path d="M0 0h24v24H0z" fill="none"></path>
+                      <path
+                        d="M13 21V11h8v10h-8zM3 13V3h8v10H3zm6-2V5H5v6h4zM3 21v-6h8v6H3zm2-2h4v-2H5v2zm10 0h4v-6h-4v6zM13 3h8v6h-8V3zm2 2v2h4V5h-4z"
+                        fill="currentColor"
+                      ></path>
+                    </svg>
+
+                    Dashboard
+                  </div>
+                </button>
+              </li>
+              <ul>
+                <li
+                  class="w-full flex p-1 rounded-lg hover:cursor-pointer hover:bg-blue-200/20"
+                  id="kelolaUserTab"
+                >
+                  <button>
+                    <div class="flex items-center gap-x-4 hover:cursor-pointer">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        class="w-6 h-6"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M7 6a5 5 0 1 1 10 0A5 5 0 0 1 7 6Zm5-3a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"
+                          class="fill-000000"
+                        ></path>
+                        <path
+                          d="M4.062 21a8.001 8.001 0 0 1 11.201-6.307l.913.409.817-1.826-.913-.408A9.968 9.968 0 0 0 12 12C6.477 12 2 16.477 2 22v1h12.354v-2H4.062Z"
+                          class="fill-000000"
+                        ></path>
+                        <path
+                          d="M20 15v3h3v2h-3v3h-2v-3h-3v-2h3v-3h2Z"
+                          class="fill-000000"
+                        ></path>
+                      </svg>
+                      Kelola User
+                    </div>
+                  </button>
+                </li>
+                <ul
+                  class="sub-menu hidden pl-6 space-y-3"
+                  id="kelolaUserSubmenu"
+                >
+                  <li
+                    data-target="kelolaAdmin,kelolaAdminHeader"
+                    class="tab flex gap-x-4 hover:bg-blue-200/20 hover:cursor-pointer"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      class="w-6 h-6"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M7 6a5 5 0 1 1 10 0A5 5 0 0 1 7 6Zm5-3a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"
+                        class="fill-000000"
+                      ></path>
+                      <path
+                        d="M4.062 21a8.001 8.001 0 0 1 11.201-6.307l.913.409.817-1.826-.913-.408A9.968 9.968 0 0 0 12 12C6.477 12 2 16.477 2 22v1h12.354v-2H4.062Z"
+                        class="fill-000000"
+                      ></path>
+                      <path
+                        d="M20 15v3h3v2h-3v3h-2v-3h-3v-2h3v-3h2Z"
+                        class="fill-000000"
+                      ></path>
+                    </svg>
+                    <button>Kelola Admin/Pegawai</button>
+                  </li>
+                  <li
+                    data-target="kelolaPenyewa,kelolaPenyewaHeader"
+                    class="tab flex gap-x-4 hover:bg-blue-200/20 hover:cursor-pointer"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      class="w-6 h-6"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M7 6a5 5 0 1 1 10 0A5 5 0 0 1 7 6Zm5-3a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"
+                        class="fill-000000"
+                      ></path>
+                      <path
+                        d="M4.062 21a8.001 8.001 0 0 1 11.201-6.307l.913.409.817-1.826-.913-.408A9.968 9.968 0 0 0 12 12C6.477 12 2 16.477 2 22v1h12.354v-2H4.062Z"
+                        class="fill-000000"
+                      ></path>
+                      <path
+                        d="M20 15v3h3v2h-3v3h-2v-3h-3v-2h3v-3h2Z"
+                        class="fill-000000"
+                      ></path>
+                    </svg>
+                    <button>Kelola Penyewa</button>
+                  </li>
+                </ul>
+              </ul>
+
+              <li
+                class="w-full flex p-1 rounded-lg hover:cursor-pointer hover:bg-blue-200/20"
+                id="masterBarangTab"
+              >
+                <button>
+                  <div class="flex items-center gap-x-4">
+                    <svg
+                      viewBox="0 0 768 768"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-6 h-6"
+                    >
+                      <path
+                        d="M579.008 260.496 534 97.504l-262.992 74 41.984 162.992zM245.968 436.352l.032.144 42.992-12.992-104-404H7.008v56.992h128.768l90.72 365.76zM749.376 497.104 744 474.496l-274.336 76.32 21.2 66.528 270.128-78.688-9.984-42zM408.496 529.392l19.52-19.52-35.392-35.408L373.12 494c-11.344-7.52-24.016-13.12-37.568-16.64v-29.168h-62.816v29.168c-13.84 3.584-26.8 9.344-38.336 17.104l-18.72-18.736-35.392 35.392 19.04 19.04c-7.28 11.136-12.736 23.568-16.176 36.784H154v62.784h29.152c3.52 13.552 9.12 26.256 16.656 37.616l-19.52 19.504 35.392 35.376 19.52-19.52c11.376 7.552 24.096 13.168 37.68 16.672v29.12h62.576v-29.12a124.523 124.523 0 0 0 36.896-16.176l20.288 20.272 35.392-35.36-19.984-20.016c7.808-11.6 13.6-24.64 17.152-38.544h29.12v-62.368H425.2c-3.504-13.616-9.12-26.384-16.704-37.792zM304.16 649.824c-28.432 0-51.472-23.04-51.472-51.488 0-28.416 23.04-51.472 51.472-51.472 28.416 0 51.472 23.04 51.472 51.472 0 28.448-23.056 51.488-51.472 51.488zM342.848 442.256c63.344-11.248 95.648 32.448 95.648 32.448l.336.336c.48.512.864.992 1.312 1.488 6.352 7.84 10.944 19.44 10.944 19.44l2.672 8.384 307.248-84.864-44-163.008-394 108 19.84 77.776z"
+                        fill="currentColor"
+                        class="fill-000000"
+                      ></path>
+                    </svg>
+                    Master Barang
+                  </div>
+                </button>
+              </li>
+              <ul
+                class="sub-menu hidden pl-6 space-y-3"
+                id="masterBarangSubmenu"
+              >
+                <li
+                  data-target="pengadaanBarang,pengadaanBarangHeader"
+                  class="tab flex gap-x-4"
+                >
+                  <svg
+                    viewBox="0 0 768 768"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      d="M579.008 260.496 534 97.504l-262.992 74 41.984 162.992zM245.968 436.352l.032.144 42.992-12.992-104-404H7.008v56.992h128.768l90.72 365.76zM749.376 497.104 744 474.496l-274.336 76.32 21.2 66.528 270.128-78.688-9.984-42zM408.496 529.392l19.52-19.52-35.392-35.408L373.12 494c-11.344-7.52-24.016-13.12-37.568-16.64v-29.168h-62.816v29.168c-13.84 3.584-26.8 9.344-38.336 17.104l-18.72-18.736-35.392 35.392 19.04 19.04c-7.28 11.136-12.736 23.568-16.176 36.784H154v62.784h29.152c3.52 13.552 9.12 26.256 16.656 37.616l-19.52 19.504 35.392 35.376 19.52-19.52c11.376 7.552 24.096 13.168 37.68 16.672v29.12h62.576v-29.12a124.523 124.523 0 0 0 36.896-16.176l20.288 20.272 35.392-35.36-19.984-20.016c7.808-11.6 13.6-24.64 17.152-38.544h29.12v-62.368H425.2c-3.504-13.616-9.12-26.384-16.704-37.792zM304.16 649.824c-28.432 0-51.472-23.04-51.472-51.488 0-28.416 23.04-51.472 51.472-51.472 28.416 0 51.472 23.04 51.472 51.472 0 28.448-23.056 51.488-51.472 51.488zM342.848 442.256c63.344-11.248 95.648 32.448 95.648 32.448l.336.336c.48.512.864.992 1.312 1.488 6.352 7.84 10.944 19.44 10.944 19.44l2.672 8.384 307.248-84.864-44-163.008-394 108 19.84 77.776z"
+                      fill="currentColor"
+                      class="fill-000000"
+                    ></path>
+                  </svg>
+                  <button>Pengadaan Barang</button>
+                </li>
+                <li
+                  data-target="kategori,kategoriHeader"
+                  class="tab flex gap-x-4"
+                >
+                  <svg
+                    viewBox="0 0 768 768"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      d="M579.008 260.496 534 97.504l-262.992 74 41.984 162.992zM245.968 436.352l.032.144 42.992-12.992-104-404H7.008v56.992h128.768l90.72 365.76zM749.376 497.104 744 474.496l-274.336 76.32 21.2 66.528 270.128-78.688-9.984-42zM408.496 529.392l19.52-19.52-35.392-35.408L373.12 494c-11.344-7.52-24.016-13.12-37.568-16.64v-29.168h-62.816v29.168c-13.84 3.584-26.8 9.344-38.336 17.104l-18.72-18.736-35.392 35.392 19.04 19.04c-7.28 11.136-12.736 23.568-16.176 36.784H154v62.784h29.152c3.52 13.552 9.12 26.256 16.656 37.616l-19.52 19.504 35.392 35.376 19.52-19.52c11.376 7.552 24.096 13.168 37.68 16.672v29.12h62.576v-29.12a124.523 124.523 0 0 0 36.896-16.176l20.288 20.272 35.392-35.36-19.984-20.016c7.808-11.6 13.6-24.64 17.152-38.544h29.12v-62.368H425.2c-3.504-13.616-9.12-26.384-16.704-37.792zM304.16 649.824c-28.432 0-51.472-23.04-51.472-51.488 0-28.416 23.04-51.472 51.472-51.472 28.416 0 51.472 23.04 51.472 51.472 0 28.448-23.056 51.488-51.472 51.488zM342.848 442.256c63.344-11.248 95.648 32.448 95.648 32.448l.336.336c.48.512.864.992 1.312 1.488 6.352 7.84 10.944 19.44 10.944 19.44l2.672 8.384 307.248-84.864-44-163.008-394 108 19.84 77.776z"
+                      fill="currentColor"
+                      class="fill-000000"
+                    ></path>
+                  </svg>
+                  <button>Kategori</button>
+                </li>
+
+                <li
+                  data-target="stokBarang,stokBarangHeader"
+                  class="tab flex gap-x-4"
+                >
+                  <svg
+                    viewBox="0 0 768 768"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      d="M579.008 260.496 534 97.504l-262.992 74 41.984 162.992zM245.968 436.352l.032.144 42.992-12.992-104-404H7.008v56.992h128.768l90.72 365.76zM749.376 497.104 744 474.496l-274.336 76.32 21.2 66.528 270.128-78.688-9.984-42zM408.496 529.392l19.52-19.52-35.392-35.408L373.12 494c-11.344-7.52-24.016-13.12-37.568-16.64v-29.168h-62.816v29.168c-13.84 3.584-26.8 9.344-38.336 17.104l-18.72-18.736-35.392 35.392 19.04 19.04c-7.28 11.136-12.736 23.568-16.176 36.784H154v62.784h29.152c3.52 13.552 9.12 26.256 16.656 37.616l-19.52 19.504 35.392 35.376 19.52-19.52c11.376 7.552 24.096 13.168 37.68 16.672v29.12h62.576v-29.12a124.523 124.523 0 0 0 36.896-16.176l20.288 20.272 35.392-35.36-19.984-20.016c7.808-11.6 13.6-24.64 17.152-38.544h29.12v-62.368H425.2c-3.504-13.616-9.12-26.384-16.704-37.792zM304.16 649.824c-28.432 0-51.472-23.04-51.472-51.488 0-28.416 23.04-51.472 51.472-51.472 28.416 0 51.472 23.04 51.472 51.472 0 28.448-23.056 51.488-51.472 51.488zM342.848 442.256c63.344-11.248 95.648 32.448 95.648 32.448l.336.336c.48.512.864.992 1.312 1.488 6.352 7.84 10.944 19.44 10.944 19.44l2.672 8.384 307.248-84.864-44-163.008-394 108 19.84 77.776z"
+                      fill="currentColor"
+                      class="fill-000000"
+                    ></path>
+                  </svg>
+                  <button>Stok Barang</button>
+                </li>
+                <li
+                  data-target="stokOpname,stokOpnameHeader"
+                  class="tab flex gap-x-4"
+                >
+                  <svg
+                    viewBox="0 0 768 768"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      d="M579.008 260.496 534 97.504l-262.992 74 41.984 162.992zM245.968 436.352l.032.144 42.992-12.992-104-404H7.008v56.992h128.768l90.72 365.76zM749.376 497.104 744 474.496l-274.336 76.32 21.2 66.528 270.128-78.688-9.984-42zM408.496 529.392l19.52-19.52-35.392-35.408L373.12 494c-11.344-7.52-24.016-13.12-37.568-16.64v-29.168h-62.816v29.168c-13.84 3.584-26.8 9.344-38.336 17.104l-18.72-18.736-35.392 35.392 19.04 19.04c-7.28 11.136-12.736 23.568-16.176 36.784H154v62.784h29.152c3.52 13.552 9.12 26.256 16.656 37.616l-19.52 19.504 35.392 35.376 19.52-19.52c11.376 7.552 24.096 13.168 37.68 16.672v29.12h62.576v-29.12a124.523 124.523 0 0 0 36.896-16.176l20.288 20.272 35.392-35.36-19.984-20.016c7.808-11.6 13.6-24.64 17.152-38.544h29.12v-62.368H425.2c-3.504-13.616-9.12-26.384-16.704-37.792zM304.16 649.824c-28.432 0-51.472-23.04-51.472-51.488 0-28.416 23.04-51.472 51.472-51.472 28.416 0 51.472 23.04 51.472 51.472 0 28.448-23.056 51.488-51.472 51.488zM342.848 442.256c63.344-11.248 95.648 32.448 95.648 32.448l.336.336c.48.512.864.992 1.312 1.488 6.352 7.84 10.944 19.44 10.944 19.44l2.672 8.384 307.248-84.864-44-163.008-394 108 19.84 77.776z"
+                      fill="currentColor"
+                      class="fill-000000"
+                    ></path>
+                  </svg>
+                  <button>Stok Opname</button>
+                </li>
+              </ul>
+
+              <li
+                class="tab w-full flex p-1 rounded-lg hover:cursor-pointer hover:bg-blue-200/20"
+                data-target="transaksi,transaksiHeader"
+              >
+                <button>
+                  <div class="flex items-center gap-x-4">
+                    <svg
+                      viewBox="0 0 64 64"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-6 h-6"
+                    >
+                      <path
+                        d="M52 7H12a6 6 0 0 0-6 6v38a6 6 0 0 0 6 6h40a6 6 0 0 0 6-6V13a6 6 0 0 0-6-6Zm2 44a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2V13a2 2 0 0 1 2-2h40a2 2 0 0 1 2 2Z"
+                        fill="currentColor"
+                        class="fill-231f20"
+                      ></path>
+                      <path
+                        d="M45 29a2 2 0 0 0 0-4H22.83l2.58-2.59a2 2 0 0 0-2.82-2.82l-6 6a2 2 0 0 0-.44 2.18A2 2 0 0 0 18 29ZM47 36H20a2 2 0 0 0 0 4h22.17l-2.58 2.59a2 2 0 1 0 2.82 2.82l6-6a2 2 0 0 0 .44-2.18A2 2 0 0 0 47 36Z"
+                        fill="currentColor"
+                        class="fill-231f20"
+                      ></path>
+                    </svg>
+                    Transaksi
+                  </div>
+                </button>
+              </li>
+              <li
+                class="tab w-full flex p-1 rounded-lg hover:cursor-pointer hover:bg-blue-200/20"
+                data-target="dataPenyewaan,dataPenyewaanHeader"
+              >
+                <button>
+                  <div class="flex items-center gap-x-4">
+                    <svg
+                      viewBox="0 0 32 32"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-6 h-6"
+                    >
+                      <g data-name="Layer 2">
+                        <path
+                          d="M16.88 15.53 7 5.66a1 1 0 0 0-1.41 1.41l9.06 9.06-8.8 8.8a1 1 0 0 0 0 1.41 1 1 0 0 0 1.42 0l9.61-9.61a.85.85 0 0 0 0-1.2Z"
+                          fill="currentColor"
+                          class="fill-231f20"
+                        ></path>
+                        <path
+                          d="m26.46 15.53-9.88-9.87a1 1 0 0 0-1.41 1.41l9.06 9.06-8.8 8.8a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l9.62-9.61a.85.85 0 0 0 0-1.2Z"
+                          fill="currentColor"
+                          class="fill-231f20"
+                        ></path>
+                      </g>
+                    </svg>
+                    Data Penyewaan
+                  </div>
+                </button>
+              </li>
+              <li
+                class="tab w-full flex p-1 rounded-lg hover:cursor-pointer hover:bg-blue-200/20"
+                data-target="dataPengembalian,dataPengembalianHeader"
+              >
+                <button>
+                  <div class="flex items-center gap-x-4">
+                    <svg
+                      viewBox="0 0 32 32"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-6 h-6"
+                    >
+                      <g data-name="Layer 2">
+                        <path
+                          d="M15.12 15.53 25 5.66a1 1 0 0 1 1.41 1.41l-9.06 9.06 8.8 8.8a1 1 0 0 1 0 1.41 1 1 0 0 1-1.42 0l-9.61-9.61a.85.85 0 0 1 0-1.2Z"
+                          fill="currentColor"
+                          class="fill-231f20"
+                        ></path>
+                        <path
+                          d="m5.54 15.53 9.88-9.87a1 1 0 1 1 1.41 1.41l-9.06 9.06 8.8 8.8a1 1 0 0 1 0 1.41 1 1 0 0 1-1.41 0l-9.62-9.61a.85.85 0 0 1 0-1.2Z"
+                          fill="currentColor"
+                          class="fill-231f20"
+                        ></path>
+                      </g>
+                    </svg>
+                    Data Pengembalian
+                  </div>
+                </button>
+              </li>
+              <li
+                class="w-full flex p-1 rounded-lg hover:cursor-pointer hover:bg-blue-200/20"
+                id="riwayatTab"
+              >
+                <button>
+                  <div class="flex items-center gap-x-4">
+                    <svg
+                      viewBox="0 0 20 21"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-6 h-6"
+                    >
+                      <path
+                        d="M10.5.5C7 .5 3.9 2.4 2.3 5.3L0 3v6.5h6.5L3.7 6.7C5 4.2 7.5 2.5 10.5 2.5c4.1 0 7.5 3.4 7.5 7.5s-3.4 7.5-7.5 7.5c-3.3 0-6-2.1-7.1-5H1.3c1.1 4 4.8 7 9.2 7 5.3 0 9.5-4.3 9.5-9.5S15.7.5 10.5.5ZM9 5.5v5.1l4.7 2.8.8-1.3-4-2.4V5.5H9Z"
+                        fill="currentColor"
+                        opacity=".9"
+                        fill-rule="evenodd"
+                        class="fill-000000"
+                      ></path>
+                    </svg>
+                    Riwayat
+                  </div>
+                </button>
+              </li>
+              <ul class="sub-menu hidden pl-6 space-y-3" id="riwayatSubmenu">
+                <li
+                  data-target="riwayatTransaksi,riwayatTransaksiHeader"
+                  class="tab flex gap-x-4"
+                >
+                  <svg
+                    viewBox="0 0 20 21"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      d="M10.5.5C7 .5 3.9 2.4 2.3 5.3L0 3v6.5h6.5L3.7 6.7C5 4.2 7.5 2.5 10.5 2.5c4.1 0 7.5 3.4 7.5 7.5s-3.4 7.5-7.5 7.5c-3.3 0-6-2.1-7.1-5H1.3c1.1 4 4.8 7 9.2 7 5.3 0 9.5-4.3 9.5-9.5S15.7.5 10.5.5ZM9 5.5v5.1l4.7 2.8.8-1.3-4-2.4V5.5H9Z"
+                      fill="currentColor"
+                      opacity=".9"
+                      fill-rule="evenodd"
+                      class="fill-000000"
+                    ></path>
+                  </svg>
+                  <button>Riwayat Transaksi</button>
+                </li>
+                <li
+                  data-target="riwayatPengadaan,riwayatPengadaanHeader"
+                  class="tab flex gap-x-4"
+                >
+                  <svg
+                    viewBox="0 0 20 21"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      d="M10.5.5C7 .5 3.9 2.4 2.3 5.3L0 3v6.5h6.5L3.7 6.7C5 4.2 7.5 2.5 10.5 2.5c4.1 0 7.5 3.4 7.5 7.5s-3.4 7.5-7.5 7.5c-3.3 0-6-2.1-7.1-5H1.3c1.1 4 4.8 7 9.2 7 5.3 0 9.5-4.3 9.5-9.5S15.7.5 10.5.5ZM9 5.5v5.1l4.7 2.8.8-1.3-4-2.4V5.5H9Z"
+                      fill="currentColor"
+                      opacity=".9"
+                      fill-rule="evenodd"
+                      class="fill-000000"
+                    ></path>
+                  </svg>
+                  <button>Riwayat Pengadaan</button>
+                </li>
+              </ul>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="">
+        <div id="dashboardHeader" class="content">
+          <p class="text-[#0000FF] text-[32px] font-bold">Dashboard Admin</p>
+        </div>
+        <div id="kelolaAdminHeader" class="content hidden">
+          <p class="text-[#0000FF] text-[32px] font-bold">Kelola Admin</p>
+        </div>
+        <div id="kelolaPenyewaHeader" class="content hidden">
+          <p class="text-[#0000FF] text-[32px] font-bold">Kelola Penyewa</p>
+        </div>
+        <div id="pengadaanBarangHeader" class="content hidden">
+          <p class="text-[#0000FF] text-[32px] font-bold">Pengadaan Barang</p>
+        </div>
+        <div id="kategoriHeader" class="content hidden">
+          <p class="text-[#0000FF] text-[32px] font-bold">Kategori</p>
+        </div>
+        <div id="stokBarangHeader" class="content hidden">
+          <p class="text-[#0000FF] text-[32px] font-bold">Stok Barang</p>
+        </div>
+        <div id="stokOpnameHeader" class="content hidden">
+          <p class="text-[#0000FF] text-[32px] font-bold">Stok Opname</p>
+        </div>
+        <div id="transaksiHeader" class="content hidden">
+          <p class="text-[#0000FF] text-[32px] font-bold">Transaksi</p>
+        </div>
+        <div id="dataPenyewaanHeader" class="content hidden">
+          <p class="text-[#0000FF] text-[32px] font-bold">Data Penyewaan</p>
+        </div>
+        <div id="dataPengembalianHeader" class="content hidden">
+          <p class="text-[#0000FF] text-[32px] font-bold">Data Pengembalian</p>
+        </div>
+        <div id="riwayatTransaksiHeader" class="content hidden">
+          <p class="text-[#0000FF] text-[32px] font-bold">Riwayat Transaksi</p>
+        </div>
+        <div id="riwayatPengadaanHeader" class="content hidden">
+          <p class="text-[#0000FF] text-[32px] font-bold">Riwayat Pengadaan</p>
+        </div>
+      </div>
+      <div class="flex p-1 items-center relative">
+        <input type="checkbox" id="profilToggle" class="peer hidden" />
+
+        <label
+          for="profilToggle"
+          class="h-full w-full border p-1 rounded bg-transparent cursor-pointer peer-checked:bg-gray-300"
+        >
+          <div class="flex gap-x-2 lex items-center">
+            <svg
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+            >
+              <path
+                d="M10 0C4.5 0 0 4.5 0 10s4.5 10 10 10 10-4.5 10-10S15.5 0 10 0Zm0 3c1.7 0 3 1.3 3 3s-1.3 3-3 3-3-1.3-3-3 1.3-3 3-3Zm0 14.2c-2.5 0-4.7-1.3-6-3.2 0-2 4-3.1 6-3.1s6 1.1 6 3.1c-1.3 1.9-3.5 3.2-6 3.2Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+                class="fill-000000"
+              ></path>
+            </svg>
+
+            <div id="userName" class="text-[20px]"></div>
+            <svg
+              viewBox="0 0 512 512"
+              xml:space="preserve"
+              xmlns="http://www.w3.org/2000/svg"
+              enable-background="new 0 0 512 512"
+              class="h-6 w-6"
+            >
+              <path
+                d="m396.6 160 19.4 20.7L256 352 96 180.7l19.3-20.7L256 310.5z"
+                fill="currentColor"
+                class="fill-000000"
+              ></path>
+            </svg>
+          </div>
+        </label>
+
+        <div
+          class="absolute right-0 top-11 hidden w-[180px] bg-[#C0C0C0] borderrounded shadow-md border-gray-200 peer-checked:block rounded-lg z-10"
+        >
+          <div
+            class="flex justify-between p-1 px-4 items-center border-b border-black"
+          >
+            <svg
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+            >
+              <path
+                d="M10 0C4.5 0 0 4.5 0 10s4.5 10 10 10 10-4.5 10-10S15.5 0 10 0Zm0 3c1.7 0 3 1.3 3 3s-1.3 3-3 3-3-1.3-3-3 1.3-3 3-3Zm0 14.2c-2.5 0-4.7-1.3-6-3.2 0-2 4-3.1 6-3.1s6 1.1 6 3.1c-1.3 1.9-3.5 3.2-6 3.2Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+                class="fill-000000"
+              ></path>
+            </svg>
+            <div id="secondaryUserName" class="text-[20px]"></div>
+            <div></div>
+          </div>
+          <ul class="flex flex-col gap-y-2 p-2 text-white text-sm">
+            <li>
+              <a
+                href=""
+                id="logoutLink"
+                class="block px-4 py-2 bg-red-600 rounded text-center"
+                >Log out</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <div id="dashboard" class="flex w-[80%] content mx-[10%] py-4">
+        <div class="min-h-[80vh] w-full flex flex-col">
+          <p class="text-[24px] text-[#0000FF] font-bold">DASHBOARD ADMIN</p>
+          <div class="flex w-full">
+            <div class="flex gap-x-4 mt-10 p-2 w-full justify-between">
+              <div
+                class="relative w-1/4 rounded-xl bg-[#C0C0C0] flex text-black text-center p-4 shadow-md border-black border items-center py-14"
+              >
+                <p class="text-[30px]">Total Barang Tersedia</p>
+                <div
+                  class="absolute rounded-full bg-[#C0C0C0] p-5 px-10 -top-10 left-20 shadow-md border-black border"
+                >
+                  <div class="text-lg">1</div>
+                </div>
+              </div>
+              <div
+                class="relative w-1/4 rounded-xl bg-[#C0C0C0] flex text-black text-center p-4 shadow-md border-black border items-center"
+              >
+                <p class="text-[30px]">Total Barang Belum Dikembalikan</p>
+                <div
+                  class="absolute rounded-full bg-[#C0C0C0] p-5 px-10 -top-10 left-20 shadow-md border-black border"
+                >
+                  <div class="text-lg">1</div>
+                </div>
+              </div>
+              <div
+                class="relative w-1/4 rounded-xl bg-[#C0C0C0] flex text-black text-center p-4 shadow-md border-black border items-center"
+              >
+                <p class="text-[30px]">Total Barang Yang Rusak</p>
+                <div
+                  class="absolute rounded-full bg-[#C0C0C0] p-5 px-10 -top-10 left-20 shadow-md border-black border"
+                >
+                  <div class="text-lg">1</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="border-t border-black mt-10">
+            <div class="flex justify-between items-center mt-5 mx-5">
+              <p class="text-[24px] text-[#0000FF] font-bold">Display Barang</p>
+
+              <!-- Filter Kategori -->
+              <div class="w-[200px]">
+                <select
+                  id="filterKategori"
+                  class="w-full p-2 border rounded-lg bg-[#D9D9D9]"
+                  onchange="filterBarangByKategori(this.value)"
+                >
+                  <option value="">Filter</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Display Barang -->
+            <div class="mt-4">
+              <div
+                class="flex justify-between flex-wrap gap-4"
+                id="displayBarangContainer"
+              >
+                <!-- Barang akan ditampilkan dalam bentuk list horizontal -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="kelolaAdmin" class="content hidden flex w-[80%] mx-[10%] py-4">
+        <div class="w-full p-6 bg-white rounded-lg shadow-lg">
+          <div class="flex items-center justify-between mb-4">
+            <input
+              type="text"
+              id="search-bar"
+              class="border rounded-lg px-4 py-2 w-2/3"
+              placeholder="Cari user berdasarkan nama atau username..."
+            />
+            <!-- <button
+              id="add-user-btn"
+              data-target="add-user-modal-admin"
+              class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+            >
+              Tambah User
+            </button> -->
+          </div>
+          <div class="overflow-x-auto max-w-full text-center">
+            <div class="snap-x flex text-[24px] font-bold">
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Jenis User
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-2 bg-[#D9D9D9] border-black"
+              >
+                Username
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Nama User
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-2 bg-[#D9D9D9] border-black"
+              >
+                Email
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Alamat
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-2 bg-[#D9D9D9] border-black"
+              >
+                No HP
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Tanggal dibuat
+              </div>
+              <!-- <div
+                class="snap-start flex-shrink-0 w-[180px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Aksi
+              </div> -->
+            </div>
+            <div id="user-container" class=""></div>
+          </div>
+        </div>
+      </div>
+      <div id="kelolaPenyewa" class="content hidden flex w-[80%] mx-[10%] py-4">
+        <div class="w-full p-6 bg-white rounded-lg shadow-lg">
+          <div class="flex items-center justify-between mb-4">
+            <input
+              type="text"
+              id="search-bar-penyewa"
+              class="border rounded-lg px-4 py-2 w-2/3"
+              placeholder="Cari user berdasarkan nama atau NIK..."
+            />
+            <button
+              id="add-user-btn"
+              data-target="add-user-modal-penyewa"
+              class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+            >
+              Tambah User
+            </button>
+          </div>
+          <div class="overflow-x-auto overflow-y-auto max-w-full text-center">
+            <div class="snap-x flex text-[24px] font-bold">
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Nama Penyewa
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-2 bg-[#D9D9D9] border-black"
+              >
+                No NIK
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Status
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-2 bg-[#D9D9D9] border-black"
+              >
+                Alamat
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                No HP
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-2 bg-[#D9D9D9] border-black"
+              >
+                Tanggal dibuat
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[180px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Aksi
+              </div>
+            </div>
+            <div
+              id="user-container-penyewa"
+              class="max-h-[300px] border border-black"
+            ></div>
+          </div>
+        </div>
+      </div>
+      <div
+        id="pengadaanBarang"
+        class="content hidden flex w-[80%] mx-[10%] py-4"
+      >
+        <div class="w-full p-6 bg-white rounded-lg shadow-lg">
+          <div class="flex items-center justify-between mb-4">
+            <input
+              type="text"
+              id="search-bar-pengadaan-barang"
+              class="border rounded-lg px-4 py-2 w-2/3"
+              placeholder="Cari user berdasarkan nama"
+            />
+            <button
+              id="add-user-btn"
+              data-target="add-user-modal-pengadaan-barang"
+              class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+            >
+              Tambah Barang
+            </button>
+          </div>
+          <div class="overflow-x-auto max-w-full text-center">
+            <div class="snap-both flex text-[24px] font-bold">
+              <div
+                class="snap-start flex-shrink-0 w-[240px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Nama Barang
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[240px] border-y-2 border-l-2 bg-[#D9D9D9] border-black"
+              >
+                Kategori
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[240px] border-2 bg-[#D9D9D9] border-black"
+              >
+                Harga Sewa
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[240px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Denda Hilang
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[240px] border-2 bg-[#D9D9D9] border-black"
+              >
+                Denda Rusak Ringan
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[240px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Denda Rusak Sedang
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[240px] border-2 bg-[#D9D9D9] border-black"
+              >
+                Denda Rusak Berat
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[240px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Status
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[240px] border-2 bg-[#D9D9D9] border-black"
+              >
+                Jumlah
+              </div>
+              <div
+                class="snap-start flex-shrink-0 w-[240px] border-y-2 border-r-2 bg-[#D9D9D9] border-black"
+              >
+                Gambar
+              </div>
+
+              <div
+                class="snap-start flex-shrink-0 w-[240px] border-y-2 bg-[#D9D9D9] border-black"
+              >
+                Aksi
+              </div>
+            </div>
+            <div
+              id="pengadaanbarang-container"
+              class="overflow-y-scroll max-h-[450px] w-max"
+            ></div>
+          </div>
+        </div>
+      </div>
+      <div id="kategori" class="content hidden flex w-[80%] mx-[10%] py-4">
+        <div class="container mx-auto p-4 flex flex-col w-full">
+          <div class="flex justify-between w-full items-center mb-4">
+            <input
+              type="text"
+              id="searchInputKategori"
+              placeholder="Cari kategori..."
+              class="p-2 border border-gray-300 rounded-lg w-1/2"
+            />
+            <button
+              id="tambahKategoriBtn"
+              class="bg-blue-500 text-white px-4 py-2 rounded-lg"
+            >
+              Tambah Kategori
+            </button>
+          </div>
+
+          <table class="min-w-full table-auto">
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="p-2">Nama Kategori</th>
+                <th class="p-2">Jumlah</th>
+                <th class="p-2">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="kategoriTable"></tbody>
+          </table>
+        </div>
+      </div>
+      <div id="stokBarang" class="content hidden flex w-[80%] mx-[10%] py-4">
+        <div class="w-full">
+          <!-- Header -->
+          <div class="flex justify-between items-center mb-4">
+            <div class="w-full">
+              <input
+                type="text"
+                id="searchStokBarang"
+                placeholder="Cari Nama Barang"
+                class="w-full p-2 rounded-lg border bg-[#D9D9D9]"
+              />
+            </div>
+          </div>
+
+          <!-- Daftar Barang -->
+          <div class="flex w-full flex-col gap-y-2" id="stokBarangContainer">
+            <!-- Template item barang - akan di-generate via JavaScript -->
+          </div>
+        </div>
+      </div>
+      <div id="stokOpname" class="content hidden flex w-[80%] mx-[10%] py-4">
+        <div class="w-full">
+          <!-- Header dan Search -->
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-[300px]">
+              <input
+                type="text"
+                placeholder="Cari Data Opname"
+                class="w-full p-2 rounded-lg border"
+              />
+            </div>
+            <div class="flex gap-x-4">
+              <button class="bg-gray-500 text-white px-4 py-2 rounded-lg">
+                Export Excel
+              </button>
+              <button
+                class="bg-[#0000FF] text-white px-4 py-2 rounded-lg"
+                id="tambahOpnameBtn"
+              >
+                Tambah Opname
+              </button>
+            </div>
+          </div>
+
+          <!-- Tabel Opname -->
+          <div class="w-full overflow-x-auto">
+            <table class="w-full border-collapse">
+              <thead>
+                <tr class="bg-gray-100">
+                  <th class="border p-2 text-left">Id Opname</th>
+                  <th class="border p-2 text-left">User</th>
+                  <th class="border p-2 text-left">Tanggal Opname</th>
+                  <th class="border p-2 text-center">Status</th>
+                  <th class="border p-2 text-center">Aksi</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tambahkan div baru untuk form tambah opname -->
+      <div
+        id="formStokOpname"
+        class="content hidden flex w-[80%] mx-[10%] py-4"
+      >
+        <div class="w-full bg-white p-6 rounded-lg shadow-md">
+          <!-- Form -->
+          <div class="space-y-6">
+            <!-- ID Opname & Nama User -->
+            <div class="grid grid-cols-2 gap-x-6">
+              <div>
+                <label class="block mb-2">Id Opname</label>
+                <input
+                  type="text"
+                  id="idOpname"
+                  class="w-full p-2 border rounded-lg"
+                  placeholder="Masukkan ID Opname"
+                />
+              </div>
+              <div>
+                <label class="block mb-2">Nama User</label>
+                <input
+                  type="text"
+                  id="namaUserOpname"
+                  class="w-full p-2 border rounded-lg bg-gray-100"
+                  disabled
+                />
+              </div>
+            </div>
+
+            <!-- Pilih Kategori -->
+            <div>
+              <label class="block mb-2">Pilih Kategori</label>
+              <div class="flex items-center gap-x-4">
+                <select
+                  id="kategoriOpname"
+                  class="w-[300px] p-2 border rounded-lg"
+                  onchange="loadBarangByKategori(this.value)"
+                >
+                  <option value="">Pilih Kategori</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Tabel Barang -->
+            <div>
+              <p class="font-semibold mb-2">Barang</p>
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse">
+                  <thead>
+                    <tr>
+                      <th class="border p-2">Id Barang</th>
+                      <th class="border p-2">Nama Barang</th>
+                      <th class="border p-2">Stok Sistem</th>
+                      <th class="border p-2">Stok Fisik</th>
+                      <th class="border p-2">Selisih</th>
+                      <th class="border p-2">Keterangan</th>
+                    </tr>
+                  </thead>
+                  <tbody id="formOpnameTable">
+                    <!-- Rows will be populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex justify-end gap-x-4">
+              <button
+                id="batalOpnameBtn"
+                class="px-4 py-2 bg-gray-500 text-white rounded-lg"
+              >
+                Batal
+              </button>
+              <button
+                id="simpanOpnameBtn"
+                class="px-4 py-2 bg-[#0000FF] text-white rounded-lg"
+              >
+                Simpan
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tambahkan script berikut -->
+      <script type="module">
+        import { db, auth } from "./firebase.js";
+        import {
+          collection,
+          getDocs,
+          query,
+          where,
+          doc,
+          getDoc,
+          addDoc,
+          serverTimestamp,
+          updateDoc,
+          deleteDoc,
+        } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+        // Load nama user dari sesi login
+        async function loadUserInfo() {
+          try {
+            const user = auth.currentUser;
+            if (user) {
+              // Cari data user berdasarkan email
+              const usersRef = collection(db, "users");
+              const q = query(usersRef, where("email", "==", user.email));
+              const querySnapshot = await getDocs(q);
+
+              if (!querySnapshot.empty) {
+                const userData = querySnapshot.docs[0].data();
+                document.getElementById("namaUserOpname").value = userData.name; // atau userData.username
+              }
+            }
+          } catch (error) {
+            console.error("Error loading user info:", error);
+          }
+        }
+
+        // Pastikan auth state sudah siap sebelum memanggil loadUserInfo
+        auth.onAuthStateChanged((user) => {
+          if (user) {
+            loadUserInfo();
+          }
+        });
+
+        // Load kategori ke dropdown
+        async function loadKategoriOpname() {
+          const select = document.getElementById("kategoriOpname");
+          const kategoriRef = collection(db, "kategori");
+          const querySnapshot = await getDocs(kategoriRef);
+
+          select.innerHTML = '<option value="">Pilih Kategori</option>';
+          querySnapshot.forEach((doc) => {
+            const kategori = doc.data();
+            select.innerHTML += `<option value="${doc.id}">${kategori.name}</option>`;
+          });
+        }
+
+        // Load barang berdasarkan kategori
+        async function loadBarangByKategori(kategoriId) {
+          const tableBody = document.getElementById("formOpnameTable");
+          tableBody.innerHTML = "";
+
+          if (!kategoriId) return;
+
+          const barangRef = query(
+            collection(db, "pengadaanBarang"),
+            where("kategori", "==", kategoriId)
+          );
+          const querySnapshot = await getDocs(barangRef);
+
+          querySnapshot.forEach((doc) => {
+            const barang = doc.data();
+            const row = document.createElement("tr");
+            row.innerHTML = `
+            <td class="border p-2">${doc.id}</td>
+            <td class="border p-2">${barang.nama}</td>
+            <td class="border p-2 text-center">${barang.jumlah}</td>
+            <td class="border p-2">
+              <input
+                type="number"
+                class="w-20 p-1 border rounded-lg mx-auto block"
+                onchange="hitungSelisih(this)"
+                data-stok-sistem="${barang.jumlah}"
+              />
+            </td>
+            <td class="border p-2 text-center">0</td>
+            <td class="border p-2">
+              <select class="w-full p-1 border rounded-lg bg-[#FF8787]">
+                <option value="">Pilih</option>
+                <option value="Ready">Ready</option>
+                <option value="Hilang">Hilang</option>
+                <option value="Rusak Ringan">Rusak Ringan</option>
+                <option value="Rusak Berat">Rusak Berat</option>
+              </select>
+            </td>
+          `;
+            tableBody.appendChild(row);
+          });
+        }
+
+        // Fungsi untuk menghitung selisih
+        window.hitungSelisih = function (input) {
+          const stokSistem = parseInt(input.dataset.stokSistem);
+          const stokFisik = parseInt(input.value) || 0;
+          const selisih = stokFisik - stokSistem;
+          input.closest("tr").querySelector("td:nth-child(5)").textContent =
+            selisih;
+        };
+
+        // Event Listeners
+        document
+          .getElementById("kategoriOpname")
+          .addEventListener("change", (e) => {
+            loadBarangByKategori(e.target.value);
+          });
+
+        // Tambahkan fungsi untuk menyimpan opname
+        async function saveOpname() {
+          try {
+            // Validasi input yang diperlukan
+            const idOpname = document.getElementById("idOpname").value;
+            const namaUser = document.getElementById("namaUserOpname").value;
+            const kategoriId = document.getElementById("kategoriOpname").value;
+
+            if (!idOpname || !namaUser || !kategoriId) {
+              alert("ID Opname, Nama User, dan Kategori harus diisi!");
+              return;
+            }
+
+            // Ambil data dari tabel
+            const rows = document.querySelectorAll("#formOpnameTable tr");
+            const items = [];
+            let isValid = true;
+
+            rows.forEach((row) => {
+              const stokFisik = row.querySelector('input[type="number"]').value;
+              if (!stokFisik) {
+                isValid = false;
+                return;
+              }
+
+              items.push({
+                idBarang: row.cells[0].textContent,
+                namaBarang: row.cells[1].textContent,
+                stokSistem: parseInt(row.cells[2].textContent),
+                stokFisik: parseInt(stokFisik),
+                selisih: parseInt(row.cells[4].textContent),
+                keterangan: row.querySelector("select").value,
+              });
+            });
+
+            if (!isValid) {
+              alert("Semua stok fisik harus diisi!");
+              return;
+            }
+
+            // Simpan ke Firestore
+            await addDoc(collection(db, "stokOpname"), {
+              idOpname,
+              namaUser,
+              kategori: kategoriId,
+              tanggal: serverTimestamp(),
+              status: "Menunggu",
+              items,
+            });
+
+            alert("Data opname berhasil disimpan!");
+
+            // Reset dan kembali ke halaman daftar
+            document.getElementById("formStokOpname").classList.add("hidden");
+            document.getElementById("stokOpname").classList.remove("hidden");
+            loadDaftarOpname(); // Muat ulang daftar opname
+          } catch (error) {
+            console.error("Error saving opname:", error);
+            alert("Gagal menyimpan data opname!");
+          }
+        }
+
+        // Fungsi untuk memuat daftar opname
+        async function loadDaftarOpname(search = "") {
+          try {
+            const tableBody = document.querySelector("#stokOpname tbody");
+            tableBody.innerHTML = "";
+
+            const opnameRef = collection(db, "stokOpname");
+            const querySnapshot = await getDocs(opnameRef);
+
+            querySnapshot.forEach((doc) => {
+              const opname = doc.data();
+
+              // Filter berdasarkan search jika ada
+              if (
+                search &&
+                !opname.idOpname.toLowerCase().includes(search.toLowerCase()) &&
+                !opname.namaUser.toLowerCase().includes(search.toLowerCase())
+              ) {
+                return;
+              }
+
+              const row = document.createElement("tr");
+              row.className = "even:bg-gray-50";
+
+              // Format tanggal
+              const tanggal = opname.tanggal?.toDate() || new Date();
+              const formattedDate = tanggal.toLocaleDateString("id-ID", {
+                day: "2-digit",
+                month: "long",
+                year: "numeric",
+              });
+
+              row.innerHTML = `
+              <td class="border p-2">${opname.idOpname}</td>
+              <td class="border p-2">${opname.namaUser}</td>
+              <td class="border p-2">${formattedDate}</td>
+              <td class="border p-2 text-center">${opname.status}</td>
+              <td class="border p-2 text-center">
+                <button class="bg-[#808000] text-white px-4 py-1 rounded-full"
+                  onclick="showOpnameDetail('${doc.id}')">
+                  DETAIL
+                </button>
+              </td>
+            `;
+              tableBody.appendChild(row);
+            });
+          } catch (error) {
+            console.error("Error loading opname list:", error);
+          }
+        }
+
+        // Fungsi untuk menampilkan detail opname
+        window.showOpnameDetail = async function (opnameId) {
+          try {
+            const opnameDoc = await getDoc(doc(db, "stokOpname", opnameId));
+            if (!opnameDoc.exists()) return;
+
+            const opname = opnameDoc.data();
+            const kategoriDoc = await getDoc(
+              doc(db, "kategori", opname.kategori)
+            );
+            const kategoriNama = kategoriDoc.exists()
+              ? kategoriDoc.data().name
+              : "";
+
+            // Buat tabel baru untuk menampilkan data
+            const container = document.getElementById("stokOpname");
+            container.innerHTML = `
+            <div class="w-full">
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse">
+                  <thead>
+                    <tr class="bg-gray-100">
+                      <th class="border p-2">ID Stok Opname</th>
+                      <th class="border p-2">Admin/Pegawai</th>
+                      <th class="border p-2">Kategori</th>
+                      <th class="border p-2">Barang</th>
+                      <th class="border p-2">Stok Sistem</th>
+                      <th class="border p-2">Stok Fisik</th>
+                      <th class="border p-2">Selisih</th>
+                      <th class="border p-2">Tanggal Opname</th>
+                      <th class="border p-2">Keterangan</th>
+                      <th class="border p-2">AKSI</th>
+                    </tr>
+                  </thead>
+                  <tbody id="detailOpnameTableNew">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          `;
+
+            const tableBody = document.getElementById("detailOpnameTableNew");
+
+            // Untuk setiap item, buat baris dengan rowspan jika perlu
+            opname.items.forEach((item, index) => {
+              const row = document.createElement("tr");
+              row.className = "even:bg-gray-50";
+
+              // Hanya tampilkan info opname pada baris pertama
+              if (index === 0) {
+                row.innerHTML = `
+                <td class="border p-2" rowspan="${opname.items.length}">${
+                  opname.idOpname
+                }</td>
+                <td class="border p-2" rowspan="${opname.items.length}">${
+                  opname.namaUser
+                }</td>
+                <td class="border p-2" rowspan="${
+                  opname.items.length
+                }">${kategoriNama}</td>
+                <td class="border p-2">${item.namaBarang}</td>
+                <td class="border p-2 text-center">${item.stokSistem}</td>
+                <td class="border p-2 text-center">${item.stokFisik}</td>
+                <td class="border p-2 text-center">${item.selisih}</td>
+                <td class="border p-2" rowspan="${opname.items.length}">
+                  ${opname.tanggal.toDate().toLocaleDateString("id-ID")}
+                </td>
+                <td class="border p-2">${item.keterangan}</td>
+                <td class="border p-2" rowspan="${opname.items.length}">
+                  <div class="flex flex-col gap-y-2">
+                    <button class="bg-[#008000] text-white px-4 py-1 rounded-lg" onclick="updateStatus('${opnameId}')">
+                      STATUS
+                    </button>
+                    <button class="bg-red-500 text-white px-4 py-1 rounded-lg" onclick="deleteOpname('${opnameId}')">
+                      HAPUS
+                    </button>
+                  </div>
+                </td>
+              `;
+              } else {
+                row.innerHTML = `
+                <td class="border p-2">${item.namaBarang}</td>
+                <td class="border p-2 text-center">${item.stokSistem}</td>
+                <td class="border p-2 text-center">${item.stokFisik}</td>
+                <td class="border p-2 text-center">${item.selisih}</td>
+                <td class="border p-2">${item.keterangan}</td>
+              `;
+              }
+              tableBody.appendChild(row);
+            });
+          } catch (error) {
+            console.error("Error showing opname detail:", error);
+            alert("Gagal menampilkan detail opname");
+          }
+        };
+
+        // Update fungsi updateStatus untuk menampilkan dropdown
+        window.updateStatus = async function (opnameId) {
+          const statusSelect = document.createElement("select");
+          statusSelect.className = "p-2 border rounded-lg";
+          statusSelect.innerHTML = `
+          <option value="Menunggu">Menunggu</option>
+          <option value="Ditolak">Ditolak</option>
+          <option value="Berhasil">Berhasil</option>
+        `;
+
+          const currentStatus = document.querySelector(
+            `button[onclick="updateStatus('${opnameId}')"]`
+          );
+          const parentDiv = currentStatus.parentElement;
+          parentDiv.replaceChild(statusSelect, currentStatus);
+
+          statusSelect.addEventListener("change", async () => {
+            try {
+              await updateDoc(doc(db, "stokOpname", opnameId), {
+                status: statusSelect.value,
+              });
+              alert("Status berhasil diperbarui!");
+              showOpnameDetail(opnameId);
+            } catch (error) {
+              console.error("Error updating status:", error);
+              alert("Gagal mengupdate status");
+            }
+          });
+        };
+
+        // Event listener untuk tombol close
+        document
+          .getElementById("closeDetailOpname")
+          .addEventListener("click", () => {
+            document
+              .getElementById("detailOpnameModal")
+              .classList.add("hidden");
+          });
+
+        // Update event listeners
+        document
+          .getElementById("simpanOpnameBtn")
+          .addEventListener("click", saveOpname);
+
+        // Event listener untuk search opname
+        document
+          .querySelector('#stokOpname input[type="text"]')
+          .addEventListener("input", (e) => {
+            loadDaftarOpname(e.target.value);
+          });
+
+        // Load daftar opname saat halaman dimuat
+        document.addEventListener("DOMContentLoaded", () => {
+          loadDaftarOpname();
+        });
+
+        // Load data saat form dibuka
+        document.addEventListener("DOMContentLoaded", () => {
+          loadUserInfo();
+          loadKategoriOpname();
+        });
+
+        // Event listener untuk tombol Tambah Opname
+        document
+          .getElementById("tambahOpnameBtn")
+          .addEventListener("click", () => {
+            document.getElementById("stokOpname").classList.add("hidden");
+            document
+              .getElementById("formStokOpname")
+              .classList.remove("hidden");
+            loadUserInfo(); // Load user info saat form dibuka
+          });
+
+        // Event listener untuk tombol Batal
+        document
+          .getElementById("batalOpnameBtn")
+          .addEventListener("click", () => {
+            document.getElementById("formStokOpname").classList.add("hidden");
+            document.getElementById("stokOpname").classList.remove("hidden");
+            // Reset form
+            document.getElementById("idOpname").value = "";
+            document.getElementById("formOpnameTable").innerHTML = "";
+            document.getElementById("kategoriOpname").value = "";
+          });
+      </script>
+
+      <div id="transaksi" class="content hidden flex w-[80%] mx-[10%] py-4">
+        <div class="w-full shadow-md p-6 bg-white rounded-lg">
+          <div class="flex items-center justify-between mb-4">
+            <input
+              type="text"
+              id="search-bar-transaksi"
+              class="border rounded-lg px-4 py-2 w-full"
+              placeholder="Cari barang"
+            />
+          </div>
+          <div class="flex w-full p-4 gap-x-2 h-[500px]">
+            <div class="flex w-3/4 max-h-full gap-y-2 flex-col overflow-y-auto">
+              <div
+                id="transaksi-container"
+                class="w-full h-[120px] justify-around items-stretch gap-y-2 bg-white flex rounded-xl border flex-col shadow-md"
+              ></div>
+            </div>
+            <div class="flex w-1/4 h-full items-center justify-center relative">
+              <button type="button" id="tambahTransaksiBtn" class="relative">
+                <div class="bg-blue-500 hover:bg-blue-600 rounded-full p-2">
+                  <svg
+                    viewBox="0 0 64 64"
+                    xml:space="preserve"
+                    xmlns="http://www.w3.org/2000/svg"
+                    enable-background="new 0 0 64 64"
+                    class="h-[100px] w-[100px] fill-white"
+                  >
+                    <path
+                      d="M-27.5-432.3h-30.3c-.5 0-.9-.2-1.1-.6-.3-.4-.3-.9-.1-1.3l2.6-6.6-2.6-24.6h-8.4v-2.8h9.6c.7 0 1.3.5 1.4 1.2l2.8 26.1c0 .2 0 .4-.1.7l-2 5h28.2v2.9"
+                      transform="translate(76 478)"
+                      fill="#4154f1"
+                      class="fill-white"
+                    ></path>
+                    <path
+                      d="m-54.7-439.2-.6-2.7 31.9-6.6v-11.3h-33v-2.8H-22c.8 0 1.4.6 1.4 1.4v13.8c0 .7-.5 1.2-1.1 1.3l-33 6.9M-26.1-424c-3 0-5.5-2.5-5.5-5.5s2.5-5.5 5.5-5.5 5.5 2.5 5.5 5.5-2.5 5.5-5.5 5.5zm0-8.3c-1.5 0-2.8 1.2-2.8 2.8s1.2 2.8 2.8 2.8 2.8-1.2 2.8-2.8-1.3-2.8-2.8-2.8zM-59.1-424c-3 0-5.5-2.5-5.5-5.5s2.5-5.5 5.5-5.5 5.5 2.5 5.5 5.5-2.5 5.5-5.5 5.5zm0-8.3c-1.5 0-2.8 1.2-2.8 2.8s1.2 2.8 2.8 2.8 2.8-1.2 2.8-2.8-1.3-2.8-2.8-2.8z"
+                      transform="translate(76 478)"
+                      fill="#4154f1"
+                      class="fill-white"
+                    ></path>
+                  </svg>
+                </div>
+
+                <div
+                  id="transaksi-badge"
+                  class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs font-bold flex items-center justify-center w-10 h-10 transform translate-x-2 -translate-y-2"
+                >
+                  0
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="konfirmasi-pembayaran"
+        class="content hidden flex w-[80%] mx-[10%] py-4"
+      >
+        <div class="w-full py-6 rounded-lg">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <button
+                id="kembaliBtn"
+                class="border rounded-lg px-4 py-2 bg-gray-200 hover:bg-gray-300"
+              >
+                Kembali
+              </button>
+            </div>
+            <div>
+              <h2 class="font-bold text-xl">Konfirmasi Pembayaran</h2>
+            </div>
+            <div></div>
+          </div>
+          <div class="flex w-full py-4 gap-x-2 h-[800px]">
+            <div class="flex w-3/4 max-h-full gap-y-2 flex-col">
+              <div
+                class="flex w-full flex-col mb-4 bg-white rounded-xl shadow-md p-4"
+              >
+                <div>
+                  <label
+                    for="transaksi-penyewa"
+                    class="block text-sm font-medium"
+                    >Nama Penyewa</label
+                  >
+                  <select
+                    id="transaksi-penyewa"
+                    class="border rounded-lg px-4 py-2 w-full"
+                  >
+                <option value="" disabled selected>Pilih Penyewa</option></select>
+                </div>
+                <div>
+                  <label for="transaksi-tujuan">Tujuan</label>
+                  <input
+                    type="text"
+                    id="transaksi-tujuan"
+                    placeholder="Input tujuan"
+                    class="border rounded-lg px-4 py-2 w-full"
+                  />
+                </div>
+                <div>
+                  <label for="transaksi-jaminan">Jaminan Penyewa</label>
+                  <input
+                    type="text"
+                    id="transaksi-jaminan"
+                    placeholder="Input jaminan"
+                    class="border rounded-lg px-4 py-2 w-full"
+                  />
+                </div>
+                <div>
+                  <label for="transaksi-display">Barang yang disewa</label>
+                </div>
+                <div
+                  id=""
+                  class="flex flex-col gap-y-4 rounded-xl bg-white shadow-md p-2"
+                >
+                  <table>
+                    <thead>
+                      <th class="border-r border-b border-black">No</th>
+                      <th class="border-r border-b border-black">Nama Barang</th>
+                      <th class="border-r border-b border-black">QTY</th>
+                      <th class=" border-b border-black">Harga</th>
+                      <!-- <th class="border-b border-black">Aksi</th> -->
+                    </thead>
+                    <tbody id="konfirmasi-data-container">
+                      
+                    </tbody>
+                  </table>
+                </div>
+                
+              </div>
+            </div>
+            <div class="flex w-1/4 max-h-full gap-y-2 flex-col">
+              <div class="flex w-full flex-col mb-4 bg-white rounded-xl shadow-md p-4">
+                <div class="">
+                  <p>Sub total</p>
+                  <div id="transaksi-subtotal" class="flex flex-col gap-y-4 rounded-xl bg-white shadow-md px-4 py-2">
+                  </div>
+                </div>
+                <div class="flex flex-col">
+                  <div class="flex gap-x-2 items-center">
+                    <label for="transaksi-waktu">Waktu Sewa</label>
+                    <p id="waktu-sewa-hari" class="text-gray-400 text-sm" ></p>
+
+                  </div>
+  <input type="date" id="transaksi-waktu" class="border rounded-lg px-4 py-2 w-full">
+</div>
+                <div>
+                  <label for="transaksi-diskon">Diskon</label>
+                  <input type="text" id="transaksi-diskon" class="border rounded-lg px-4 py-2 w-full">
+                </div>
+                <div>
+                  <p>Total</p>
+                  <div id="transaksi-total" class="flex flex-col gap-y-4 rounded-xl bg-white shadow-md px-4 py-2">
+
+                  </div>
+                </div>
+                <div>
+                  <label for="transaksi-bayar">Bayar</label>
+                  <input type="text" id="transaksi-bayar" class="border rounded-lg px-4 py-2 w-full">
+                </div>
+                <div>
+                  <p>Kembalian</p>
+                  <div id="transaksi-kembalian" class="flex flex-col gap-y-4 rounded-xl bg-white shadow-md px-4 py-2">
+
+                  </div>
+                </div>
+                <div class="w-full">
+                    <button
+                    id="konfirmasiPembayaranBtn"
+                    class="mt-4 bg-blue-500 w-full text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+                  >
+                    Cetak Nota
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="dataPenyewaan"
+        class="content hidden flex w-[80%] mx-[10%] py-4n"
+      >
+         <div class="flex flex-col w-full">
+    <!-- Search bar -->
+    <div class="mb-4 pt-4 flex w-full justify-between items-center">
+      <input
+        type="text"
+        id="searchInput-dataPenyewaan"
+        class="border border-gray-300 rounded-lg px-4 py-2 w-full max-w-md"
+        placeholder="Cari Nama Penyewa..."
+      />
+    </div>
+
+    <!-- Kontainer Data Penyewaan -->
+    <div id="dataPenyewaanContainer" class="flex flex-col w-full">
+      <!-- Tabel akan di-render di sini melalui JavaScript -->
+    </div>
+  </div>
+      </div>
+      <div
+        id="dataPengembalian"
+        class="content hidden flex w-[80%] mx-[10%] py-4"
+      >
+        <p class="flex w-full justify-center">data Pengembalian</p>
+      </div>
+      <div
+        id="riwayatTransaksi"
+        class="content hidden flex w-[80%] mx-[10%] py-4"
+      >
+        <p class="flex w-full justify-center">riwayatTransaksi</p>
+      </div>
+      <div
+        id="riwayatPengadaan"
+        class="content hidden flex w-[80%] mx-[10%] py-4"
+      >
+        <p class="flex w-full justify-center">riwayatPengadaan</p>
+      </div>
+
+<!-- Modal Edit -->
+  <div id="editModal-transaksi" class="modal hidden fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
+    <div class="modal-content bg-white p-6 rounded-lg w-1/3">
+      <h2 class="text-xl mb-4">Edit Quantity</h2>
+      <div>
+        <label for="edit-qty" class="block text-sm font-medium">Quantity</label>
+        <input type="number" id="edit-qty" class="border rounded-lg px-4 py-2 w-full" min="1" />
+      </div>
+      <div class="mt-4 flex justify-between">
+        <button id="saveEditQtyBtn-transaksi" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Save</button>
+        <button id="closeEditModalBtn-transaksi" class="bg-gray-500 text-white px-4 py-2 rounded-lg">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Konfirmasi Hapus -->
+  <div id="deleteModal-transaksi" class="modal hidden fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
+    <div class="modal-content bg-white p-6 rounded-lg w-1/3">
+      <h2 class="text-xl mb-4">Konfirmasi Hapus</h2>
+      <p>Apakah Anda yakin ingin menghapus barang ini?</p>
+      <div class="mt-4 flex justify-between">
+        <button id="confirmDeleteBtn" class="bg-red-500 text-white px-4 py-2 rounded-lg">Hapus</button>
+        <button id="closeDeleteModalBtn" class="bg-gray-500 text-white px-4 py-2 rounded-lg">Batal</button>
+      </div>
+    </div>
+  </div>
+
+
+      <!-- Modal Nota -->
+<div id="notaModal" class="fixed inset-0 flex items-center justify-center hidden bg-gray-500 bg-opacity-75">
+  <div class="bg-white rounded-lg w-11/12 md:w-1/2 p-6">
+    <h2 class="text-xl font-bold mb-4">Nota Pembayaran</h2>
+    
+    <!-- Tabel Nota -->
+    <table class="w-full mb-4">
+      <tr>
+        <td class="font-medium">No.</td>
+        <td id="nota-nomor"></td>
+      </tr>
+      <tr>
+        <td class="font-medium">Nama Barang</td>
+        <td id="nota-namaBarang"></td>
+      </tr>
+      <tr>
+        <td class="font-medium">Harga Sewa</td>
+        <td id="nota-hargaSewa"></td>
+      </tr>
+      <tr>
+        <td class="font-medium">Qty</td>
+        <td id="nota-qty"></td>
+      </tr>
+      <tr>
+        <td class="font-medium">Harga Total</td>
+        <td id="nota-hargaTotal"></td>
+      </tr>
+      <tr>
+        <td class="font-medium">Diskon</td>
+        <td id="nota-diskon"></td>
+      </tr>
+      <tr>
+        <td class="font-medium">Total</td>
+        <td id="nota-total"></td>
+      </tr>
+      <tr>
+        <td class="font-medium">No HP Penyewa</td>
+        <td id="nota-noHpPenyewa"></td>
+      </tr>
+      <tr>
+        <td class="font-medium">Nama Penyewa</td>
+        <td id="nota-namePenyewa"></td>
+      </tr>
+      <!-- <tr>
+        <td class="font-medium">Admin Pencatat</td>
+        <td id="nota-pencatat"></td>
+      </tr> -->
+      <tr>
+        <td class="font-medium">Tujuan</td>
+        <td id="nota-tujuan"></td>
+      </tr>
+      <tr>
+        <td class="font-medium">Jaminan</td>
+        <td id="nota-jaminan"></td>
+      </tr>
+
+      <tr>
+    <td class="font-medium">Tanggal Sewa</td>
+    <td id="nota-tanggalSewa"></td> <!-- Baris untuk tanggal sewa -->
+  </tr>
+
+    </table>
+
+    <!-- Tombol Tutup Modal -->
+     <div class="flex justify-end gap-x-2">
+       <button id="closeModalBtn" class="mt-4 bg-red-500 w-1/4 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+         Batal
+       </button>
+       <button id="submitPembayaranBtn" class="mt-4 bg-blue-500 w-1/4l text-white px-4 py-2 rounded-lg hover:bg-red-600">
+        Konfirmasi
+       </button>
+     </div>
+  </div>
+</div>
+
+
+      <div
+        id="add-user-modal-admin"
+        class="fixed inset-0 bg-black bg-opacity-50 flex hidden items-center justify-center"
+      >
+        <div class="bg-white p-6 rounded-lg w-full max-w-4xl">
+          <h1
+            class="text-2xl font-bold mb-4 flex justify-center text-[#0000FF]"
+          >
+            Tambah User
+          </h1>
+          <form id="add-user-form">
+            <div class="flex w-full gap-x-2">
+              <div class="flex flex-col w-1/2">
+                <div class="mb-2">
+                  <label class="block text-sm font-medium mb-2">Nama</label>
+                  <input
+                    type="text"
+                    id="name"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    placeholder="Nama Lengkap"
+                    required
+                  />
+                </div>
+                <div class="mb-2">
+                  <label class="block text-sm font-medium mb-2">Username</label>
+                  <input
+                    type="text"
+                    id="username"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    placeholder="Username"
+                    required
+                  />
+                </div>
+                <div class="mb-2">
+                  <label class="block text-sm font-medium mb-2">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    placeholder="Email"
+                    required
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium mb-2">Alamat</label>
+                  <input
+                    type="text"
+                    id="address"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    placeholder="Address"
+                    required
+                  /><br />
+                </div>
+              </div>
+              <div class="flex flex-col w-1/2">
+                <div>
+                  <label class="block text-sm font-medium mb-2"
+                    >No Handphone</label
+                  >
+                  <input
+                    type="text"
+                    id="phoneNumber"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    placeholder="Phone Number"
+                    required
+                  /><br />
+                  <p class="text-xs text-gray-500">Contoh: 628123456789</p>
+                </div>
+                <div class="mb-2">
+                  <label class="block text-sm font-medium mb-2">Password</label>
+                  <input
+                    type="password"
+                    id="password"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    placeholder="Password"
+                    required
+                  />
+                  <p class="text-xs text-gray-500">
+                    Pastikan password terdiri dari 8 karakter dan mengandung
+                    huruf dan angka <br />
+                    Contoh: abxy123
+                  </p>
+                </div>
+                <div class="mb-2">
+                  <label class="block text-sm font-medium mb-2"
+                    >Konfirmasi Password</label
+                  >
+                  <input
+                    type="password"
+                    id="confirm-password"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    placeholder="Konfirmasi Password"
+                    required
+                  />
+                </div>
+                <div class="mb-2">
+                  <label class="block text-sm font-medium mb-2">Role</label>
+                  <select
+                    id="role"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    required
+                  >
+                    <option value="admin">Admin</option>
+                    <option value="pegawai">Pegawai</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex justify-end">
+              <button
+                type="button"
+                id="cancel-btn"
+                class="mr-2 bg-gray-300 px-4 py-2 rounded-lg"
+              >
+                Batal
+              </button>
+              <button
+                type="submit"
+                class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+              >
+                Simpan
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div
+        id="add-user-modal-penyewa"
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden"
+      >
+        <div class="bg-white p-6 rounded-lg w-full max-w-md">
+          <form id="add-user-form-penyewa">
+            <div class="mb-2">
+              <label class="block text-sm font-medium mb-2">Nama</label>
+              <input
+                type="text"
+                id="namePenyewa"
+                class="border rounded-lg px-4 py-2 w-full"
+                placeholder="Nama Lengkap"
+                required
+              />
+            </div>
+            <div class="mb-2">
+              <label class="block text-sm font-medium mb-2">No NIK</label>
+              <input
+                type="text"
+                id="nik"
+                class="border rounded-lg px-4 py-2 w-full"
+                placeholder="No NIK"
+                required
+              />
+            </div>
+            <div class="mb-2">
+              <label class="block text-sm font-medium mb-2">Status</label>
+              <input
+                type="text"
+                id="status"
+                class="border rounded-lg px-4 py-2 w-full"
+                placeholder="Pekerjaan/Status"
+                required
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2">Alamat</label>
+              <input
+                type="text"
+                id="alamat"
+                class="border rounded-lg px-4 py-2 w-full"
+                placeholder="Address"
+                required
+              /><br />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2">No Handphone</label>
+              <input
+                type="text"
+                id="noHpPenyewa"
+                class="border rounded-lg px-4 py-2 w-full"
+                placeholder="Phone Number"
+                required
+              /><br />
+              <p class="text-xs text-gray-500">Contoh: 628123456789</p>
+            </div>
+
+            <div class="flex justify-end">
+              <button
+                type="button"
+                id="cancel-btn-penyewa"
+                class="mr-2 bg-gray-300 px-4 py-2 rounded-lg"
+              >
+                Batal
+              </button>
+              <button
+                type="submit"
+                class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+              >
+                Simpan
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div
+        id="edit-user-modal-admin"
+        class="hidden fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50"
+      >
+        <div class="bg-white p-6 rounded-md flex flex-col w-1/2">
+          <h2 class="text-xl font-bold mb-4">Edit User</h2>
+          <form id="edit-user-form">
+            <div>
+              <label for="edit-name" class="block">Nama</label>
+              <input
+                type="text"
+                id="edit-name"
+                class="border p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mt-2">
+              <label for="edit-username" class="block">Username</label>
+              <input
+                type="text"
+                id="edit-username"
+                class="border p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mt-2">
+              <label for="edit-email" class="block">Email</label>
+              <input
+                type="email"
+                id="edit-email"
+                class="border p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mt-2">
+              <label for="edit-address" class="block">Alamat</label>
+              <input
+                type="text"
+                id="edit-address"
+                class="border p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mt-2">
+              <label for="edit-phoneNumber" class="block">No HP</label>
+              <input
+                type="text"
+                id="edit-phoneNumber"
+                class="border p-2 w-full"
+                required
+              />
+              <p class="text-xs text-gray-500">Contoh: 628123456789</p>
+            </div>
+            <div class="mt-2">
+              <label for="edit-role" class="block">Role</label>
+              <select id="edit-role" class="border p-2 w-full">
+                <option value="admin">Admin</option>
+                <option value="pegawai">Pegawai</option>
+              </select>
+            </div>
+            <div class="mt-4 flex justify-between">
+              <button
+                type="button"
+                id="cancel-edit-btn"
+                class="bg-gray-300 p-2 rounded-md"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                id="save-edit-btn"
+                class="bg-blue-500 p-2 text-white rounded-md"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div
+        id="edit-user-modal-penyewa"
+        class="hidden fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50"
+      >
+        <div class="bg-white p-6 rounded-md flex flex-col w-1/2">
+          <h2 class="text-xl font-bold mb-4">Edit User</h2>
+          <form id="edit-user-form-penyewa">
+            <div>
+              <label for="edit-name-penyewa" class="block">Nama</label>
+              <input
+                type="text"
+                id="edit-name-penyewa"
+                class="border p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mt-2">
+              <label for="edit-nik" class="block">No NIK</label>
+              <input
+                type="text"
+                id="edit-nik"
+                class="border p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mt-2">
+              <label for="edit-status" class="block">Status</label>
+              <input
+                type="text"
+                id="edit-status"
+                class="border p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mt-2">
+              <label for="edit-alamat" class="block">Alamat</label>
+              <input
+                type="text"
+                id="edit-alamat"
+                class="border p-2 w-full"
+                required
+              />
+            </div>
+            <div class="mt-2">
+              <label for="edit-no-hp-penyewa" class="block">No HP</label>
+              <input
+                type="text"
+                id="edit-no-hp-penyewa"
+                class="border p-2 w-full"
+                required
+              />
+              <p class="text-xs text-gray-500">Contoh: 628123456789</p>
+            </div>
+
+            <div class="mt-4 flex justify-between">
+              <button
+                type="button"
+                id="cancel-edit-btn-penyewa"
+                class="bg-gray-300 p-2 rounded-md"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                id="save-edit-btn-penyewa"
+                class="bg-blue-500 p-2 text-white rounded-md"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div
+        id="delete-user-modal-admin"
+        class="hidden fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50"
+      >
+        <div class="bg-white p-6 rounded-md">
+          <h2 class="text-xl font-bold mb-4">Konfirmasi Hapus</h2>
+          <p>Apakah Anda yakin ingin menghapus pengguna berikut?</p>
+          <p
+            id="delete-user-name"
+            class="font-semibold text-lg mt-2 flex w-full justify-center"
+          ></p>
+          <!-- Menampilkan nama pengguna yang akan dihapus -->
+          <div class="mt-4 flex justify-between">
+            <button
+              type="button"
+              id="cancel-delete-btn"
+              class="bg-gray-300 p-2 rounded-md"
+            >
+              Batal
+            </button>
+            <button
+              type="button"
+              id="confirm-delete-btn"
+              class="bg-red-500 p-2 text-white rounded-md"
+            >
+              Hapus
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="delete-user-modal-penyewa"
+        class="hidden fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50"
+      >
+        <div class="bg-white p-6 rounded-md">
+          <h2 class="text-xl font-bold mb-4">Konfirmasi Hapus</h2>
+          <p>Apakah Anda yakin ingin menghapus pengguna berikut?</p>
+          <p
+            id="delete-user-name-penyewa"
+            class="font-semibold text-lg mt-2 flex w-full justify-center"
+          ></p>
+          <!-- Menampilkan nama pengguna yang akan dihapus -->
+          <div class="mt-4 flex justify-between">
+            <button
+              type="button"
+              id="cancel-delete-btn-penyewa"
+              class="bg-gray-300 p-2 rounded-md"
+            >
+              Batal
+            </button>
+            <button
+              type="button"
+              id="confirm-delete-btn-penyewa"
+              class="bg-red-500 p-2 text-white rounded-md"
+            >
+              Hapus
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="kategori-modal"
+        class="hidden fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50"
+      >
+        <div class="bg-white p-6 rounded-lg w-96">
+          <h3 class="text-xl mb-4">Tambah Kategori</h3>
+          <input
+            type="text"
+            id="kategoriInput"
+            placeholder="Nama Kategori"
+            class="p-2 border border-gray-300 rounded-lg w-full mb-4"
+          />
+          <div class="flex justify-between">
+            <button
+              id="closeKategoriBtn"
+              class="bg-red-500 text-white px-4 py-2 rounded-lg"
+            >
+              Tutup
+            </button>
+            <button
+              id="saveKategoriBtn"
+              class="bg-green-500 text-white px-4 py-2 rounded-lg"
+            >
+              Simpan
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="edit-kategori-modal"
+        class="hidden fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50"
+      >
+        <div class="bg-white p-6 rounded-lg w-96">
+          <h3 class="text-xl mb-4">Edit Kategori</h3>
+          <input
+            type="text"
+            id="editKategoriInput"
+            placeholder="Nama Kategori"
+            class="p-2 border border-gray-300 rounded-lg w-full mb-4"
+          />
+          <div class="flex justify-between">
+            <button
+              id="editCloseKategoriBtn"
+              class="bg-red-500 text-white px-4 py-2 rounded-lg"
+            >
+              Tutup
+            </button>
+            <button
+              id="editSaveKategoriBtn"
+              class="bg-green-500 text-white px-4 py-2 rounded-lg"
+            >
+              Simpan
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="delete-kategori-modal"
+        class="hidden fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50"
+      >
+        <div class="bg-white p-6 rounded-md">
+          <h2 class="text-xl font-bold mb-4">Konfirmasi Hapus</h2>
+          <p>Apakah Anda yakin ingin menghapus kategori berikut?</p>
+          <p
+            id="delete-kategori-name"
+            class="font-semibold text-lg mt-2 flex w-full justify-center"
+          ></p>
+          <!-- Menampilkan nama pengguna yang akan dihapus -->
+          <div class="mt-4 flex justify-between">
+            <button
+              type="button"
+              id="cancel-delete-btn-kategori"
+              class="bg-gray-300 p-2 rounded-md"
+            >
+              Batal
+            </button>
+            <button
+              type="button"
+              id="confirm-delete-btn-kategori"
+              class="bg-red-500 p-2 text-white rounded-md"
+            >
+              Hapus
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="edit-barang-modal"
+        class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+      >
+        <div class="bg-white rounded-lg p-6 w-1/2">
+          <h2 class="text-xl font-bold mb-4">Edit Barang</h2>
+          <form id="edit-barang-form" class="space-y-4">
+            <input type="hidden" id="edit-barang-id" />
+            <div class="flex w-full gap-x-2">
+              <div class="w-1/2">
+                <div>
+                  <label
+                    for="edit-nama-barang"
+                    class="block text-sm font-medium"
+                    >Nama Barang</label
+                  >
+                  <input
+                    type="text"
+                    id="edit-nama-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    for="edit-kategori-barang"
+                    class="block text-sm font-medium"
+                    >Kategori</label
+                  >
+                  <select
+                    id="edit-kategori-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                  ></select>
+                </div>
+                <div>
+                  <label
+                    for="edit-harga-sewa-barang"
+                    class="block text-sm font-medium"
+                    >Harga Sewa</label
+                  >
+                  <input
+                    type="number"
+                    id="edit-harga-sewa-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    for="edit-denda-hilang-barang"
+                    class="block text-sm font-medium"
+                    >Denda Hilang</label
+                  >
+                  <input
+                    type="number"
+                    id="edit-denda-hilang-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    for="edit-denda-rusak-ringan-barang"
+                    class="block text-sm font-medium"
+                    >Denda Rusak Ringan</label
+                  >
+                  <input
+                    type="number"
+                    id="edit-denda-rusak-ringan-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="w-1/2">
+                <div>
+                  <label
+                    for="edit-denda-rusak-sedang-barang"
+                    class="block text-sm font-medium"
+                    >Denda Rusak Sedang</label
+                  >
+                  <input
+                    type="number"
+                    id="edit-denda-rusak-sedang-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    for="edit-denda-rusak-berat-barang"
+                    class="block text-sm font-medium"
+                    >Denda Rusak Berat</label
+                  >
+                  <input
+                    type="number"
+                    id="edit-denda-rusak-berat-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    for="edit-status-barang"
+                    class="block text-sm font-medium"
+                    >Status</label
+                  >
+                  <select
+                    id="edit-status-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                  >
+                    <option value="Tersedia">Tersedia</option>
+                    <option value="Tidak Tersedia">Tidak Tersedia</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    for="edit-jumlah-barang"
+                    class="block text-sm font-medium"
+                    >Jumlah</label
+                  >
+                  <input
+                    type="number"
+                    id="edit-jumlah-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    required
+                  />
+                </div>
+                <div class="flex justify-end">
+                  <button
+                    type="button"
+                    class="mr-4 bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
+                    onclick="document.getElementById('edit-barang-modal').classList.add('hidden')"
+                  >
+                    Batal
+                  </button>
+                  <button
+                    type="submit"
+                    class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+                  >
+                    Simpan
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div
+        id="delete-barang-modal"
+        class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+      >
+        <div class="bg-white rounded-lg p-6 w-1/3">
+          <h2 class="text-xl font-bold mb-4">Hapus Barang</h2>
+          <p>Apakah Anda yakin ingin menghapus barang ini?</p>
+          <div class="flex justify-end">
+            <button
+              type="button"
+              class="mr-4 bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
+              onclick="document.getElementById('delete-barang-modal').classList.add('hidden')"
+            >
+              Batal
+            </button>
+            <button
+              id="confirm-delete-btn"
+              class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+            >
+              Hapus
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="add-user-modal-pengadaan-barang"
+        class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+      >
+        <div class="bg-white rounded-lg p-6 w-1/2">
+          <h2 class="text-xl font-bold mb-4">Tambah Barang</h2>
+          <form id="add-barang-form" class="space-y-4">
+            <div class="flex w-full gap-x-2">
+              <div class="w-1/2">
+                <div>
+                  <label for="nama-barang" class="block text-sm font-medium"
+                    >Nama Barang</label
+                  >
+                  <input
+                    type="text"
+                    name=""
+                    id="nama-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    required
+                  />
+                </div>
+                <div>
+                  <label for="kategori-barang" class="block text-sm font-medium"
+                    >Kategori</label
+                  >
+                  <select
+                    id="kategori-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                  ></select>
+                </div>
+                <div>
+                  <label
+                    for="harga-sewa-barang"
+                    class="block text-sm font-medium"
+                    >Harga Sewa</label
+                  >
+                  <input
+                    type="number"
+                    id="harga-sewa-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    for="denda-hilang-barang"
+                    class="block text-sm font-medium"
+                    >Denda Hilang</label
+                  >
+                  <input
+                    type="number"
+                    id="denda-hilang-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    for="denda-rusak-ringan-barang"
+                    class="block text-sm font-medium"
+                    >Denda Rusak Ringan</label
+                  >
+                  <input
+                    type="number"
+                    id="denda-rusak-ringan-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="w-1/2">
+                <div>
+                  <label
+                    for="denda-rusak-sedang-barang"
+                    class="block text-sm font-medium"
+                    >Denda Rusak Sedang</label
+                  >
+                  <input
+                    type="number"
+                    id="denda-rusak-sedang-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    for="denda-rusak-berat-barang"
+                    class="block text-sm font-medium"
+                    >Denda Rusak Berat</label
+                  >
+                  <input
+                    type="number"
+                    id="denda-rusak-berat-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    required
+                  />
+                </div>
+                <div>
+                  <label for="status-barang" class="block text-sm font-medium"
+                    >Status</label
+                  >
+                  <select
+                    id="status-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                  >
+                    <option value="Tersedia">Tersedia</option>
+                    <option value="Tidak Tersedia">Tidak Tersedia</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="gambar-barang" class="block text-sm font-medium"
+                    >Upload Gambar</label
+                  >
+                  <input
+                    type="file"
+                    id="gambar-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    accept="image/*"
+                  />
+                </div>
+                <div>
+                  <label for="jumlah-barang" class="block text-sm font-medium"
+                    >Jumlah</label
+                  >
+                  <input
+                    type="number"
+                    id="jumlah-barang"
+                    class="border rounded-lg px-4 py-2 w-full"
+                    required
+                  />
+                </div>
+                <div class="flex justify-end">
+                  <button
+                    type="button"
+                    class="mr-4 bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
+                    onclick="document.getElementById('add-user-modal-pengadaan-barang').classList.add('hidden')"
+                  >
+                    Batal
+                  </button>
+                  <button
+                    type="submit"
+                    class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+                  >
+                    Simpan
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <script type="module" src="./userInfo.js"></script>
+    <script type="module" src="./displayUserPegawai.js"></script>
+    <script type="module" src="./displayUserPenyewa.js"></script>
+    <script type="module" src="./kategori.js"></script>
+    <script type="module" src="./pengadaanBarang.js"></script>
+    <script type="module" src="./transaksi.js"></script>
+    <script type="module" src="./dataPenyewaan.js"></script>
+    <script type="module">
+      // Get all tab buttons and content sections
+      const tabs = document.querySelectorAll(".tab");
+      const contents = document.querySelectorAll(".content");
+
+      // Add event listener to each tab
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          // Hide all content sections
+          contents.forEach((content) => content.classList.add("hidden"));
+
+          // Get all target content IDs from data-target
+          const targetIds = tab.getAttribute("data-target").split(",");
+
+          // Show the content sections based on the data-target
+          targetIds.forEach((targetId) => {
+            const targetContent = document.getElementById(targetId.trim());
+            if (targetContent) {
+              targetContent.classList.remove("hidden");
+            }
+          });
+
+          // Remove 'active' class from all tabs
+          tabs.forEach((item) => item.classList.remove("text-[#003CD3]"));
+
+          // Add 'active' class to the clicked tab
+          tab.classList.add("text-[#003CD3]");
+        });
+      });
+
+      // Handle submenu toggle
+      document.getElementById("kelolaUserTab").addEventListener("click", () => {
+        const userSubmenu = document.getElementById("kelolaUserSubmenu");
+        userSubmenu.classList.toggle("hidden"); // Toggle visibility
+
+        // Check if submenu is visible, add active class to "Kelola User"
+        if (!userSubmenu.classList.contains("hidden")) {
+          document
+            .getElementById("kelolaUserTab")
+            .classList.add("text-[#003CD3]");
+        } else {
+          document
+            .getElementById("kelolaUserTab")
+            .classList.remove("text-[#003CD3]");
+        }
+      });
+
+      document
+        .getElementById("masterBarangTab")
+        .addEventListener("click", () => {
+          const barangSubmenu = document.getElementById("masterBarangSubmenu");
+          barangSubmenu.classList.toggle("hidden"); // Toggle visibility
+
+          // Check if submenu is visible, add active class to "Kelola User"
+          if (!barangSubmenu.classList.contains("hidden")) {
+            document
+              .getElementById("masterBarangTab")
+              .classList.add("text-[#003CD3]");
+          } else {
+            document
+              .getElementById("masterBarangTab")
+              .classList.remove("text-[#003CD3]");
+          }
+        });
+
+      document.getElementById("riwayatTab").addEventListener("click", () => {
+        const historySubmenu = document.getElementById("riwayatSubmenu");
+        historySubmenu.classList.toggle("hidden"); // Toggle visibility
+
+        // Check if submenu is visible, add active class to "Kelola User"
+        if (!historySubmenu.classList.contains("hidden")) {
+          document.getElementById("riwayatTab").classList.add("text-[#003CD3]");
+        } else {
+          document
+            .getElementById("riwayatTab")
+            .classList.remove("text-[#003CD3]");
+        }
+      });
+
+      // Handle submenu item click
+      document
+        .querySelectorAll("#kelolaUserSubmenu .tab")
+        .forEach((submenu) => {
+          submenu.addEventListener("click", () => {
+            // Remove active class from all submenu items
+            document
+              .querySelectorAll("#kelolaUserSubmenu .tab")
+              .forEach((item) => item.classList.remove("text-[#003CD3]"));
+
+            // Add active class to the clicked submenu item
+            submenu.classList.add("text-[#003CD3]");
+
+            // Ensure "Kelola User" remains active
+            document
+              .getElementById("kelolaUserTab")
+              .classList.add("text-[#003CD3]");
+          });
+        });
+
+      document
+        .querySelectorAll("#masterBarangSubmenu .tab")
+        .forEach((submenu) => {
+          submenu.addEventListener("click", () => {
+            // Remove active class from all submenu items
+            document
+              .querySelectorAll("#masterBarangSubmenu .tab")
+              .forEach((item) => item.classList.remove("text-[#003CD3]"));
+
+            // Add active class to the clicked submenu item
+            submenu.classList.add("text-[#003CD3]");
+
+            // Ensure "Kelola User" remains active
+            document
+              .getElementById("masterBarangTab")
+              .classList.add("text-[#003CD3]");
+          });
+        });
+
+      document.querySelectorAll("#riwayatSubmenu .tab").forEach((submenu) => {
+        submenu.addEventListener("click", () => {
+          // Remove active class from all submenu items
+          document
+            .querySelectorAll("#riwayatSubmenu .tab")
+            .forEach((item) => item.classList.remove("text-[#003CD3]"));
+
+          // Add active class to the clicked submenu item
+          submenu.classList.add("text-[#003CD3]");
+
+          // Ensure "Kelola User" remains active
+          document.getElementById("riwayatTab").classList.add("text-[#003CD3]");
+        });
+      });
+    </script>
+    <script type="module">
+      import { db } from "./firebase.js";
+      import {
+        collection,
+        getDocs,
+        query,
+        where,
+      } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+      async function loadKategoriFilter() {
+        const filterSelect = document.getElementById("filterKategori");
+        const kategoriRef = collection(db, "kategori");
+        const querySnapshot = await getDocs(kategoriRef);
+
+        querySnapshot.forEach((doc) => {
+          const kategori = doc.data();
+          const option = document.createElement("option");
+          option.value = doc.id;
+          option.textContent = kategori.name;
+          filterSelect.appendChild(option);
+        });
+      }
+      async function displayBarang(kategoriId = "") {
+        const container = document.getElementById("displayBarangContainer");
+        container.innerHTML = "";
+
+        let barangRef;
+        if (kategoriId) {
+          barangRef = query(
+            collection(db, "pengadaanBarang"),
+            where("kategori", "==", kategoriId)
+          );
+        } else {
+          barangRef = collection(db, "pengadaanBarang");
+        }
+
+        const querySnapshot = await getDocs(barangRef);
+
+        querySnapshot.forEach((doc) => {
+          const barang = doc.data();
+          const barangElement = document.createElement("div");
+          barangElement.className = "";
+          barangElement.innerHTML = `
+      <img src="${barang.gambar}" alt="${
+            barang.nama
+          }" class="w-full h-48 object-cover rounded-lg mb-4">
+      <h3 class="font-semibold text-lg mb-2 hidden">${barang.nama}</h3>
+      <p class="text-gray-600 mb-2 hidden">Status: ${barang.status}</p>
+      <p class="text-gray-600 hidden">Stok: ${barang.jumlah}</p>
+      <p class="text-blue-600 font-semibold mt-2 hidden">Rp ${barang.hargaSewa.toLocaleString(
+        "id-ID"
+      )}/hari</p>
+    `;
+          container.appendChild(barangElement);
+        });
+      }
+
+      // Fungsi untuk filter barang berdasarkan kategori
+      window.filterBarangByKategori = function (kategoriId) {
+        displayBarang(kategoriId);
+      };
+
+      // Load kategori dan barang saat halaman dimuat
+      document.addEventListener("DOMContentLoaded", () => {
+        loadKategoriFilter();
+        displayBarang();
+      });
+
+      // Fungsi untuk menampilkan stok barang
+      async function displayStokBarang(searchTerm = "") {
+        const container = document.getElementById("stokBarangContainer");
+        container.innerHTML = "";
+
+        try {
+          const barangRef = collection(db, "pengadaanBarang");
+          const querySnapshot = await getDocs(barangRef);
+
+          querySnapshot.forEach((doc) => {
+            const barang = doc.data();
+
+            // Filter berdasarkan pencarian
+            if (
+              searchTerm &&
+              !barang.nama.toLowerCase().includes(searchTerm.toLowerCase())
+            ) {
+              return;
+            }
+
+            const itemElement = document.createElement("div");
+            itemElement.className =
+              "flex items-center justify-between w-full bg-white p-4 border border-gray-200 rounded-md shadow-sm gap-x-4 mb-2";
+
+            itemElement.innerHTML = `
+  <!-- Bagian Kiri -->
+  <div class="flex items-center gap-x-4 w-1/3 h-full">
+    <img src="${barang.gambar}" alt="${
+              barang.nama
+            }" class="w-16 h-16 object-cover rounded">
+    <p class="font-semibold truncate">${barang.nama}</p>
+  </div>
+
+  <!-- Bagian Tengah -->
+  <div class="flex flex-1 justify-between gap-x-4 h-full">
+    <div class="flex items-center justify-center w-1/3 border-x border-black px-4 bg-gray-100 h-full">
+      <p class="text-gray-600 text-center">Stok Tersedia:</p>
+      <p class="font-bold text-lg ml-2">${barang.jumlah}</p>
+    </div>
+    <div class="flex items-center justify-center w-1/3 px-4 bg-gray-100 h-full">
+      <p class="text-gray-600">Stok Tersewa:</p>
+      <p class="font-bold text-lg ml-2">${barang.stokTersewa || 0}</p>
+    </div>
+  </div>
+`;
+
+            container.appendChild(itemElement);
+          });
+        } catch (error) {
+          console.error("Error fetching stok barang:", error);
+        }
+      }
+
+      // Event listener untuk pencarian
+      document
+        .getElementById("searchStokBarang")
+        ?.addEventListener("input", (e) => {
+          displayStokBarang(e.target.value);
+        });
+
+      // Load stok barang saat tab dibuka
+      document
+        .querySelector('[data-target="stokBarang"]')
+        ?.addEventListener("click", () => {
+          displayStokBarang();
+        });
+
+      // Load initial data
+      displayStokBarang();
+    </script>
+    <script type="module">
+      import { db } from "./firebase.js";
+      import {
+        collection,
+        getDocs,
+        query,
+        where,
+      } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+      // Fungsi untuk memuat kategori ke dropdown
+      async function loadKategoriStokOpname() {
+        const kategoriSelect = document.querySelector("#stokOpname select");
+        const kategoriRef = collection(db, "kategori");
+        const querySnapshot = await getDocs(kategoriRef);
+
+        kategoriSelect.innerHTML = '<option value="">Pilih Kategori</option>';
+        querySnapshot.forEach((doc) => {
+          const kategori = doc.data();
+          kategoriSelect.innerHTML += `<option value="${doc.id}">${kategori.name}</option>`;
+        });
+      }
+
+      // Fungsi untuk menampilkan barang berdasarkan kategori
+      async function displayBarangStokOpname(kategoriId) {
+        const tableBody = document.getElementById("stokOpnameTable");
+        tableBody.innerHTML = "";
+
+        if (!kategoriId) return;
+
+        const barangRef = query(
+          collection(db, "pengadaanBarang"),
+          where("kategori", "==", kategoriId)
+        );
+        const querySnapshot = await getDocs(barangRef);
+
+        querySnapshot.forEach((doc) => {
+          const barang = doc.data();
+          const row = document.createElement("tr");
+          row.innerHTML = `
+      <td class="border p-2">${doc.id}</td>
+      <td class="border p-2">${barang.nama}</td>
+      <td class="border p-2 text-center">${barang.jumlah}</td>
+      <td class="border p-2">
+        <input type="number" class="w-20 p-1 border rounded-lg mx-auto block"
+          onchange="hitungSelisih(this)" data-stok-sistem="${barang.jumlah}"/>
+      </td>
+      <td class="border p-2 text-center">0</td>
+      <td class="border p-2">
+        <input type="text" class="w-full p-1 border rounded-lg"/>
+      </td>
+    `;
+          tableBody.appendChild(row);
+        });
+      }
+
+      // Event listener untuk perubahan kategori
+      document
+        .querySelector("#stokOpname select")
+        ?.addEventListener("change", (e) => {
+          displayBarangStokOpname(e.target.value);
+        });
+
+      // Fungsi untuk menghitung selisih
+      window.hitungSelisih = function (input) {
+        const stokSistem = parseInt(input.dataset.stokSistem);
+        const stokFisik = parseInt(input.value) || 0;
+        const selisih = stokFisik - stokSistem;
+        input.closest("tr").querySelector("td:nth-child(5)").textContent =
+          selisih;
+      };
+
+      // Load kategori saat tab dibuka
+      document
+        .querySelector('[data-target="stokOpname"]')
+        ?.addEventListener("click", () => {
+          loadKategoriStokOpname();
+        });
+    </script>
+
+    <!-- Tambahkan modal detail opname -->
+    <div
+      id="detailOpnameModal"
+      class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center"
+    >
+      <div class="bg-white rounded-lg p-6 w-3/4 max-h-[90vh] overflow-y-auto">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-bold">Detail Stock Opname</h2>
+          <button
+            id="closeDetailOpname"
+            class="text-gray-500 hover:text-gray-700"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Info Opname -->
+        <div class="grid grid-cols-3 gap-4 mb-6">
+          <div>
+            <p class="font-semibold">ID Opname</p>
+            <p id="detailIdOpname" class="text-gray-600"></p>
+          </div>
+          <div>
+            <p class="font-semibold">Admin/Pegawai</p>
+            <p id="detailNamaUser" class="text-gray-600"></p>
+          </div>
+          <div>
+            <p class="font-semibold">Tanggal Opname</p>
+            <p id="detailTanggal" class="text-gray-600"></p>
+          </div>
+        </div>
+
+        <!-- Tabel Detail -->
+        <div class="overflow-x-auto mb-6">
+          <table class="w-full border-collapse">
+            <thead>
+              <tr class="bg-gray-100">
+                <th class="border p-2">Barang</th>
+                <th class="border p-2">Stok Sistem</th>
+                <th class="border p-2">Stok Fisik</th>
+                <th class="border p-2">Selisih</th>
+                <th class="border p-2">Keterangan</th>
+              </tr>
+            </thead>
+            <tbody id="detailOpnameTable"></tbody>
+          </table>
+        </div>
+
+        <!-- Aksi -->
+        <div class="flex justify-between items-center">
+          <div class="flex items-center gap-x-4">
+            <p class="font-semibold">Status:</p>
+            <select id="statusOpname" class="p-2 border rounded-lg">
+              <option value="Menunggu">Menunggu</option>
+              <option value="Ditolak">Ditolak</option>
+              <option value="Berhasil">Berhasil</option>
+            </select>
+          </div>
+          <div class="flex gap-x-4">
+            <button
+              id="hapusOpname"
+              class="bg-red-500 text-white px-4 py-2 rounded-lg"
+            >
+              Hapus
+            </button>
+            <button
+              id="simpanStatus"
+              class="bg-blue-500 text-white px-4 py-2 rounded-lg"
+            >
+              Simpan
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tambahkan div untuk detail opname -->
+    <div
+      id="detailOpnameView"
+      class="content hidden flex w-[80%] mx-[10%] py-4"
+    >
+      <div class="w-full">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-[#0000FF] text-[24px] font-bold">
+            Detail Stock Opname
+          </h2>
+          <button
+            id="backToOpnameList"
+            class="bg-gray-500 text-white px-4 py-2 rounded-lg"
+          >
+            Kembali
+          </button>
+        </div>
+
+        <!-- Info Opname -->
+        <div class="grid grid-cols-3 gap-4 mb-6">
+          <div>
+            <p class="font-semibold">ID Stock Opname</p>
+            <p id="detailIdOpname" class="text-gray-600"></p>
+          </div>
+          <div>
+            <p class="font-semibold">Admin/Pegawai</p>
+            <p id="detailNamaUser" class="text-gray-600"></p>
+          </div>
+          <div>
+            <p class="font-semibold">Tanggal Opname</p>
+            <p id="detailTanggal" class="text-gray-600"></p>
+          </div>
+        </div>
+
+        <!-- Tabel Detail -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse">
+            <thead>
+              <tr class="bg-gray-100">
+                <th class="border p-2">ID Barang</th>
+                <th class="border p-2">Nama Barang</th>
+                <th class="border p-2">Stok Sistem</th>
+                <th class="border p-2">Stok Fisik</th>
+                <th class="border p-2">Selisih</th>
+                <th class="border p-2">Tanggal Opname</th>
+                <th class="border p-2">Keterangan</th>
+                <th class="border p-2">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="detailOpnameTable">
+              <!-- Data akan diisi melalui JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Update script untuk detail opname -->
+    <script>
+      // Update fungsi showOpnameDetail
+      window.showOpnameDetail = async function (opnameId) {
+        try {
+          const opnameDoc = await getDoc(doc(db, "stokOpname", opnameId));
+          if (!opnameDoc.exists()) return;
+
+          const opname = opnameDoc.data();
+          const kategoriDoc = await getDoc(
+            doc(db, "kategori", opname.kategori)
+          );
+          const kategoriNama = kategoriDoc.exists()
+            ? kategoriDoc.data().name
+            : "";
+
+          // Buat tabel baru untuk menampilkan data
+          const container = document.getElementById("stokOpname");
+          container.innerHTML = `
+      <div class="w-full">
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse">
+            <thead>
+              <tr class="bg-gray-100">
+                <th class="border p-2">ID Stok Opname</th>
+                <th class="border p-2">Admin/Pegawai</th>
+                <th class="border p-2">Kategori</th>
+                <th class="border p-2">Barang</th>
+                <th class="border p-2">Stok Sistem</th>
+                <th class="border p-2">Stok Fisik</th>
+                <th class="border p-2">Selisih</th>
+                <th class="border p-2">Tanggal Opname</th>
+                <th class="border p-2">Keterangan</th>
+                <th class="border p-2">AKSI</th>
+              </tr>
+            </thead>
+            <tbody id="detailOpnameTableNew">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+
+          const tableBody = document.getElementById("detailOpnameTableNew");
+
+          // Untuk setiap item, buat baris dengan rowspan jika perlu
+          opname.items.forEach((item, index) => {
+            const row = document.createElement("tr");
+            row.className = "even:bg-gray-50";
+
+            // Hanya tampilkan info opname pada baris pertama
+            if (index === 0) {
+              row.innerHTML = `
+          <td class="border p-2" rowspan="${opname.items.length}">${
+                opname.idOpname
+              }</td>
+          <td class="border p-2" rowspan="${opname.items.length}">${
+                opname.namaUser
+              }</td>
+          <td class="border p-2" rowspan="${
+            opname.items.length
+          }">${kategoriNama}</td>
+          <td class="border p-2">${item.namaBarang}</td>
+          <td class="border p-2 text-center">${item.stokSistem}</td>
+          <td class="border p-2 text-center">${item.stokFisik}</td>
+          <td class="border p-2 text-center">${item.selisih}</td>
+          <td class="border p-2" rowspan="${opname.items.length}">
+            ${opname.tanggal.toDate().toLocaleDateString("id-ID")}
+          </td>
+          <td class="border p-2">${item.keterangan}</td>
+          <td class="border p-2" rowspan="${opname.items.length}">
+            <div class="flex flex-col gap-y-2">
+              <button class="bg-[#008000] text-white px-4 py-1 rounded-lg" onclick="updateStatus('${opnameId}')">
+                STATUS
+              </button>
+              <button class="bg-red-500 text-white px-4 py-1 rounded-lg" onclick="deleteOpname('${opnameId}')">
+                HAPUS
+              </button>
+            </div>
+          </td>
+        `;
+            } else {
+              row.innerHTML = `
+          <td class="border p-2">${item.namaBarang}</td>
+          <td class="border p-2 text-center">${item.stokSistem}</td>
+          <td class="border p-2 text-center">${item.stokFisik}</td>
+          <td class="border p-2 text-center">${item.selisih}</td>
+          <td class="border p-2">${item.keterangan}</td>
+        `;
+            }
+            tableBody.appendChild(row);
+          });
+        } catch (error) {
+          console.error("Error showing opname detail:", error);
+          alert("Gagal menampilkan detail opname");
+        }
+      };
+
+      // Update fungsi updateStatus untuk menampilkan dropdown
+      window.updateStatus = async function (opnameId) {
+        const statusSelect = document.createElement("select");
+        statusSelect.className = "p-2 border rounded-lg";
+        statusSelect.innerHTML = `
+    <option value="Menunggu">Menunggu</option>
+    <option value="Ditolak">Ditolak</option>
+    <option value="Berhasil">Berhasil</option>
+  `;
+
+        const currentStatus = document.querySelector(
+          `button[onclick="updateStatus('${opnameId}')"]`
+        );
+        const parentDiv = currentStatus.parentElement;
+        parentDiv.replaceChild(statusSelect, currentStatus);
+
+        statusSelect.addEventListener("change", async () => {
+          try {
+            await updateDoc(doc(db, "stokOpname", opnameId), {
+              status: statusSelect.value,
+            });
+            alert("Status berhasil diperbarui!");
+            showOpnameDetail(opnameId);
+          } catch (error) {
+            console.error("Error updating status:", error);
+            alert("Gagal mengupdate status");
+          }
+        });
+      };
+
+      // Event listener untuk tombol close
+      document
+        .getElementById("closeDetailOpname")
+        .addEventListener("click", () => {
+          document.getElementById("detailOpnameModal").classList.add("hidden");
+        });
+
+      // Event listener untuk tombol hapus
+      document.getElementById("hapusOpname").addEventListener("click", () => {
+        if (confirm("Apakah Anda yakin ingin menghapus data opname ini?")) {
+          deleteOpname(opnameId);
+        }
+      });
+
+      // Event listener untuk tombol simpan
+      document.getElementById("simpanStatus").addEventListener("click", () => {
+        const status = document.getElementById("statusOpname").value;
+        updateStatus(opnameId, status);
+      });
+
+      // Fungsi untuk menghapus opname
+      window.deleteOpname = async function (opnameId) {
+        if (confirm("Apakah Anda yakin ingin menghapus data opname ini?")) {
+          try {
+            await deleteDoc(doc(db, "stokOpname", opnameId));
+            alert("Data opname berhasil dihapus!");
+            // Kembali ke daftar opname
+            document.getElementById("detailOpnameView").classList.add("hidden");
+            document.getElementById("stokOpname").classList.remove("hidden");
+            loadDaftarOpname();
+          } catch (error) {
+            console.error("Error deleting opname:", error);
+            alert("Gagal menghapus data opname");
+          }
+        }
+      };
+
+      // Fungsi untuk mengupdate status
+      window.updateStatus = async function (opnameId, status) {
+        try {
+          await updateDoc(doc(db, "stokOpname", opnameId), {
+            status: status,
+          });
+          alert("Status berhasil diperbarui!");
+          showOpnameDetail(opnameId); // Refresh tampilan
+        } catch (error) {
+          console.error("Error updating status:", error);
+          alert("Gagal mengupdate status");
+        }
+      };
+
+      // Event listener untuk tombol kembali
+      document
+        .getElementById("backToOpnameList")
+        .addEventListener("click", () => {
+          document.getElementById("detailOpnameView").classList.add("hidden");
+          document.getElementById("stokOpname").classList.remove("hidden");
+        });
+
+      window.showOpnameDetail = async function (opnameId) {
+        try {
+          const opnameDoc = await getDoc(doc(db, "stokOpname", opnameId));
+          if (!opnameDoc.exists()) return;
+
+          const opname = opnameDoc.data();
+
+          // Isi informasi dasar
+          document.getElementById("detailIdOpname").textContent =
+            opname.idOpname;
+          document.getElementById("detailNamaUser").textContent =
+            opname.namaUser;
+          document.getElementById("detailTanggal").textContent = opname.tanggal
+            .toDate()
+            .toLocaleDateString("id-ID", {
+              day: "2-digit",
+              month: "long",
+              year: "numeric",
+            });
+
+          // Isi tabel
+          const tableBody = document.getElementById("detailOpnameTable");
+          tableBody.innerHTML = "";
+          opname.items.forEach((item) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+        <td class="border p-2">${item.idBarang}</td>
+        <td class="border p-2">${item.namaBarang}</td>
+        <td class="border p-2 text-center">${item.stokSistem}</td>
+        <td class="border p-2 text-center">${item.stokFisik}</td>
+        <td class="border p-2 text-center">${item.selisih}</td>
+        <td class="border p-2">${opname.tanggal
+          .toDate()
+          .toLocaleDateString("id-ID")}</td>
+        <td class="border p-2">${item.keterangan}</td>
+        <td class="border p-2 text-center">
+          <div class="flex justify-center gap-x-2">
+            <button class="bg-[#008000] text-white px-4 py-1 rounded-lg" onclick="updateStatus('${opnameId}')">
+              STATUS
+            </button>
+            <button class="bg-red-500 text-white px-4 py-1 rounded-lg" onclick="deleteOpname('${opnameId}')">
+              HAPUS
+            </button>
+          </div>
+        </td>
+      `;
+            tableBody.appendChild(row);
+          });
+
+          // Sembunyikan list dan tampilkan detail
+          document.getElementById("stokOpname").classList.add("hidden");
+          document
+            .getElementById("detailOpnameView")
+            .classList.remove("hidden");
+        } catch (error) {
+          console.error("Error showing opname detail:", error);
+          alert("Gagal menampilkan detail opname");
+        }
+      };
+
+      // Fungsi untuk update status
+      window.updateStatus = async function (opnameId) {
+        const newStatus = prompt(
+          "Pilih status (Menunggu/Ditolak/Berhasil):",
+          "Menunggu"
+        );
+        if (
+          newStatus &&
+          ["Menunggu", "Ditolak", "Berhasil"].includes(newStatus)
+        ) {
+          try {
+            await updateDoc(doc(db, "stokOpname", opnameId), {
+              status: newStatus,
+            });
+            alert("Status berhasil diperbarui!");
+            showOpnameDetail(opnameId); // Refresh tampilan
+          } catch (error) {
+            console.error("Error updating status:", error);
+            alert("Gagal mengupdate status");
+          }
+        }
+      };
+
+      // Fungsi untuk hapus opname
+      window.deleteOpname = async function (opnameId) {
+        if (confirm("Apakah Anda yakin ingin menghapus data opname ini?")) {
+          try {
+            await deleteDoc(doc(db, "stokOpname", opnameId));
+            alert("Data opname berhasil dihapus!");
+            // Kembali ke daftar opname
+            document.getElementById("detailOpnameView").classList.add("hidden");
+            document.getElementById("stokOpname").classList.remove("hidden");
+            loadDaftarOpname();
+          } catch (error) {
+            console.error("Error deleting opname:", error);
+            alert("Gagal menghapus data opname");
+          }
+        }
+      };
+
+      // Event listener untuk tombol kembali
+      document
+        .getElementById("backToOpnameList")
+        .addEventListener("click", () => {
+          document.getElementById("detailOpnameView").classList.add("hidden");
+          document.getElementById("stokOpname").classList.remove("hidden");
+        });
+    </script>
+  </body>
+</html>

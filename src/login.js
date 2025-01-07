@@ -45,7 +45,7 @@ document
       // Redirect sesuai role
       if (role === "admin") {
         window.location.href = "admindashboard.html";
-      } else if (role === "petugas") {
+      } else if (role === "pegawai") {
         window.location.href = "petugasdashboard.html";
       }
     } catch (error) {
