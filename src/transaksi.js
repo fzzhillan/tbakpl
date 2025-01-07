@@ -197,21 +197,7 @@ function renderBarang(barang) {
 
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const thirdUserNameElement = document.getElementById("thirdUserName");
-  if (!thirdUserNameElement) {
-    console.error("thirdUserNameElement tidak ditemukan di DOM!");
-  } else {
-    console.log(
-      "Konten thirdUserNameElement saat ini:",
-      thirdUserNameElement.textContent
-    );
-  }
-
-  const pencatat = thirdUserNameElement
-    ? thirdUserNameElement.textContent.trim()
-    : "Tidak Diketahui";
-
-  document.querySelector("#nota-pencatat").textContent = pencatat;
+  
 
 
 
@@ -374,11 +360,8 @@ tambahTransaksiBtn.addEventListener("click", () => {
   <td class="border-r border-b border-black">${nomor}</td>
   <td class="border-r border-b border-black">${data.nama}</td>
   <td class="border-r border-b border-black jumlah">${data.jumlah}</td> <!-- Pastikan class 'jumlah' sesuai -->
-  <td class="border-r border-b border-black harga-total" data-harga-sewa="${data.hargaSewa}">${hargaTotal}</td>
-  <td class="border-b border-black">
-    <button class="edit-btn-transaksi bg-yellow-500 text-white px-2 py-1 rounded" data-id="${data.id}">Edit</button>
-    <button class="delete-btn-transaksi bg-red-500 text-white px-2 py-1 rounded" data-id="${data.id}">Hapus</button>
-  </td>
+  <td class=" border-b border-black harga-total" data-harga-sewa="${data.hargaSewa}">${hargaTotal}</td>
+  
 `;
 
       konfirmasiDataContainer.appendChild(row);
@@ -661,16 +644,6 @@ konfirmasiPembayaranBtn.addEventListener("click", () => {
     const notaNoHpPenyewa = penyewa.noHpPenyewa;
     const notaNamePenyewa = penyewa.namePenyewa;
     const thirdUserNameElement = document.getElementById("thirdUserName");
-    if (!thirdUserNameElement) {
-      console.error("thirdUserNameElement tidak ditemukan di DOM!");
-    } else {
-      console.log(
-        "Konten thirdUserNameElement saat ini:",
-        thirdUserNameElement.textContent
-      );
-    }
-    
-
     const pencatat = thirdUserNameElement
       ? thirdUserNameElement.textContent.trim()
       : "Tidak Diketahui";
@@ -688,7 +661,7 @@ konfirmasiPembayaranBtn.addEventListener("click", () => {
     document.querySelector("#nota-total").textContent = `Rp ${notaTotal.toLocaleString()}`;
     document.querySelector("#nota-noHpPenyewa").textContent = notaNoHpPenyewa;
     document.querySelector("#nota-namePenyewa").textContent = notaNamePenyewa;
-    document.querySelector("#nota-pencatat").textContent = pencatat;
+    // document.querySelector("#nota-pencatat").textContent = pencatat;
     document.querySelector("#nota-tujuan").textContent = notaTujuan;
     document.querySelector("#nota-jaminan").textContent = notaJaminan;
     document.querySelector("#nota-tanggalSewa").textContent =
@@ -794,7 +767,7 @@ document
         noHpPenyewa: document
           .querySelector("#nota-noHpPenyewa")
           .textContent.trim(),
-        pencatat: document.querySelector("#nota-pencatat").textContent.trim(),
+        // pencatat: document.querySelector("#nota-pencatat").textContent.trim(),
         tujuan: document.querySelector("#nota-tujuan").textContent.trim(),
         
         jaminan: document.querySelector("#nota-jaminan").textContent.trim(),

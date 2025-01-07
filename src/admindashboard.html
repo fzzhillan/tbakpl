@@ -1525,8 +1525,8 @@
                       <th class="border-r border-b border-black">No</th>
                       <th class="border-r border-b border-black">Nama Barang</th>
                       <th class="border-r border-b border-black">QTY</th>
-                      <th class="border-r border-b border-black">Harga</th>
-                      <th class="border-b border-black">Aksi</th>
+                      <th class=" border-b border-black">Harga</th>
+                      <!-- <th class="border-b border-black">Aksi</th> -->
                     </thead>
                     <tbody id="konfirmasi-data-container">
                       
@@ -1590,9 +1590,22 @@
         id="dataPenyewaan"
         class="content hidden flex w-[80%] mx-[10%] py-4n"
       >
-        <div id="dataPenyewaanContainer" class="flex flex-col w-full">
+         <div class="flex flex-col w-full">
+    <!-- Search bar -->
+    <div class="mb-4 pt-4 flex w-full justify-between items-center">
+      <input
+        type="text"
+        id="searchInput-dataPenyewaan"
+        class="border border-gray-300 rounded-lg px-4 py-2 w-full max-w-md"
+        placeholder="Cari Nama Penyewa..."
+      />
+    </div>
 
-        </div>
+    <!-- Kontainer Data Penyewaan -->
+    <div id="dataPenyewaanContainer" class="flex flex-col w-full">
+      <!-- Tabel akan di-render di sini melalui JavaScript -->
+    </div>
+  </div>
       </div>
       <div
         id="dataPengembalian"
@@ -1684,10 +1697,10 @@
         <td class="font-medium">Nama Penyewa</td>
         <td id="nota-namePenyewa"></td>
       </tr>
-      <tr>
+      <!-- <tr>
         <td class="font-medium">Admin Pencatat</td>
         <td id="nota-pencatat"></td>
-      </tr>
+      </tr> -->
       <tr>
         <td class="font-medium">Tujuan</td>
         <td id="nota-tujuan"></td>
