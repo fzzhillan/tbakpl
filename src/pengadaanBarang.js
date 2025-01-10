@@ -14,9 +14,126 @@ import {
 import { renderCategories } from "./kategori.js";
 
 
-window.addEventListener("DOMContentLoaded", () => {
-  fetchKategori("kategori-barang");
+const resetBtn = document.getElementById("resetRusakBtn");
+
+resetBtn.addEventListener("click", async () => {
+  const barangRusakRef = collection(db, "barangRusak"); // Referensi koleksi
+  const snapshot = await getDocs(barangRusakRef);
+
+  if (snapshot.empty) {
+    alert("Tidak ada barang rusak untuk direset.");
+    return;
+  }
+
+  try {
+    // Iterasi dokumen dan hapus satu per satu
+    const promises = snapshot.docs.map((docItem) =>
+      deleteDoc(doc(db, "barangRusak", docItem.id))
+    );
+    await Promise.all(promises);
+
+    alert("Semua barang rusak berhasil direset!");
+  } catch (error) {
+    console.error("Terjadi kesalahan saat mereset barang rusak:", error);
+    alert("Gagal mereset barang rusak.");
+  }
 });
+
+async function getTotalQty() {
+  try {
+    const transaksiRef = collection(db, "transaksi"); // Referensi ke koleksi transaksi
+    const transaksiSnapshot = await getDocs(transaksiRef); // Ambil semua dokumen
+    const totalQty = transaksiSnapshot.docs.reduce((total, doc) => {
+      const qty = parseInt(doc.data().qty, 10) || 0; // Ambil qty, konversi ke angka, default 0
+      return total + qty; // Jumlahkan qty ke total
+    }, 0);
+    return totalQty; // Kembalikan hasil jumlah
+  } catch (error) {
+    console.error("Error fetching total qty:", error);
+    return 0;
+  }
+}
+
+async function loadJumlahBarangRusak() {
+  const barangRusakContainer = document.querySelector(".barang-rusak");
+  if (!barangRusakContainer) {
+    console.error('Elemen dengan kelas "barang-rusak" tidak ditemukan.');
+    return;
+  }
+
+  try {
+    // Ambil semua dokumen dari koleksi barangRusak
+    const barangRusakRef = collection(db, "barangRusak");
+    const querySnapshot = await getDocs(barangRusakRef);
+
+    // Hitung jumlah dokumen
+    const totalBarangRusak = querySnapshot.size;
+
+    // Tampilkan jumlah barang rusak di elemen HTML
+    barangRusakContainer.textContent = `${totalBarangRusak}`;
+  } catch (error) {
+    console.error("Error mengambil jumlah barang rusak:", error);
+    barangRusakContainer.textContent = `Gagal memuat data barang rusak.`;
+  }
+}
+
+
+async function getTotalJumlah() {
+  try {
+    const pengadaanRef = collection(db, "pengadaanBarang");
+    const pengadaanSnapshot = await getDocs(pengadaanRef);
+
+    // Hitung total jumlah
+    const totalJumlahBarang = pengadaanSnapshot.docs.reduce((total, doc) => {
+      const data = doc.data();
+      return total + (data.jumlah || 0); // Tambahkan jumlah jika ada, jika tidak, gunakan 0
+    }, 0);
+
+    console.log(`Total Jumlah: ${totalJumlahBarang}`);
+    return totalJumlahBarang;
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+    return 0; // Default nilai jika terjadi error
+  }
+}
+
+
+
+window.addEventListener("DOMContentLoaded", async () => {
+  try {
+    loadJumlahBarangRusak();
+    // Ambil data kategori (jika diperlukan)
+    fetchKategori("kategori-barang");
+
+    // Ambil total jumlah barang dari database
+    const totalJumlah = await getTotalJumlah();
+    console.log("Total Jumlah Barang:", totalJumlah);
+
+    // Perbarui elemen dengan class 'barang-tersedia'
+    const totalBarangElement = document.querySelector(".barang-tersedia");
+    if (totalBarangElement) {
+      totalBarangElement.textContent = totalJumlah; // Tampilkan total jumlah barang
+    } else {
+      console.error("Elemen dengan class 'barang-tersedia' tidak ditemukan.");
+    }
+    const totalQty = await getTotalQty();
+    console.log("Total Qty Barang Tersewa:", totalQty);
+
+    // Perbarui elemen dengan class 'barang-tersewa'
+    const tersewaElement = document.querySelector(".barang-tersewa");
+    if (tersewaElement) {
+      tersewaElement.textContent = totalQty; // Tampilkan total qty
+    } else {
+      console.error("Elemen dengan class 'barang-tersewa' tidak ditemukan.");
+    }
+  } catch (error) {
+    console.error("Error initializing page:", error);
+  }
+});
+
+
+
+
 
 // Elemen DOM
 
@@ -28,7 +145,6 @@ const addBarangModal = document.getElementById(
   "add-user-modal-pengadaan-barang"
 );
 const addBarangForm = document.getElementById("add-barang-form");
-
 
 // Fungsi untuk memuat kategori dari Firestore
 async function fetchKategori(targetSelectId, selectedKategori = "") {
@@ -54,8 +170,6 @@ async function fetchKategori(targetSelectId, selectedKategori = "") {
     console.error("Error fetching kategori:", error);
   }
 }
-
-
 
 // Fungsi untuk memuat data pengadaan barang
 async function fetchPengadaanBarang(search = "") {
@@ -93,7 +207,6 @@ async function fetchPengadaanBarang(search = "") {
       ) {
         return; // Abaikan barang yang tidak sesuai
       }
-
 
       // Buat elemen untuk setiap barang
       const row = document.createElement("div");
@@ -211,7 +324,7 @@ addBarangForm.addEventListener("submit", async (e) => {
       jumlah: parseInt(jumlah),
       date: serverTimestamp(),
       aksi: "Tambah",
-    })
+    });
 
     const kategoriRef = doc(db, "kategori", kategori);
     await updateDoc(kategoriRef, {
@@ -226,7 +339,6 @@ addBarangForm.addEventListener("submit", async (e) => {
     console.error("Error adding barang:", error);
   }
 });
-
 
 async function uploadImageToServer(file) {
   const formData = new FormData();
@@ -289,14 +401,14 @@ async function handleEditBarang(e) {
   }
 }
 
-
-
 document
   .getElementById("edit-barang-form")
   .addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const thirdUserName = document.querySelector("#thirdUserName").textContent.trim();
+    const thirdUserName = document
+      .querySelector("#thirdUserName")
+      .textContent.trim();
 
     const id = document.getElementById("edit-barang-id").value;
     const nama = document.getElementById("edit-nama-barang").value;
@@ -331,7 +443,6 @@ document
           const kategoriLamaRef = doc(db, "kategori", kategoriLama);
           await updateDoc(kategoriLamaRef, {
             jumlah: increment(-1),
-            
           });
 
           // Tambah jumlah pada kategori baru
@@ -373,37 +484,60 @@ document
     }
   });
 
+async function handleDeleteBarang(e) {
+  const id = e.target.dataset.id;
+  document.getElementById("delete-barang-modal").classList.remove("hidden");
 
-  async function handleDeleteBarang(e) {
-    const id = e.target.dataset.id;
-    document.getElementById("delete-barang-modal").classList.remove("hidden");
+  document.getElementById("confirm-delete-btn-barang").onclick = async () => {
+    const thirdUserName = document
+      .querySelector("#thirdUserName")
+      .textContent.trim();
 
-    document.getElementById("confirm-delete-btn").onclick = async () => {
-      const thirdUserName = document
-        .querySelector("#thirdUserName")
-        .textContent.trim();
-      try {
-         const kategoriRef = doc(db, "kategori", barang.kategori);
-      await updateDoc(kategoriRef, {
-        jumlah: increment(-1), // Kurangi 1 dari field jumlah
-      });
-        renderCategories();
-        await deleteDoc(doc(db, "pengadaanBarang", id));
-        await addDoc(collection(db, "riwayatPengadaan"), {
-          nama,
-          namaPencatat: thirdUserName,
-          // jumlah: parseInt(jumlah),
-          date: serverTimestamp(),
-          aksi: "Tambah",
-        });
-        alert("Barang berhasil dihapus!");
-        document.getElementById("delete-barang-modal").classList.add("hidden");
-        fetchPengadaanBarang();
-      } catch (error) {
-        console.error("Error deleting barang:", error);
+    try {
+      // Ambil data barang berdasarkan ID
+      const docRef = doc(db, "pengadaanBarang", id);
+      const docSnap = await getDoc(docRef);
+
+      if (!docSnap.exists()) {
+        alert("Barang tidak ditemukan.");
+        return;
       }
-    };
-  }
+
+      const barang = docSnap.data();
+      const nama = barang.nama; // Ambil nama barang
+      const kategori = barang.kategori; // Ambil kategori barang
+      const kategoriRef = doc(db, "kategori", kategori);
+
+      // Kurangi jumlah di kategori terkait
+      await updateDoc(kategoriRef, {
+        jumlah: increment(-1),
+      });
+
+      // Render ulang kategori
+      renderCategories();
+
+      // Hapus dokumen barang
+      await deleteDoc(doc(db, "pengadaanBarang", id));
+
+      // Tambahkan log ke riwayatPengadaan
+      await addDoc(collection(db, "riwayatPengadaan"), {
+        nama: nama, // Pastikan nama berasal dari barang
+        namaPencatat: thirdUserName,
+        date: serverTimestamp(),
+        aksi: "Hapus",
+      });
+
+      alert("Barang berhasil dihapus!");
+      document.getElementById("delete-barang-modal").classList.add("hidden");
+
+      // Refresh data barang
+      fetchPengadaanBarang();
+    } catch (error) {
+      console.error("Error deleting barang:", error);
+      alert("Terjadi kesalahan saat menghapus barang.");
+    }
+  };
+}
 
 
 // Load kategori saat halaman dimuat

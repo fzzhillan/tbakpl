@@ -12,6 +12,8 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 // import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
+
+
 // Fungsi untuk mengambil dan menampilkan data dari koleksi transaksi
 export async function fetchAndDisplayTransaksi() {
   try {
@@ -287,14 +289,18 @@ async function createCekBarangModalWithData(dataPenyewa, namaBarang, transaksiId
     document
       .getElementById("tanggalDikembalikan")
       .addEventListener("change", (event) => {
-        const tanggalDikembalikan = new Date(event.target.value); // Format yyyy-mm-dd dari input date
-        const tanggalSewa = new Date(parseTanggal(dataPenyewa.tanggalSewa)); // Parsing tanggalSewa (dd-mm-yyyy)
+        // Mendapatkan tanggal dikembalikan dari input user (yyyy-mm-dd)
+        const tanggalDikembalikan = new Date(event.target.value);
+
+        // Parsing tanggal sewa yang diambil dari dataPenyewa (dd-mm-yyyy)
+        const tanggalSewa = new Date(parseTanggal(dataPenyewa.tanggalSewa));
 
         const keteranganTerlambat = document.getElementById(
           "keteranganTerlambat"
         );
 
         if (tanggalDikembalikan > tanggalSewa) {
+          // Menghitung jumlah hari terlambat
           const hariTerlambat = Math.ceil(
             (tanggalDikembalikan - tanggalSewa) / (1000 * 60 * 60 * 24)
           );
@@ -302,8 +308,15 @@ async function createCekBarangModalWithData(dataPenyewa, namaBarang, transaksiId
             event.target.value
           )}).`;
           keteranganTerlambat.classList.remove("hidden");
-        } else {
+        } else if (tanggalDikembalikan.getTime() === tanggalSewa.getTime()) {
+          // Menampilkan pesan jika dikembalikan tepat waktu
           keteranganTerlambat.textContent = `Barang dikembalikan tepat waktu (Tanggal Dikembalikan: ${formatTanggal(
+            event.target.value
+          )}).`;
+          keteranganTerlambat.classList.remove("hidden");
+        } else {
+          // Menampilkan pesan jika dikembalikan lebih awal
+          keteranganTerlambat.textContent = `Barang dikembalikan lebih awal (Tanggal Dikembalikan: ${formatTanggal(
             event.target.value
           )}).`;
           keteranganTerlambat.classList.remove("hidden");

@@ -554,7 +554,7 @@
                 <div
                   class="absolute rounded-full bg-[#C0C0C0] p-5 px-10 -top-10 left-20 shadow-md border-black border"
                 >
-                  <div class="text-lg">1</div>
+                  <div class="barang-tersedia text-lg"></div>
                 </div>
               </div>
               <div
@@ -564,7 +564,7 @@
                 <div
                   class="absolute rounded-full bg-[#C0C0C0] p-5 px-10 -top-10 left-20 shadow-md border-black border"
                 >
-                  <div class="text-lg">1</div>
+                  <div class="barang-tersewa text-lg"></div>
                 </div>
               </div>
               <div
@@ -574,7 +574,7 @@
                 <div
                   class="absolute rounded-full bg-[#C0C0C0] p-5 px-10 -top-10 left-20 shadow-md border-black border"
                 >
-                  <div class="text-lg">1</div>
+                  <div class="barang-rusak"></div>
                 </div>
               </div>
             </div>
@@ -737,7 +737,7 @@
         id="pengadaanBarang"
         class="content hidden flex w-[80%] mx-[10%] py-4"
       >
-        <div class="w-full p-6 bg-white rounded-lg shadow-lg">
+        <div class="w-full gap-x-2 p-6 bg-white rounded-lg shadow-lg">
           <div class="flex items-center justify-between mb-4">
             <input
               type="text"
@@ -745,6 +745,12 @@
               class="border rounded-lg px-4 py-2 w-2/3"
               placeholder="Cari user berdasarkan nama"
             />
+            <button
+              id = "resetRusakBtn"
+              class="resetRusakBtn bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+            >
+              Reset Barang Rusak
+            </button>
             <button
               id="add-user-btn"
               data-target="add-user-modal-pengadaan-barang"
@@ -825,27 +831,32 @@
             <input
               type="text"
               id="searchInputKategori"
-              placeholder="Cari kategori..."
-              class="p-2 border border-gray-300 rounded-lg w-1/2"
+              placeholder="Cari kategori barang..."
+              class="p-2 border border-gray-300 bg-[#C3C3C3] rounded-lg w-1/2"
             />
             <button
               id="tambahKategoriBtn"
-              class="bg-blue-500 text-white px-4 py-2 rounded-lg"
+              class="bg-[#C3C3C3] text-black px-4 py-2 rounded-lg"
             >
               Tambah Kategori
             </button>
           </div>
 
-          <table class="min-w-full table-auto">
-            <thead class="bg-gray-200">
-              <tr>
-                <th class="p-2">Nama Kategori</th>
-                <th class="p-2">Jumlah</th>
-                <th class="p-2">Aksi</th>
-              </tr>
-            </thead>
-            <tbody id="kategoriTable"></tbody>
-          </table>
+          <div class="overflow-x-auto max-w-full text-center">
+  <div class="snap-both flex text-[24px] font-bold">
+    <div class="snap-start flex-shrink-0 w-[240px] border-y-2 bg-[#D9D9D9] border-black">
+      Nama Kategori
+    </div>
+    <div class="snap-start flex-shrink-0 w-[240px] border-2 bg-[#D9D9D9] border-black">
+      Jumlah
+    </div>
+    <div class="snap-start flex-shrink-0 w-[240px] border-y-2 bg-[#D9D9D9] border-black">
+      Aksi
+    </div>
+  </div>
+  <div id="kategoriTable" class="overflow-y-scroll max-h-[450px] w-max"></div>
+</div>
+
         </div>
       </div>
       <div id="stokBarang" class="content hidden flex w-[80%] mx-[10%] py-4">
@@ -1222,6 +1233,7 @@
             console.error("Error loading opname list:", error);
           }
         }
+        
 
         // Fungsi untuk menampilkan detail opname
         window.showOpnameDetail = async function (opnameId) {
@@ -1241,6 +1253,12 @@
             const container = document.getElementById("stokOpname");
             container.innerHTML = `
             <div class="w-full">
+              <button
+  id="backToDaftarOpnameBtn"
+  class="px-4 py-2 bg-gray-500 text-white rounded-lg mb-4"
+>
+  Kembali
+</button>
               <div class="overflow-x-auto">
                 <table class="w-full border-collapse">
                   <thead>
@@ -1263,6 +1281,8 @@
               </div>
             </div>
           `;
+
+          
 
             const tableBody = document.getElementById("detailOpnameTableNew");
 
@@ -2509,7 +2529,7 @@
               Batal
             </button>
             <button
-              id="confirm-delete-btn"
+              id="confirm-delete-btn-barang"
               class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
             >
               Hapus
@@ -2913,28 +2933,28 @@
 
             const itemElement = document.createElement("div");
             itemElement.className =
-              "flex items-center justify-between w-full h-full bg-white p-4 border border-gray-200 rounded-md shadow-sm gap-x-4 mb-2";
+              "flex items-center justify-between w-full h-full p-4 border border-gray-200 rounded-md shadow-sm gap-x-4 mb-2";
 
             itemElement.innerHTML = `
   <!-- Bagian Kiri -->
-  <div class="flex items-center gap-x-4 w-1/3 h-full">
+  <div class="flex items-center gap-x-4 w-1/3 min-h-full">
     <img src="${barang.gambar}" alt="${
               barang.nama
             }" class="w-16 h-16 object-cover rounded">
     <p class="font-semibold truncate">${barang.nama}</p>
   </div>
-
-  <!-- Bagian Tengah -->
-  <div class="flex flex-1 justify-between gap-x-4 h-full">
-    <div class="flex items-center justify-center w-1/3  px-4 bg-gray-100 h-full">
+  <div class="flex items-center justify-center w-1/3 border-x border-black px-4 min-h-full">
       <p class="text-gray-600 text-center">Stok Tersedia:</p>
       <p class="font-bold text-lg ml-2">${barang.jumlah}</p>
     </div>
-    <div class="flex items-center justify-center w-1/3 px-4 bg-gray-100 h-full">
+    <div class="flex items-center justify-center w-1/3 px-4 min-h-full">
       <p class="text-gray-600">Stok Tersewa:</p>
       <p class="font-bold text-lg ml-2">${barang.jumlahSewa|| 0}</p>
     </div>
-  </div>
+  
+
+  <!-- Bagian Tengah -->
+  
 `;
 
             container.appendChild(itemElement);

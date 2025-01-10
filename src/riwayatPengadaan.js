@@ -8,8 +8,18 @@ import {
 async function fetchPengadaanData() {
   const pengadaanRef = collection(db, "riwayatPengadaan");
   const pengadaanSnapshot = await getDocs(pengadaanRef);
-  return pengadaanSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+  const data = pengadaanSnapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+
+  // Urutkan data berdasarkan date (descending)
+  data.sort((a, b) => b.date.seconds - a.date.seconds);
+
+  return data;
 }
+
 
 function formatDate(date) {
   const d = new Date(date.seconds * 1000); // Mengambil timestamp dan mengkonversinya ke milidetik
@@ -51,8 +61,13 @@ document
         pengadaan.nama.toLowerCase().includes(keyword) ||
         pengadaan.namaPencatat.toLowerCase().includes(keyword)
     );
+
+    // Urutkan data yang sudah difilter berdasarkan date
+    filteredData.sort((a, b) => b.date.seconds - a.date.seconds);
+
     renderPengadaan(filteredData);
   });
+
 
 // Ambil data saat halaman dimuat
 let allPengadaan = [];

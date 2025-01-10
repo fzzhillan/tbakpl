@@ -8,6 +8,7 @@ import {
   doc,
   addDoc,
   deleteDoc,
+  serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 async function fetchAndRenderData(query = "") {
@@ -58,6 +59,35 @@ async function updateStatusInTransaksi(namePenyewa, tanggalSewa, newStatus) {
   } catch (error) {
     console.error("Error memperbarui status:", error);
     alert("Gagal memperbarui status.");
+  }
+}
+async function deleteDocFromTransaksi(namePenyewa, tanggalSewa) {
+  try {
+    const transaksiRef = collection(db, "transaksi");
+    const q = query(
+      transaksiRef,
+      where("namePenyewa", "==", namePenyewa),
+      where("tanggalSewa", "==", tanggalSewa)
+    );
+
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      console.error("Dokumen tidak ditemukan:", { namePenyewa, tanggalSewa });
+      alert("Dokumen tidak ditemukan.");
+      return;
+    }
+
+    querySnapshot.forEach(async (docSnapshot) => {
+      const docRef = doc(db, "transaksi", docSnapshot.id);
+      await deleteDoc(docRef); // Hapus dokumen
+      console.log("Dokumen berhasil dihapus:", docSnapshot.id);
+    });
+
+    // alert("Dokumen berhasil dihapus.");
+  } catch (error) {
+    console.error("Error menghapus dokumen:", error);
+    // alert("Gagal menghapus dokumen.");
   }
 }
 
@@ -216,6 +246,16 @@ function renderDataPengembalian(dataPenyewaan) {
 
           if (barang.kondisi === "Baik") {
             newJumlah += 1; // Tambahkan ke jumlah
+          } else {
+            // Tambahkan ke barangRusak jika kondisi != "Baik"
+            await addDoc(collection(db, "barangRusak"), {
+              nama: barang.nama,
+              kondisi: barang.kondisi,
+              tanggalRusak: serverTimestamp(), // Tambahkan timestamp untuk tracking
+            });
+            console.log(
+              `Barang "${barang.nama}" dengan kondisi "${barang.kondisi}" ditambahkan ke barangRusak.`
+            );
           }
           newJumlahSewa -= 1; // Kurangi dari jumlahSewa
 
@@ -237,6 +277,7 @@ function renderDataPengembalian(dataPenyewaan) {
 
 
 
+
   body.addEventListener("click", async (event) => {
     const target = event.target;
 
@@ -245,6 +286,7 @@ function renderDataPengembalian(dataPenyewaan) {
       const penyewaanData = dataPenyewaan.find(
         (item) => item.id === penyewaanId
       );
+      const { namePenyewa, tanggalSewa } = penyewaanData;
 
       if (!penyewaanData) {
         console.error("Data penyewaan tidak ditemukan:", penyewaanId);
@@ -263,6 +305,8 @@ function renderDataPengembalian(dataPenyewaan) {
         await updatePengadaanBarang(penyewaanData);
 
         await deleteDoc(doc(db, "dataPenyewaan", penyewaanId));
+
+        await deleteDocFromTransaksi(namePenyewa, tanggalSewa);
 
         // Hapus data dari UI
         target.closest(".flex").remove(); // Menghapus baris terkait
@@ -292,6 +336,7 @@ function renderDataPengembalian(dataPenyewaan) {
       try {
         // Panggil fungsi untuk memperbarui status di koleksi transaksi
         await updateStatusInTransaksi(namePenyewa, tanggalSewa, "Menunggu");
+        
         await deleteDoc(doc(db, "dataPenyewaan", penyewaanId));
 
         // Hapus data dari UI

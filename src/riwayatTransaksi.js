@@ -4,10 +4,28 @@ import {
   getDocs,
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
+
+function parseDate(dateString) {
+  // Format: "DD-MM-YYYY"
+  const parts = dateString.split("-");
+  return new Date(parts[2], parts[1] - 1, parts[0]); // new Date(year, month, day)
+}
+
 async function fetchData() {
   const transaksiRef = collection(db, "riwayatTransaksi");
   const transaksiSnapshot = await getDocs(transaksiRef);
-  return transaksiSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  const data = transaksiSnapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+
+  // Urutkan berdasarkan tanggalDiselesaikan (misalnya format "DD-MM-YYYY")
+  data.sort(
+    (a, b) =>
+      parseDate(b.tanggalDiselesaikan) - parseDate(a.tanggalDiselesaikan)
+  ); // descending order
+
+  return data;
 }
 
 function renderTransaksi(data) {

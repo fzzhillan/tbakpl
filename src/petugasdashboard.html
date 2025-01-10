@@ -554,7 +554,7 @@
                 <div
                   class="absolute rounded-full bg-[#C0C0C0] p-5 px-10 -top-10 left-20 shadow-md border-black border"
                 >
-                  <div class="text-lg">1</div>
+                  <div class="barang-tersedia text-lg"></div>
                 </div>
               </div>
               <div
@@ -564,7 +564,7 @@
                 <div
                   class="absolute rounded-full bg-[#C0C0C0] p-5 px-10 -top-10 left-20 shadow-md border-black border"
                 >
-                  <div class="text-lg">1</div>
+                  <div class="barang-tersewa text-lg"></div>
                 </div>
               </div>
               <div
@@ -574,7 +574,7 @@
                 <div
                   class="absolute rounded-full bg-[#C0C0C0] p-5 px-10 -top-10 left-20 shadow-md border-black border"
                 >
-                  <div class="text-lg">1</div>
+                  <div class="barang-rusak"></div>
                 </div>
               </div>
             </div>
@@ -737,7 +737,7 @@
         id="pengadaanBarang"
         class="content hidden flex w-[80%] mx-[10%] py-4"
       >
-        <div class="w-full p-6 bg-white rounded-lg shadow-lg">
+        <div class="w-full gap-x-2 p-6 bg-white rounded-lg shadow-lg">
           <div class="flex items-center justify-between mb-4">
             <input
               type="text"
@@ -745,6 +745,12 @@
               class="border rounded-lg px-4 py-2 w-2/3"
               placeholder="Cari user berdasarkan nama"
             />
+            <button
+              id = "resetRusakBtn"
+              class="resetRusakBtn bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+            >
+              Reset Barang Rusak
+            </button>
             <button
               id="add-user-btn"
               data-target="add-user-modal-pengadaan-barang"
@@ -825,27 +831,32 @@
             <input
               type="text"
               id="searchInputKategori"
-              placeholder="Cari kategori..."
-              class="p-2 border border-gray-300 rounded-lg w-1/2"
+              placeholder="Cari kategori barang..."
+              class="p-2 border border-gray-300 bg-[#C3C3C3] rounded-lg w-1/2"
             />
             <button
               id="tambahKategoriBtn"
-              class="bg-blue-500 text-white px-4 py-2 rounded-lg"
+              class="bg-[#C3C3C3] text-black px-4 py-2 rounded-lg"
             >
               Tambah Kategori
             </button>
           </div>
 
-          <table class="min-w-full table-auto">
-            <thead class="bg-gray-200">
-              <tr>
-                <th class="p-2">Nama Kategori</th>
-                <th class="p-2">Jumlah</th>
-                <th class="p-2">Aksi</th>
-              </tr>
-            </thead>
-            <tbody id="kategoriTable"></tbody>
-          </table>
+          <div class="overflow-x-auto max-w-full text-center">
+  <div class="snap-both flex text-[24px] font-bold">
+    <div class="snap-start flex-shrink-0 w-[240px] border-y-2 bg-[#D9D9D9] border-black">
+      Nama Kategori
+    </div>
+    <div class="snap-start flex-shrink-0 w-[240px] border-2 bg-[#D9D9D9] border-black">
+      Jumlah
+    </div>
+    <div class="snap-start flex-shrink-0 w-[240px] border-y-2 bg-[#D9D9D9] border-black">
+      Aksi
+    </div>
+  </div>
+  <div id="kategoriTable" class="overflow-y-scroll max-h-[450px] w-max"></div>
+</div>
+
         </div>
       </div>
       <div id="stokBarang" class="content hidden flex w-[80%] mx-[10%] py-4">
@@ -1222,6 +1233,7 @@
             console.error("Error loading opname list:", error);
           }
         }
+        
 
         // Fungsi untuk menampilkan detail opname
         window.showOpnameDetail = async function (opnameId) {
@@ -1241,6 +1253,12 @@
             const container = document.getElementById("stokOpname");
             container.innerHTML = `
             <div class="w-full">
+              <button
+  id="backToDaftarOpnameBtn"
+  class="px-4 py-2 bg-gray-500 text-white rounded-lg mb-4"
+>
+  Kembali
+</button>
               <div class="overflow-x-auto">
                 <table class="w-full border-collapse">
                   <thead>
@@ -1263,6 +1281,8 @@
               </div>
             </div>
           `;
+
+          
 
             const tableBody = document.getElementById("detailOpnameTableNew");
 
@@ -1493,7 +1513,8 @@
                     id="transaksi-penyewa"
                     class="border rounded-lg px-4 py-2 w-full"
                   >
-                <option value="" disabled selected>Pilih Penyewa</option></select>
+                    <option value="" disabled selected>Pilih Penyewa</option>
+                  </select>
                 </div>
                 <div>
                   <label for="transaksi-tujuan">Tujuan</label>
@@ -1523,63 +1544,78 @@
                   <table>
                     <thead>
                       <th class="border-r border-b border-black">No</th>
-                      <th class="border-r border-b border-black">Nama Barang</th>
+                      <th class="border-r border-b border-black">
+                        Nama Barang
+                      </th>
                       <th class="border-r border-b border-black">QTY</th>
-                      <th class=" border-b border-black">Harga</th>
+                      <th class="border-b border-black">Harga</th>
                       <!-- <th class="border-b border-black">Aksi</th> -->
                     </thead>
-                    <tbody id="konfirmasi-data-container">
-                      
-                    </tbody>
+                    <tbody id="konfirmasi-data-container"></tbody>
                   </table>
                 </div>
-                
               </div>
             </div>
             <div class="flex w-1/4 max-h-full gap-y-2 flex-col">
-              <div class="flex w-full flex-col mb-4 bg-white rounded-xl shadow-md p-4">
+              <div
+                class="flex w-full flex-col mb-4 bg-white rounded-xl shadow-md p-4"
+              >
                 <div class="">
                   <p>Sub total</p>
-                  <div id="transaksi-subtotal" class="flex flex-col gap-y-4 rounded-xl bg-white shadow-md px-4 py-2">
-                  </div>
+                  <div
+                    id="transaksi-subtotal"
+                    class="flex flex-col gap-y-4 rounded-xl bg-white shadow-md px-4 py-2"
+                  ></div>
                 </div>
                 <div class="flex flex-col">
                   <div class="flex gap-x-2 items-center">
                     <label for="transaksi-waktu">Waktu Sewa</label>
-                    <p id="waktu-sewa-hari" class="text-gray-400 text-sm" ></p>
-
+                    <p id="waktu-sewa-hari" class="text-gray-400 text-sm"></p>
                   </div>
-  <input type="date" id="transaksi-waktu" class="border rounded-lg px-4 py-2 w-full">
-</div>
+                  <input
+                    type="date"
+                    id="transaksi-waktu"
+                    class="border rounded-lg px-4 py-2 w-full"
+                  />
+                </div>
                 <div>
                   <label for="transaksi-diskon">Diskon</label>
-                  <input type="text" id="transaksi-diskon" class="border rounded-lg px-4 py-2 w-full">
+                  <input
+                    type="text"
+                    id="transaksi-diskon"
+                    class="border rounded-lg px-4 py-2 w-full"
+                  />
                 </div>
                 <div>
                   <p>Total</p>
-                  <div id="transaksi-total" class="flex flex-col gap-y-4 rounded-xl bg-white shadow-md px-4 py-2">
-
-                  </div>
+                  <div
+                    id="transaksi-total"
+                    class="flex flex-col gap-y-4 rounded-xl bg-white shadow-md px-4 py-2"
+                  ></div>
                 </div>
                 <div>
                   <label for="transaksi-bayar">Bayar</label>
-                  <input type="text" id="transaksi-bayar" class="border rounded-lg px-4 py-2 w-full">
+                  <input
+                    type="text"
+                    id="transaksi-bayar"
+                    class="border rounded-lg px-4 py-2 w-full"
+                  />
                 </div>
                 <div>
                   <p>Kembalian</p>
-                  <div id="transaksi-kembalian" class="flex flex-col gap-y-4 rounded-xl bg-white shadow-md px-4 py-2">
-
-                  </div>
+                  <div
+                    id="transaksi-kembalian"
+                    class="flex flex-col gap-y-4 rounded-xl bg-white shadow-md px-4 py-2"
+                  ></div>
                 </div>
                 <div class="w-full">
-                    <button
+                  <button
                     id="konfirmasiPembayaranBtn"
                     class="mt-4 bg-blue-500 w-full text-white px-4 py-2 rounded-lg hover:bg-blue-600"
                   >
                     Cetak Nota
                   </button>
                 </div>
-
               </div>
             </div>
           </div>
@@ -1590,145 +1626,233 @@
         id="dataPenyewaan"
         class="content hidden flex w-[80%] mx-[10%] py-4n"
       >
-         <div class="flex flex-col w-full">
-    <!-- Search bar -->
-    <div class="mb-4 pt-4 flex w-full justify-between items-center">
-      <input
-        type="text"
-        id="searchInput-dataPenyewaan"
-        class="border border-gray-300 rounded-lg px-4 py-2 w-full max-w-md"
-        placeholder="Cari Nama Penyewa..."
-      />
-    </div>
+        <div class="flex flex-col w-full">
+          <!-- Search bar -->
+          <div class="mb-4 pt-4 flex w-full justify-between items-center">
+            <input
+              type="text"
+              id="searchInput-dataPenyewaan"
+              class="border border-gray-300 rounded-lg px-4 py-2 w-full max-w-md"
+              placeholder="Cari Nama Penyewa..."
+            />
+          </div>
 
-    <!-- Kontainer Data Penyewaan -->
-    <div id="dataPenyewaanContainer" class="flex flex-col w-full">
-      <!-- Tabel akan di-render di sini melalui JavaScript -->
-    </div>
-  </div>
+          <!-- Kontainer Data Penyewaan -->
+          <div id="dataPenyewaanContainer" class="flex flex-col w-full">
+            <!-- Tabel akan di-render di sini melalui JavaScript -->
+          </div>
+        </div>
       </div>
       <div
         id="dataPengembalian"
         class="content hidden flex w-[80%] mx-[10%] py-4"
       >
-        <p class="flex w-full justify-center">data Pengembalian</p>
+        <div class="flex flex-col w-full">
+          <input
+            id="searchBar-dataPengembalian"
+            type="text"
+            class="w-full mb-4 p-2 border rounded"
+            placeholder="Cari barang atau kondisi..."
+          />
+
+          <div
+            id="barangList-dataPengembalian"
+            class="w-full max-w-full flex bg-white rounded-xl shadow-md border-4 overflow-x-auto"
+          ></div>
+        </div>
       </div>
       <div
         id="riwayatTransaksi"
         class="content hidden flex w-[80%] mx-[10%] py-4"
       >
-        <p class="flex w-full justify-center">riwayatTransaksi</p>
+        <div class="flex flex-col w-full">
+          <input
+      type="text"
+      id="searchInput-riwayatTransaksi"
+      class="mb-4 p-2 w-full border rounded-lg"
+      placeholder="Cari nama barang atau penyewa..."
+    />
+    <div id="transaksiList" class="space-y-4">
+      <!-- List of transaksi will be dynamically generated here -->
+    </div>
+
+        </div>
       </div>
       <div
         id="riwayatPengadaan"
         class="content hidden flex w-[80%] mx-[10%] py-4"
       >
-        <p class="flex w-full justify-center">riwayatPengadaan</p>
-      </div>
-
-<!-- Modal Edit -->
-  <div id="editModal-transaksi" class="modal hidden fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
-    <div class="modal-content bg-white p-6 rounded-lg w-1/3">
-      <h2 class="text-xl mb-4">Edit Quantity</h2>
-      <div>
-        <label for="edit-qty" class="block text-sm font-medium">Quantity</label>
-        <input type="number" id="edit-qty" class="border rounded-lg px-4 py-2 w-full" min="1" />
-      </div>
-      <div class="mt-4 flex justify-between">
-        <button id="saveEditQtyBtn-transaksi" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Save</button>
-        <button id="closeEditModalBtn-transaksi" class="bg-gray-500 text-white px-4 py-2 rounded-lg">Cancel</button>
-      </div>
-    </div>
+        <div class="w-full flex flex-col">
+          <div class="mb-4 w-full flex justify-center">
+    <input
+      id="searchInput-riwayatPengadaan"
+      type="text"
+      placeholder="Cari Nama atau Nama Pencatat"
+      class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+    />
   </div>
 
-  <!-- Modal Konfirmasi Hapus -->
-  <div id="deleteModal-transaksi" class="modal hidden fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
-    <div class="modal-content bg-white p-6 rounded-lg w-1/3">
-      <h2 class="text-xl mb-4">Konfirmasi Hapus</h2>
-      <p>Apakah Anda yakin ingin menghapus barang ini?</p>
-      <div class="mt-4 flex justify-between">
-        <button id="confirmDeleteBtn" class="bg-red-500 text-white px-4 py-2 rounded-lg">Hapus</button>
-        <button id="closeDeleteModalBtn" class="bg-gray-500 text-white px-4 py-2 rounded-lg">Batal</button>
-      </div>
-    </div>
-  </div>
+  <!-- Table untuk menampilkan data -->
+  <table class="min-w-full table-auto ">
+    <thead>
+      <tr>
+        <th class="px-4 py-2">Aksi</th>
+        <th class="px-4 py-2">Tanggal</th>
+        
+        <th class="px-4 py-2">Nama</th>
+        <th class="px-4 py-2">Nama Pencatat</th>
+      </tr>
+    </thead>
+    <tbody id="pengadaanList"></tbody>
+  </table>
 
+        </div>
+      </div>
+
+      <!-- Modal Edit -->
+      <div
+        id="editModal-transaksi"
+        class="modal hidden fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center"
+      >
+        <div class="modal-content bg-white p-6 rounded-lg w-1/3">
+          <h2 class="text-xl mb-4">Edit Quantity</h2>
+          <div>
+            <label for="edit-qty" class="block text-sm font-medium"
+              >Quantity</label
+            >
+            <input
+              type="number"
+              id="edit-qty"
+              class="border rounded-lg px-4 py-2 w-full"
+              min="1"
+            />
+          </div>
+          <div class="mt-4 flex justify-between">
+            <button
+              id="saveEditQtyBtn-transaksi"
+              class="bg-blue-500 text-white px-4 py-2 rounded-lg"
+            >
+              Save
+            </button>
+            <button
+              id="closeEditModalBtn-transaksi"
+              class="bg-gray-500 text-white px-4 py-2 rounded-lg"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Konfirmasi Hapus -->
+      <div
+        id="deleteModal-transaksi"
+        class="modal hidden fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center"
+      >
+        <div class="modal-content bg-white p-6 rounded-lg w-1/3">
+          <h2 class="text-xl mb-4">Konfirmasi Hapus</h2>
+          <p>Apakah Anda yakin ingin menghapus barang ini?</p>
+          <div class="mt-4 flex justify-between">
+            <button
+              id="confirmDeleteBtn"
+              class="bg-red-500 text-white px-4 py-2 rounded-lg"
+            >
+              Hapus
+            </button>
+            <button
+              id="closeDeleteModalBtn"
+              class="bg-gray-500 text-white px-4 py-2 rounded-lg"
+            >
+              Batal
+            </button>
+          </div>
+        </div>
+      </div>
 
       <!-- Modal Nota -->
-<div id="notaModal" class="fixed inset-0 flex items-center justify-center hidden bg-gray-500 bg-opacity-75">
-  <div class="bg-white rounded-lg w-11/12 md:w-1/2 p-6">
-    <h2 class="text-xl font-bold mb-4">Nota Pembayaran</h2>
-    
-    <!-- Tabel Nota -->
-    <table class="w-full mb-4">
-      <tr>
-        <td class="font-medium">No.</td>
-        <td id="nota-nomor"></td>
-      </tr>
-      <tr>
-        <td class="font-medium">Nama Barang</td>
-        <td id="nota-namaBarang"></td>
-      </tr>
-      <tr>
-        <td class="font-medium">Harga Sewa</td>
-        <td id="nota-hargaSewa"></td>
-      </tr>
-      <tr>
-        <td class="font-medium">Qty</td>
-        <td id="nota-qty"></td>
-      </tr>
-      <tr>
-        <td class="font-medium">Harga Total</td>
-        <td id="nota-hargaTotal"></td>
-      </tr>
-      <tr>
-        <td class="font-medium">Diskon</td>
-        <td id="nota-diskon"></td>
-      </tr>
-      <tr>
-        <td class="font-medium">Total</td>
-        <td id="nota-total"></td>
-      </tr>
-      <tr>
-        <td class="font-medium">No HP Penyewa</td>
-        <td id="nota-noHpPenyewa"></td>
-      </tr>
-      <tr>
-        <td class="font-medium">Nama Penyewa</td>
-        <td id="nota-namePenyewa"></td>
-      </tr>
-      <!-- <tr>
+      <div
+        id="notaModal"
+        class="fixed inset-0 flex items-center justify-center hidden bg-gray-500 bg-opacity-75"
+      >
+        <div class="bg-white rounded-lg w-11/12 md:w-1/2 p-6">
+          <h2 class="text-xl font-bold mb-4">Nota Pembayaran</h2>
+
+          <!-- Tabel Nota -->
+          <table class="w-full mb-4">
+            <tr>
+              <td class="font-medium">No.</td>
+              <td id="nota-nomor"></td>
+            </tr>
+            <tr>
+              <td class="font-medium">Nama Barang</td>
+              <td id="nota-namaBarang"></td>
+            </tr>
+            <tr>
+              <td class="font-medium">Harga Sewa</td>
+              <td id="nota-hargaSewa"></td>
+            </tr>
+            <tr>
+              <td class="font-medium">Qty</td>
+              <td id="nota-qty"></td>
+            </tr>
+            <tr>
+              <td class="font-medium">Harga Total</td>
+              <td id="nota-hargaTotal"></td>
+            </tr>
+            <tr>
+              <td class="font-medium">Diskon</td>
+              <td id="nota-diskon"></td>
+            </tr>
+            <tr>
+              <td class="font-medium">Total</td>
+              <td id="nota-total"></td>
+            </tr>
+            <tr>
+              <td class="font-medium">No HP Penyewa</td>
+              <td id="nota-noHpPenyewa"></td>
+            </tr>
+            <tr>
+              <td class="font-medium">Nama Penyewa</td>
+              <td id="nota-namePenyewa"></td>
+            </tr>
+            <tr>
         <td class="font-medium">Admin Pencatat</td>
-        <td id="nota-pencatat"></td>
-      </tr> -->
-      <tr>
-        <td class="font-medium">Tujuan</td>
-        <td id="nota-tujuan"></td>
+        <td id="thirdUserName"></td>
       </tr>
-      <tr>
-        <td class="font-medium">Jaminan</td>
-        <td id="nota-jaminan"></td>
-      </tr>
+            <tr>
+              <td class="font-medium">Tujuan</td>
+              <td id="nota-tujuan"></td>
+            </tr>
+            <tr>
+              <td class="font-medium">Jaminan</td>
+              <td id="nota-jaminan"></td>
+            </tr>
 
-      <tr>
-    <td class="font-medium">Tanggal Sewa</td>
-    <td id="nota-tanggalSewa"></td> <!-- Baris untuk tanggal sewa -->
-  </tr>
+            <tr>
+              <td class="font-medium">Tanggal Pengembalian</td>
+              <td id="nota-tanggalSewa"></td>
+              <!-- Baris untuk tanggal sewa -->
+            </tr>
+            
+          </table>
 
-    </table>
-
-    <!-- Tombol Tutup Modal -->
-     <div class="flex justify-end gap-x-2">
-       <button id="closeModalBtn" class="mt-4 bg-red-500 w-1/4 text-white px-4 py-2 rounded-lg hover:bg-red-600">
-         Batal
-       </button>
-       <button id="submitPembayaranBtn" class="mt-4 bg-blue-500 w-1/4l text-white px-4 py-2 rounded-lg hover:bg-red-600">
-        Konfirmasi
-       </button>
-     </div>
-  </div>
-</div>
-
+          <!-- Tombol Tutup Modal -->
+          <div class="flex justify-end gap-x-2">
+            <button
+              id="closeModalBtn"
+              class="mt-4 bg-red-500 w-1/4 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+            >
+              Batal
+            </button>
+            <button
+              id="submitPembayaranBtn"
+              class="mt-4 bg-blue-500 w-1/4l text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+            >
+              Konfirmasi
+            </button>
+          </div>
+        </div>
+      </div>
 
       <div
         id="add-user-modal-admin"
@@ -2405,7 +2529,7 @@
               Batal
             </button>
             <button
-              id="confirm-delete-btn"
+              id="confirm-delete-btn-barang"
               class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
             >
               Hapus
@@ -2565,14 +2689,27 @@
           </form>
         </div>
       </div>
+      <div id="detailModal-riwayatTransaksi" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden">
+    <div class="bg-white p-6 rounded shadow-lg w-96">
+      <h2 class="text-xl font-semibold mb-4" id="detailModalLabel-riwayatTransaksi">Detail Transaksi</h2>
+      <div id="modalBody-riwayatTransaksi">
+        <!-- Detail akan dimasukkan di sini -->
+      </div>
+      <button onclick="closeModal()" class="mt-4 px-4 py-2 bg-red-500 text-white rounded">Tutup</button>
+    </div>
+  </div>
     </main>
     <script type="module" src="./userInfo.js"></script>
+    <script type="module" src="./dataPengembalian.js"></script>
     <script type="module" src="./displayUserPegawai.js"></script>
     <script type="module" src="./displayUserPenyewa.js"></script>
     <script type="module" src="./kategori.js"></script>
     <script type="module" src="./pengadaanBarang.js"></script>
     <script type="module" src="./transaksi.js"></script>
     <script type="module" src="./dataPenyewaan.js"></script>
+    <script type="module" src="./dataPengembalian.js"></script>
+    <script type="module" src="./riwayatTransaksi.js"></script>
+    <script type="module" src="./riwayatPengadaan.js"></script>
     <script type="module">
       // Get all tab buttons and content sections
       const tabs = document.querySelectorAll(".tab");
@@ -2796,28 +2933,28 @@
 
             const itemElement = document.createElement("div");
             itemElement.className =
-              "flex items-center justify-between w-full bg-white p-4 border border-gray-200 rounded-md shadow-sm gap-x-4 mb-2";
+              "flex items-center justify-between w-full h-full p-4 border border-gray-200 rounded-md shadow-sm gap-x-4 mb-2";
 
             itemElement.innerHTML = `
   <!-- Bagian Kiri -->
-  <div class="flex items-center gap-x-4 w-1/3 h-full">
+  <div class="flex items-center gap-x-4 w-1/3 min-h-full">
     <img src="${barang.gambar}" alt="${
               barang.nama
             }" class="w-16 h-16 object-cover rounded">
     <p class="font-semibold truncate">${barang.nama}</p>
   </div>
-
-  <!-- Bagian Tengah -->
-  <div class="flex flex-1 justify-between gap-x-4 h-full">
-    <div class="flex items-center justify-center w-1/3 border-x border-black px-4 bg-gray-100 h-full">
+  <div class="flex items-center justify-center w-1/3 border-x border-black px-4 min-h-full">
       <p class="text-gray-600 text-center">Stok Tersedia:</p>
       <p class="font-bold text-lg ml-2">${barang.jumlah}</p>
     </div>
-    <div class="flex items-center justify-center w-1/3 px-4 bg-gray-100 h-full">
+    <div class="flex items-center justify-center w-1/3 px-4 min-h-full">
       <p class="text-gray-600">Stok Tersewa:</p>
-      <p class="font-bold text-lg ml-2">${barang.stokTersewa || 0}</p>
+      <p class="font-bold text-lg ml-2">${barang.jumlahSewa|| 0}</p>
     </div>
-  </div>
+  
+
+  <!-- Bagian Tengah -->
+  
 `;
 
             container.appendChild(itemElement);
