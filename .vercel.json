@@ -1,4 +1,10 @@
 {
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node"
+    }
+  ],
   "rewrites": [
     { "source": "/", "destination": "/src/index.html" },
     { "source": "/index.html", "destination": "/src/index.html" },
@@ -34,5 +40,8 @@
       "source": "/riwayatTransaksi.js",
       "destination": "/src/riwayatTransaksi.js"
     }
-  ]
+  ],
+  "env": {
+    "NODE_VERSION": "18.x"
+  }
 }
