@@ -160,6 +160,9 @@ searchBarPengadaan.addEventListener("input", (e) => {
 // Event listener untuk tombol Tambah Barang
 addBarangForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+  const thirdUserName = document
+    .querySelector("#thirdUserName")
+    .textContent.trim();
 
   // Ambil nilai dari form tambah barang
   const nama = document.getElementById("nama-barang").value;
@@ -376,6 +379,9 @@ document
     document.getElementById("delete-barang-modal").classList.remove("hidden");
 
     document.getElementById("confirm-delete-btn").onclick = async () => {
+      const thirdUserName = document
+        .querySelector("#thirdUserName")
+        .textContent.trim();
       try {
          const kategoriRef = doc(db, "kategori", barang.kategori);
       await updateDoc(kategoriRef, {
