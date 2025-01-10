@@ -10,6 +10,11 @@
     { "source": "/login.js", "destination": "/src/login.js" },
     { "source": "/pengadaanBarang.js", "destination": "/src/pengadaanBarang.js" },
     { "source": "/displayUserPenyewa.js", "destination": "/src/displayUserPenyewa.js" },
-    { "source": "/userInfo.js", "destination": "/src/userInfo.js" }
+    { "source": "/userInfo.js", "destination": "/src/userInfo.js" },
+    { "source": "/transaksi.js", "destination": "/src/transaksi.js" },
+    { "soruce": "/dataPengembalian.js", "destination": "/src/dataPengembalian.js" },
+    { "source": "/dataPenyewaan.js", "destination": "/src/dataPenyewaan.js" },
+    { "source": "/riwayatPengadaan.js", "destination": "/src/riwayatPengadaan.js" },
+    { "source": "/riwayatTransaksi.js", "destination": "/src/riwayatTransaksi.js" }
   ]
 }
