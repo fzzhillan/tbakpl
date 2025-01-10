@@ -772,13 +772,14 @@ document
         noHpPenyewa: document
           .querySelector("#nota-noHpPenyewa")
           .textContent.trim(),
-        // pencatat: document.querySelector("#nota-pencatat").textContent.trim(),
+        pencatat: document.querySelector("#thirdUserName").textContent.trim(),
         tujuan: document.querySelector("#nota-tujuan").textContent.trim(),
         
         jaminan: document.querySelector("#nota-jaminan").textContent.trim(),
         tanggalSewa: formatTanggal(
           document.querySelector("#transaksi-waktu").value.trim()
         ),
+        status: "Menunggu",
       };
 
       function formatTanggal(tanggal) {
@@ -810,11 +811,13 @@ document
 
           // Perbarui jumlah barang
           const newJumlah = barangData.jumlah - qty;
+          const newJumlahSewa = barangData.jumlahSewa + qty; 
           if (newJumlah < 0) {
             console.warn(`Jumlah barang "${namaBarang}" tidak mencukupi.`);
           } else {
             await updateDoc(doc(db, "pengadaanBarang", barangId), {
               jumlah: newJumlah,
+              jumlahSewa: newJumlahSewa,
             });
             console.log(
               `Jumlah barang "${namaBarang}" diperbarui ke: ${newJumlah}`
@@ -827,7 +830,7 @@ document
 
       // Tampilkan pesan sukses
       alert("Pembayaran berhasil diselesaikan dan data telah disimpan!");
-      fetchPengadaanBarang(); 
+      // fetchPengadaanBarang(); 
       
 
       // Reset tampilan dan modal seperti di kode Anda

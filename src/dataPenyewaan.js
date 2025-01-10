@@ -1,26 +1,16 @@
 // Import Firebase dari file firebase.js
 import { db } from "./firebase.js";
 import {
+  addDoc,
   getDocs,
+  deleteDoc,
+  doc,
   collection,
   query,
   where,
+  updateDoc,
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-
-// Mendapatkan informasi pengguna yang sedang login
-const auth = getAuth();
-const user = auth.currentUser; // Dapatkan user yang sedang login
-const username = user
-  ? user.displayName || "Nama Pengguna Tidak Ditemukan"
-  : "Tidak ada pengguna yang login";
-if (user) {
-  const username = user.displayName || "Nama Pengguna Tidak Ditemukan";
-  const userEmail = user.email || "Email Tidak Ditemukan";
-} else {
-  console.log("Tidak ada pengguna yang sedang login.");
-}
-
+// import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
 // Fungsi untuk mengambil dan menampilkan data dari koleksi transaksi
 export async function fetchAndDisplayTransaksi() {
@@ -30,10 +20,12 @@ export async function fetchAndDisplayTransaksi() {
 
     const dataPenyewaanDiv = document.getElementById("dataPenyewaanContainer");
 
+    dataPenyewaanDiv.innerHTML = "";
+
     // Menambahkan header tabel hanya sekali
     if (!dataPenyewaanDiv.querySelector("thead")) {
       dataPenyewaanDiv.innerHTML =
-        '' +
+        "" +
         `<div class="overflow-x-auto">
           <table class="table-auto w-full min-w-max mb-4">
             <thead>
@@ -44,6 +36,7 @@ export async function fetchAndDisplayTransaksi() {
                 <th class="border px-4 py-2 w-[200px] text-center">Tujuan</th>
                 <th class="border px-4 py-2 w-[200px] text-center">Nama Barang</th>
                 <th class="border px-4 py-2 w-[200px] text-center">Jumlah (Qty)</th>
+                <th class="border px-4 py-2 w-[200px] text-center">Pencatat</th>
                 <th class="border px-4 py-2 w-[200px] text-center">Diskon</th>
                 <th class="border px-4 py-2 w-[200px] text-center">Harga Sewa</th>
                 <th class="border px-4 py-2 w-[200px] text-center">Harga Total</th>
@@ -63,8 +56,12 @@ export async function fetchAndDisplayTransaksi() {
     querySnapshot.forEach((doc) => {
       const data = doc.data();
 
+      if (data.status !== "Menunggu") return;
+
       // Parsing string yang memuat beberapa nilai menjadi array
-      const namaBarang = data.namaBarang.split(", ").map((item) => item.trim());
+      const namaBarang = [
+        ...new Set(data.namaBarang.split(", ").map((item) => item.trim())),
+      ];
       const qty = data.qty.split(", ").map((item) => parseInt(item.trim(), 10));
       const hargaSewa = data.hargaSewa
         .split(", ")
@@ -92,6 +89,7 @@ export async function fetchAndDisplayTransaksi() {
           <td class="border px-4 py-2 text-center">
             <ul>${qty.map((item) => `<li>${item}</li>`).join("")}</ul>
           </td>
+          <td class="border px-4 py-2 text-center">${data.pencatat || "-"}</td>
           <td class="border px-4 py-2 text-center">${data.diskon || "-"}</td>
           <td class="border px-4 py-2 text-center">
             <ul>${hargaSewa
@@ -106,7 +104,20 @@ export async function fetchAndDisplayTransaksi() {
           <td class="border px-4 py-2 text-center">${data.jaminan || "-"}</td>
           <td class="border px-4 py-2 text-center">${data.total || "-"}</td>
           <td class="border px-4 py-2 text-center">
-            <button  class="konfirmasiButton bg-green-500 text-white px-4 py-2 rounded text-center">Selesai</button>
+            <button data-transaksi-id="${
+              doc.id
+            }" data-nama-barang="${namaBarang.join(",")}, qty: ${qty.join(
+        ","
+      )}" data-data-penyewa='${JSON.stringify({
+        namePenyewa: data.namePenyewa || "-",
+        noHpPenyewa: data.noHpPenyewa || "-",
+        tanggalSewa: data.tanggalSewa || "-",
+        tujuan: data.tujuan || "-",
+        jaminan: data.jaminan || "-",
+        qty: data.qty || "-",
+        total: data.total || "-",
+        pencatat: data.pencatat || "-",
+      })}'   class="konfirmasiButton bg-green-500 text-white px-4 py-2 rounded text-center" >Cek Barang</button>
 
           </td>
         </tr>
@@ -132,7 +143,12 @@ export async function fetchAndDisplayTransaksi() {
     });
     document.querySelectorAll(".konfirmasiButton").forEach((button) => {
       button.addEventListener("click", () => {
-        createKonfirmasiModal();
+        const transaksiId = button.getAttribute("data-transaksi-id");
+        const namaBarang = button.getAttribute("data-nama-barang").split(",");
+        const dataPenyewa = JSON.parse(
+          button.getAttribute("data-data-penyewa")
+        );
+        createCekBarangModalWithData(dataPenyewa, namaBarang, transaksiId);
       });
     });
     // Tambahkan fitur pencarian setelah data dimuat
@@ -141,55 +157,6 @@ export async function fetchAndDisplayTransaksi() {
     console.error("Error fetching transaksi:", error);
   }
 }
-
-// Mendapatkan tombol konfirmasi
-function createKonfirmasiModal() {
-  const modalContainer = document.createElement("div");
-  modalContainer.id = "konfirmasiModal";
-  modalContainer.classList.add(
-    "fixed",
-    "inset-0",
-    "bg-gray-800",
-    "bg-opacity-50",
-    "flex",
-    "justify-center",
-    "items-center"
-  );
-
-  modalContainer.innerHTML = `
-    <div class="bg-white flex flex-col p-6 rounded-lg shadow-lg max-w-md w-full">
-      <h2 class="text-xl text-center font-bold mb-4">Konfirmasi</h2>
-      <p class="text-center">Apakah Anda yakin ingin melanjutkan ke pengolahan data barang?</p>
-      <div class="flex justify-end space-x-4 mt-4">
-        <button id="cancelButtonkonfirmasi" class="bg-red-500 text-white px-4 py-2 rounded">Batal</button>
-        <button id="submitButtonkonfirmasi" class="bg-blue-500 text-white px-4 py-2 rounded">Submit</button>
-      </div>
-    </div>
-  `;
-
-  document.body.appendChild(modalContainer);
-
-  // Tombol Batal
-  document
-    .getElementById("cancelButtonkonfirmasi")
-    .addEventListener("click", () => {
-      document.body.removeChild(modalContainer); // Menghapus modal jika batal
-    });
-
-  // Tombol Submit
-  document
-    .getElementById("submitButtonkonfirmasi")
-    .addEventListener("click", () => {
-      // Proses setelah konfirmasi (misalnya, memproses barang)
-      console.log("Konfirmasi Submit: Data barang akan diproses");
-
-      // Hapus modal setelah submit
-      document.body.removeChild(modalContainer);
-
-      
-    });
-}
-
 
 // Fungsi untuk setup search bar
 function setupSearchBar() {
@@ -216,146 +183,350 @@ function setupSearchBar() {
 
 // Tambahkan event listener global untuk tombol cek barang
 
-
 // Fungsi untuk mengambil data barang dari Firestore
-async function fetchBarang() {
+// Fungsi untuk membuat modal pengecekan barang berdasarkan namaBarang
+async function createCekBarangModalWithData(dataPenyewa, namaBarang, transaksiId) {
   try {
-    const barangRef = collection(db, "pengadaanBarang"); // Koleksi barang di Firestore
-    const querySnapshot = await getDocs(barangRef);
-    
-    // Menyusun data barang dari querySnapshot
+    if (!namaBarang || namaBarang.length === 0) {
+      console.error("Nama barang tidak ditemukan.");
+      alert("Nama barang tidak ditemukan.");
+      return;
+    }
+
+    // Ambil data barang dari Firestore berdasarkan nama
+    const barangRef = collection(db, "pengadaanBarang");
+    const querySnapshot = await getDocs(
+      query(barangRef, where("nama", "in", namaBarang))
+    );
+
+    // Hilangkan barang duplikat
     const barangList = [];
     querySnapshot.forEach((doc) => {
       const data = doc.data();
-      barangList.push({
-        id: doc.id,  // ID dokumen Firestore
-        nama: data.nama || "-",  // Nama barang
-        dendaRusakRingan: data.dendaRusakRingan || 0,
-        dendaRusakSedang: data.dendaRusakSedang || 0,
-        dendaRusakBerat: data.dendaRusakBerat || 0,
-        dendaHilang: data.dendaHilang || 0,
-      });
+
+      // Tambahkan hanya barang unik
+      if (!barangList.some((item) => item.nama === data.nama)) {
+        barangList.push({
+          id: doc.id,
+          nama: data.nama,
+          dendaRusakRingan: data.dendaRusakRingan || 0,
+          dendaRusakSedang: data.dendaRusakSedang || 0,
+          dendaRusakBerat: data.dendaRusakBerat || 0,
+          dendaHilang: data.dendaHilang || 0,
+        });
+      }
     });
 
-    return barangList;  // Mengembalikan data barang
+    console.log("Barang unik yang akan dirender:", barangList);
+
+    // Buat modal
+    const modalContainer = document.createElement("div");
+    modalContainer.id = "cekBarangModal";
+    modalContainer.classList.add(
+      "fixed",
+      "inset-0",
+      "bg-gray-800",
+      "bg-opacity-50",
+      "flex",
+      "justify-center",
+      "items-center"
+    );
+
+    modalContainer.innerHTML = `
+      <div class="bg-white p-6 rounded-lg shadow-lg max-w-3xl w-full">
+        <h2 class="text-xl font-bold mb-4">Cek Barang</h2>
+        <div class="mb-4">
+          <p><strong>Nama Penyewa:</strong> ${dataPenyewa.namePenyewa}</p>
+          <p><strong>No HP:</strong> ${dataPenyewa.noHpPenyewa}</p>
+          <p><strong>Tanggal Sewa:</strong> ${dataPenyewa.tanggalSewa}</p>
+          <p><strong>Tujuan:</strong> ${dataPenyewa.tujuan}</p>
+          <p><strong>Jaminan:</strong> ${dataPenyewa.jaminan}</p>
+          <p><strong>Keterangan:</strong> ${dataPenyewa.keterangan}</p>
+          <p><strong>Total Harga:</strong> ${dataPenyewa.total}</p>
+          <p><strong>Pencatat:</strong> ${dataPenyewa.pencatat}</p>
+        </div>
+         <div class="mb-4">
+      <label for="tanggalDikembalikan" class="block font-bold mb-2">Tanggal Dikembalikan:</label>
+      <input type="date" id="tanggalDikembalikan" class="border p-2 rounded w-full" />
+      <p id="keteranganTerlambat" class="text-red-500 mt-2 hidden"></p>
+    </div>
+    <input type="hidden" id="transaksiId" value="${transaksiId}" />
+        <div id="barangList" class="space-y-4"></div>
+        <div class="flex justify-between items-center mt-4">
+          <h3 class="font-bold">Total Denda: <span id="totalDenda">Rp 0</span></h3>
+          <div class="flex space-x-4">
+            <button id="cancelButton" class="bg-red-500 text-white px-4 py-2 rounded">Batal</button>
+            <button id="submitButton" class="bg-blue-500 text-white px-4 py-2 rounded">Selesai</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modalContainer);
+
+    // Render barang dan setup event listener
+    renderBarangListWithOptions(barangList,dataPenyewa);
+    setupBarangConditionListeners(barangList);
+
+    document.getElementById("cancelButton").addEventListener("click", () => {
+      document.body.removeChild(modalContainer);
+    });
+
+    function formatTanggal(tanggal) {
+      if (!tanggal) return "Tanggal tidak diatur"; // Jika tanggal kosong
+      const [year, month, day] = tanggal.split("-"); // Pisahkan tahun, bulan, dan hari
+      return `${day}-${month}-${year}`; // Susun kembali dalam format dd-mm-yyyy
+    }
+
+    function parseTanggal(tanggal) {
+      if (!tanggal) return null;
+      const [day, month, year] = tanggal.split("-");
+      return `${year}-${month}-${day}`; // Ubah ke format yyyy-mm-dd
+    }
+
+    document
+      .getElementById("tanggalDikembalikan")
+      .addEventListener("change", (event) => {
+        const tanggalDikembalikan = new Date(event.target.value); // Format yyyy-mm-dd dari input date
+        const tanggalSewa = new Date(parseTanggal(dataPenyewa.tanggalSewa)); // Parsing tanggalSewa (dd-mm-yyyy)
+
+        const keteranganTerlambat = document.getElementById(
+          "keteranganTerlambat"
+        );
+
+        if (tanggalDikembalikan > tanggalSewa) {
+          const hariTerlambat = Math.ceil(
+            (tanggalDikembalikan - tanggalSewa) / (1000 * 60 * 60 * 24)
+          );
+          keteranganTerlambat.textContent = `Penyewa terlambat mengembalikan barang selama ${hariTerlambat} hari (Tanggal Dikembalikan: ${formatTanggal(
+            event.target.value
+          )}).`;
+          keteranganTerlambat.classList.remove("hidden");
+        } else {
+          keteranganTerlambat.textContent = `Barang dikembalikan tepat waktu (Tanggal Dikembalikan: ${formatTanggal(
+            event.target.value
+          )}).`;
+          keteranganTerlambat.classList.remove("hidden");
+        }
+      });
+
+      
+
+    document
+      .getElementById("submitButton")
+      .addEventListener("click", async () => {
+        try {
+          const tanggalDikembalikanInput = document.getElementById(
+            "tanggalDikembalikan"
+          );
+          if (!tanggalDikembalikanInput) {
+            console.error(
+              "Elemen dengan ID 'tanggalDikembalikan' tidak ditemukan."
+            );
+            alert(
+              "Tanggal Dikembalikan tidak ditemukan. Pastikan modal sudah dibuat dengan benar."
+            );
+            return;
+          }
+function formatTanggalToDDMMYYYY(tanggal) {
+  if (!tanggal) return ""; // Jika tanggal kosong, kembalikan string kosong
+  const [year, month, day] = tanggal.split("-"); // Pisahkan menjadi [yyyy, mm, dd]
+  return `${day}-${month}-${year}`; // Susun ulang menjadi dd-mm-yyyy
+}
+
+
+          const tanggalDikembalikan = tanggalDikembalikanInput.value;
+          const tanggalDikembalikanFormatted =
+            formatTanggalToDDMMYYYY(tanggalDikembalikan);
+          const keteranganTanggal = document.getElementById(
+            "keteranganTerlambat"
+          )
+          const keteranganTanggalText = keteranganTanggal.textContent;
+
+          const barangElements = document
+            .getElementById("barangList")
+            .querySelectorAll(".flex.justify-between.items-center");
+
+          const barangData = Array.from(barangElements).map((barangElement) => {
+            const namaBarang = barangElement
+              .querySelector("span")
+              .textContent.trim();
+            const kondisiBarang =
+              barangElement.querySelector(".barang-condition").value;
+            const idBarang =
+              barangElement.querySelector(".barang-condition").dataset.id;
+
+            return {
+              id: idBarang,
+              nama: namaBarang,
+              kondisi: kondisiBarang,
+            };
+          });
+
+          console.log("Barang Data:", barangData);
+
+          const totalDendaElement = document.getElementById("totalDenda");
+          const totalDenda = totalDendaElement
+            ? parseFloat(
+                totalDendaElement.textContent
+                  .replace("Rp", "")
+                  .replace(",", "")
+                  .trim()
+              )
+            : 0;
+
+          const dataUntukSimpan = {
+            ...dataPenyewa,
+            tanggalDikembalikanFormatted,
+            totalDenda,
+            barang: barangData,
+            keteranganTerlambat: keteranganTanggalText,
+          };
+
+          console.log("Data untuk disimpan:", dataUntukSimpan);
+
+          await addDoc(collection(db, "dataPenyewaan"), dataUntukSimpan);
+
+          const transaksiId = document.getElementById("transaksiId").value; // Pastikan ID transaksi tersedia
+          if (transaksiId) {
+            await updateDoc(doc(db, "transaksi", transaksiId), {
+              status: "siap",
+            });
+            console.log(
+              "Status transaksi berhasil diperbarui menjadi 'siap':",
+              transaksiId
+            );
+          }
+
+
+          // Tutup modal
+          const modalContainer = document.getElementById("cekBarangModal");
+          if (modalContainer) {
+            modalContainer.remove();
+            console.log("Modal ditutup.");
+          }
+
+          // Refresh data transaksi
+          fetchAndDisplayTransaksi();
+
+          alert("Data berhasil disimpan!");
+        } catch (error) {
+          console.error("Error saat menyimpan data:", error);
+          alert("Terjadi kesalahan saat menyimpan data.");
+        }
+      });
+
   } catch (error) {
     console.error("Error fetching barang:", error);
-    throw new Error("Gagal memuat data barang");
+    alert("Gagal memuat data barang");
   }
 }
 
-
-function createCekBarangModal(barang) {
-  const modalContainer = document.createElement("div");
-  modalContainer.id = "cekBarangModal";
-  modalContainer.classList.add(
-    "fixed",
-    "inset-0",
-    "bg-gray-800",
-    "bg-opacity-50",
-    "flex",
-    "justify-center",
-    "items-center"
-  );
-
-  modalContainer.innerHTML = `
-    <div class="bg-white p-6 rounded-lg shadow-lg max-w-3xl w-full">
-      <h2 class="text-xl font-bold mb-4">Cek Barang</h2>
-      <div id="barangList" class="space-y-4"></div>
-      <div class="flex justify-end space-x-4 mt-4">
-        <button id="cancelButton" class="bg-red-500 text-white px-4 py-2 rounded">Batal</button>
-        <button id="submitButton" class="bg-blue-500 text-white px-4 py-2 rounded">Selesai</button>
-      </div>
-    </div>
-  `;
-
-  document.body.appendChild(modalContainer);
-  renderBarangList(barang);
-
-  document.getElementById("cancelButton").addEventListener("click", () => {
-    document.body.removeChild(modalContainer);
-  });
-
-  document.getElementById("submitButton").addEventListener("click", () => {
-    const barangConditions = Array.from(
-      document.querySelectorAll(".barang-condition")
-    ).map((select) => {
-      const id = select.dataset.id;
-      const condition = select.value;
-      return { id, condition };
-    });
-
-    console.log("Barang Conditions:", barangConditions);
-
-    calculateTotalDenda(barangConditions, barang);
-
-    document.body.removeChild(modalContainer);
-  });
-}
-
-function renderBarangList(barang) {
+function renderBarangListWithOptions(barangList, dataPenyewa) {
   const barangListContainer = document.getElementById("barangList");
-  barang.forEach((item) => {
-    const itemElement = document.createElement("div");
-    itemElement.classList.add(
-      "flex",
-      "justify-between",
-      "items-center",
-      "border",
-      "p-2",
-      "rounded-lg"
-    );
+  barangListContainer.innerHTML = ""; // Reset kontainer untuk mencegah duplikasi
 
-    itemElement.innerHTML = `
-      <span>${item.nama}</span>
-      <select class="barang-condition" data-id="${item.id}">
-        <option value="baik">Baik</option>
-        <option value="ringan">Denda Ringan</option>
-        <option value="sedang">Denda Sedang</option>
-        <option value="berat">Denda Berat</option>
-        <option value="hilang">Hilang</option>
-      </select>
-    `;
+  // Pastikan qty dari dataPenyewa sesuai dengan jumlah barang
+  const qtyArray = dataPenyewa.qty
+    ? dataPenyewa.qty.split(", ").map((item) => parseInt(item.trim(), 10))
+    : [1];
 
-    barangListContainer.appendChild(itemElement);
+  barangList.forEach((item, index) => {
+    // Dapatkan qty sesuai dengan index barang
+    const qty = qtyArray[index] || 1; // Gunakan qty dari array jika ada, jika tidak default ke 1
+
+    // Loop berdasarkan qty dan render barang sesuai jumlahnya
+    for (let i = 0; i < qty; i++) {
+      const itemElement = document.createElement("div");
+      itemElement.classList.add(
+        "flex",
+        "justify-between",
+        "items-center",
+        "border",
+        "p-2",
+        "rounded-lg"
+      );
+
+       const kondisiDefault = "Baik"; // Default condition is "Baik"
+
+       itemElement.innerHTML = `
+        <span>${item.nama}</span>
+        <select class="barang-condition" data-id="${item.id}">
+          <option value="Baik" ${
+            kondisiDefault === "Baik" ? "selected" : ""
+          }>Baik</option>
+          <option value="Rusak Ringan" ${
+            kondisiDefault === "Rusak Ringan" ? "selected" : ""
+          }>Denda Ringan</option>
+          <option value="Rusak Sedang" ${
+            kondisiDefault === "Rusak Sedang" ? "selected" : ""
+          }>Denda Sedang</option>
+          <option value="Rusak Berat" ${
+            kondisiDefault === "Rusak Berat" ? "selected" : ""
+          }>Denda Berat</option>
+          <option value="Hilang" ${
+            kondisiDefault === "Hilang" ? "selected" : ""
+          }>Hilang</option>
+        </select>
+      `;
+
+      barangListContainer.appendChild(itemElement);
+    }
   });
 }
 
-function calculateTotalDenda(conditions, barang) {
+
+
+function calculateTotalDenda(conditions, barangList) {
   let totalDenda = 0;
 
   conditions.forEach(({ id, condition }) => {
-    const item = barang.find((b) => b.id === id);
+    const item = barangList.find((b) => b.id === id);
     if (item) {
       switch (condition) {
-        case "ringan":
+        case "Rusak Ringan":
           totalDenda += item.dendaRusakRingan || 0;
           break;
-        case "sedang":
+        case "Rusak Sedang":
           totalDenda += item.dendaRusakSedang || 0;
           break;
-        case "berat":
+        case "Rusak Berat":
           totalDenda += item.dendaRusakBerat || 0;
           break;
-        case "hilang":
+        case "Hilang":
           totalDenda += item.dendaHilang || 0;
           break;
       }
     }
   });
 
-  alert(`Total Denda: Rp ${totalDenda.toLocaleString()}`);
+  // Perbarui tampilan total denda di modal
+  const totalDendaElement = document.getElementById("totalDenda");
+  if (totalDendaElement) {
+    totalDendaElement.textContent = `Rp ${totalDenda.toLocaleString()}`;
+  }
 }
 
+function setupBarangConditionListeners(barangList) {
+  const conditionDropdowns = document.querySelectorAll(".barang-condition");
 
+  conditionDropdowns.forEach((dropdown) => {
+    dropdown.addEventListener("change", () => {
+      const barangConditions = Array.from(conditionDropdowns).map(
+        (dropdown) => ({
+          id: dropdown.dataset.id,
+          condition: dropdown.value, // Ambil nilai yang dipilih
+        })
+      );
 
+      calculateTotalDenda(barangConditions, barangList);
+    });
+
+  });
+}
 
 
 // Panggil fungsi saat halaman selesai dimuat
 document.addEventListener("DOMContentLoaded", () => {
   fetchAndDisplayTransaksi();
-
-  
 });
-
-

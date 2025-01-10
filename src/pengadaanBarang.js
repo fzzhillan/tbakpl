@@ -9,7 +9,7 @@ import {
   deleteDoc,
   updateDoc,
   increment,
-  
+  serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 import { renderCategories } from "./kategori.js";
 
@@ -199,8 +199,16 @@ addBarangForm.addEventListener("submit", async (e) => {
       dendaRusakBerat: parseFloat(dendaRusakBerat),
       status,
       jumlah: parseInt(jumlah),
+      jumlahSewa: 0,
       gambar: gambarUrl,
     });
+    await addDoc(collection(db, "riwayatPengadaan"), {
+      nama,
+      namaPencatat: thirdUserName,
+      jumlah: parseInt(jumlah),
+      date: serverTimestamp(),
+      aksi: "Tambah",
+    })
 
     const kategoriRef = doc(db, "kategori", kategori);
     await updateDoc(kategoriRef, {
@@ -222,7 +230,7 @@ async function uploadImageToServer(file) {
   formData.append("file", file);
 
   try {
-    const response = await fetch("https://tbakpl.vercel.app/api/cloudinary", {
+    const response = await fetch("http://localhost:3000/api/cloudinary", {
       method: "POST",
       body: formData,
     });
@@ -285,6 +293,8 @@ document
   .addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    const thirdUserName = document.querySelector("#thirdUserName").textContent.trim();
+
     const id = document.getElementById("edit-barang-id").value;
     const nama = document.getElementById("edit-nama-barang").value;
     const kategoriBaru = document.getElementById("edit-kategori-barang").value; // ID kategori baru
@@ -343,6 +353,14 @@ document
         jumlah: parseInt(jumlah),
       });
 
+      await addDoc(collection(db, "riwayatPengadaan"), {
+        nama,
+        namaPencatat: thirdUserName,
+        jumlah: parseInt(jumlah),
+        date: serverTimestamp(),
+        aksi: "Edit",
+      });
+
       alert("Barang berhasil diperbarui!");
       document.getElementById("edit-barang-modal").classList.add("hidden");
       fetchPengadaanBarang();
@@ -365,6 +383,13 @@ document
       });
         renderCategories();
         await deleteDoc(doc(db, "pengadaanBarang", id));
+        await addDoc(collection(db, "riwayatPengadaan"), {
+          nama,
+          namaPencatat: thirdUserName,
+          // jumlah: parseInt(jumlah),
+          date: serverTimestamp(),
+          aksi: "Tambah",
+        });
         alert("Barang berhasil dihapus!");
         document.getElementById("delete-barang-modal").classList.add("hidden");
         fetchPengadaanBarang();

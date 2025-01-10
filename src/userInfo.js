@@ -60,7 +60,7 @@ async function fetchUserName(user) {
         }
         const thirdUserNameElement = document.getElementById("thirdUserName");
         if (thirdUserNameElement) {
-          thirdUserNameElement.textContent = ` ${userData.username}`;
+          thirdUserNameElement.textContent = ` ${userData.name}`;
         }
         
       });
