@@ -40,11 +40,13 @@ function renderPengadaan(data) {
     const tr = document.createElement("tr");
 
     tr.innerHTML = `
-      <td class="border px-4 py-2">${pengadaan.aksi}</td>
-      <td class="border px-4 py-2">${formatDate(pengadaan.date)}</td>
+      <td class="border border-black px-4 py-2">${pengadaan.aksi}</td>
+      <td class="border border-black px-4 py-2">${formatDate(
+        pengadaan.date
+      )}</td>
       
-      <td class="border px-4 py-2">${pengadaan.nama}</td>
-      <td class="border px-4 py-2">${pengadaan.namaPencatat}</td>
+      <td class="border border-black px-4 py-2">${pengadaan.nama}</td>
+      <td class="border border-black px-4 py-2">${pengadaan.namaPencatat}</td>
     `;
 
     pengadaanList.appendChild(tr);
