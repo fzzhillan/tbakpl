@@ -28,16 +28,16 @@ async function renderCategories(search = "") {
 
     // Tambahkan kategori ke tabel
     const row = document.createElement("div");
-    row.classList.add("snap-start", "flex", "border-b", "w-max");
+    row.classList.add("snap-start", "flex", "w-full");
 
     row.innerHTML = `
-      <div class="snap-start flex-shrink-0 w-[240px] border-y p-1 border-black text-center">
+      <div class="snap-start flex-shrink-0 w-1/3 border-y p-1 border-black text-center">
         ${kategori.name}
       </div>
-      <div class="snap-start flex-shrink-0 w-[240px] border p-1 border-black text-center">
+      <div class="snap-start flex-shrink-0 w-1/3 border p-1 border-black text-center">
         ${kategori.jumlah}
       </div>
-      <div class="snap-start flex-shrink-0 w-[240px] border-y  p-1 border-black text-center">
+      <div class="snap-start flex-shrink-0 w-1/3 border-y  p-1 border-black text-center">
         <button class="edit-btn-kategori px-4 rounded bg-blue-500" data-uid="${doc.id}">Edit</button>
         <button class="delete-btn-kategori px-4 rounded bg-red-500" data-uid="${doc.id}">Hapus</button>
       </div>

@@ -34,7 +34,7 @@ function renderTransaksi(data) {
 
   data.forEach((transaksi) => {
     const item = document.createElement("div");
-    item.classList.add("border", "p-4", "rounded", "shadow", "bg-white");
+    item.classList.add("border", "p-4", "rounded", "shadow-md", "bg-white", "flex", "flex-col");
 
     item.innerHTML = `
       <p><strong>Nama Penyewa:</strong> ${transaksi.namePenyewa}</p>
@@ -44,14 +44,15 @@ function renderTransaksi(data) {
       }</p>
       <p><strong>Total Barang Disewa:</strong> ${transaksi.barang.length}</p>
       <p><strong>Pencatat:</strong> ${transaksi.pencatat}</p>
-      <p><strong>Total Pembayaran:</strong> Rp ${transaksi.total}</p>
-      <button class="btn btn-info" onclick="showDetailModal('${
+      <p><strong>Total Pembayaran:</strong> ${transaksi.total}</p>
+      <button class="btn btn-info bg-blue-500 flex justify-center rounded-xl text-white" onclick="showDetailModal('${
         transaksi.id
       }')">Lihat Detail</button>
     `;
     transaksiList.appendChild(item);
   });
 }
+
 
 async function showDetailModal(transaksiId) {
   const transaksi = allData.find((transaksi) => transaksi.id === transaksiId);
