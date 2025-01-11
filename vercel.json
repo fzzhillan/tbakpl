@@ -8,6 +8,8 @@
     { "source": "/firebase.js", "destination": "/src/firebase.js" },
     { "source": "/kategori.js", "destination": "/src/kategori.js" },
     { "source": "/login.js", "destination": "/src/login.js" },
+    { "source": "/petugasdashboard.html", "destination": "/src/petugasdashboard.html" },
+    { "source": "/displayUserPegawai.js", "destination": "/src/displayUserPegawai.js" },
     { "source": "/pengadaanBarang.js", "destination": "/src/pengadaanBarang.js" },
     { "source": "/displayUserPenyewa.js", "destination": "/src/displayUserPenyewa.js" },
     { "source": "/userInfo.js", "destination": "/src/userInfo.js" },
