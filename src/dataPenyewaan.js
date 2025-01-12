@@ -12,7 +12,10 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 // import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
-
+document.getElementById("dataPenyewaanBtn").addEventListener("click", function() {
+  fetchAndDisplayTransaksi();
+  console.log("Refresh Berhasil");
+});
 
 // Fungsi untuk mengambil dan menampilkan data dari koleksi transaksi
 export async function fetchAndDisplayTransaksi() {

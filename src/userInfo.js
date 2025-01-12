@@ -52,16 +52,22 @@ async function fetchUserName(user) {
       querySnapshot.forEach((doc) => {
         const userData = doc.data();
         // Perbarui elemen pertama
-        userNameElement.textContent = ` ${userData.username}`;
+        userNameElement.textContent = ` ${userData.name}`;
         // Perbarui elemen kedua
         const secondaryUserNameElement = document.getElementById("secondaryUserName");
         if (secondaryUserNameElement) {
-          secondaryUserNameElement.textContent = ` ${userData.username}`;
+          secondaryUserNameElement.textContent = ` ${userData.name}`;
         }
         const thirdUserNameElement = document.getElementById("thirdUserName");
         if (thirdUserNameElement) {
           thirdUserNameElement.textContent = ` ${userData.name}`;
         }
+        const namaUserElement =
+          document.querySelectorAll(".namaUser");
+        namaUserElement.forEach((element,) => {
+          element.textContent = `${userData.name}`;
+        });
+
         
       });
     } else {

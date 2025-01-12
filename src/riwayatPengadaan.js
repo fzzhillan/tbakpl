@@ -20,6 +20,11 @@ async function fetchPengadaanData() {
   return data;
 }
 
+document.getElementById("riwayatPengadaanBtn").addEventListener("click", function() {
+  fetchPengadaanData();
+  console.log("Refresh Berhasil");
+
+});
 
 function formatDate(date) {
   const d = new Date(date.seconds * 1000); // Mengambil timestamp dan mengkonversinya ke milidetik

@@ -122,6 +122,10 @@ function attachSearchBarListener(barang) {
   });
 }
 
+document.getElementById("transaksiBtn").addEventListener("click", function(){
+  fetchBarang();
+  console.log("Refresh Berhasil");
+})
 
 // Render barang ke dalam transaksi-container
 // Dalam fungsi renderBarang:
@@ -637,9 +641,9 @@ konfirmasiPembayaranBtn.addEventListener("click", () => {
         "Tidak tersedia";
     }
     
-
+    let nomor = 0;
     const tanggalSewa = document.querySelector("#transaksi-waktu").value.trim();
-    const notaNomor = 1; // Nomor nota, bisa Anda sesuaikan
+    const notaNomor = nomor++; // Nomor nota, bisa Anda sesuaikan
     const notaNamaBarang = transaksiData.map(item => item.nama).join(", ");
     const notaHargaSewa = transaksiData.map(item => item.hargaSewa).join(", ");
     const notaQty = transaksiData.map(item => item.qty).join(", ");
@@ -656,21 +660,52 @@ konfirmasiPembayaranBtn.addEventListener("click", () => {
     const notaJaminan = jaminanInput.value;
     console.log("Current user data in transaksi:", currentUserData);
 
+    function hariIni() {
+  const today = new Date();
+  const day = String(today.getDate()).padStart(2, '0'); // Menambahkan leading zero jika kurang dari 10
+  const month = String(today.getMonth() + 1).padStart(2, '0'); // Bulan dimulai dari 0, jadi tambahkan 1
+  const year = today.getFullYear();
+
+  return `${day}-${month}-${year}`;
+}
+function formatTanggal(tanggal) {
+  if (!tanggal) return "Tanggal tidak diatur"; // Jika tanggal kosong
+  const [year, month, day] = tanggal.split("-"); // Pisahkan tahun, bulan, dan hari
+  return `${day}-${month}-${year}`; // Susun kembali dalam format dd-mm-yyyy
+}
+
+
+    const tanggalDisewa = hariIni();
+
     // Isi modal dengan data transaksi dan penyewa
-    document.querySelector("#nota-nomor").textContent = notaNomor;
-    document.querySelector("#nota-namaBarang").textContent = notaNamaBarang;
-    document.querySelector("#nota-hargaSewa").textContent = notaHargaSewa;
-    document.querySelector("#nota-qty").textContent = notaQty;
-    document.querySelector("#nota-hargaTotal").textContent = notaHargaTotal;
-    document.querySelector("#nota-diskon").textContent = `${notaDiskon}%`;
+    // document.querySelector("#nota-nomor").textContent = notaNomor;
+    // document.querySelector("#nota-namaBarang").textContent = notaNamaBarang;
+    // document.querySelector("#nota-hargaSewa").textContent = notaHargaSewa;
+    // document.querySelector("#nota-qty").textContent = notaQty;
+    // document.querySelector("#nota-hargaTotal").textContent = notaHargaTotal;
+    // document.querySelector("#nota-diskon").textContent = `${notaDiskon}%`;
     document.querySelector("#nota-total").textContent = `Rp ${notaTotal.toLocaleString()}`;
     document.querySelector("#nota-noHpPenyewa").textContent = notaNoHpPenyewa;
-    document.querySelector("#nota-namePenyewa").textContent = notaNamePenyewa;
+    document.querySelector("#nota-namePenyewa").textContent = notaNamePenyewa + ",";
     // document.querySelector("#nota-pencatat").textContent = pencatat;
-    document.querySelector("#nota-tujuan").textContent = notaTujuan;
-    document.querySelector("#nota-jaminan").textContent = notaJaminan;
+    // document.querySelector("#nota-tujuan").textContent = notaTujuan;
+    // document.querySelector("#nota-jaminan").textContent = notaJaminan;
     document.querySelector("#nota-tanggalSewa").textContent =
-      tanggalSewa || "Tanggal tidak diatur";
+      formatTanggal(tanggalSewa) || "Tanggal tidak diatur";
+    document.querySelector("#nota-tanggalDisewa").textContent = tanggalDisewa;
+
+    const tbody = document.querySelector("#nota-table-body");
+    transaksiData.forEach((item, index) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td class="border border-black py-2 px-4">${index + 1}</td>
+        <td class="border border-black py-2 px-4 text-left">${item.nama}</td>
+        <td class="border border-black py-2 px-4">${item.qty}</td>
+        <td class="border border-black py-2 px-4">Rp ${item.hargaSewa.toLocaleString()}</td>
+        <td class="border border-black py-2 px-4">Rp ${item.hargaTotal.toLocaleString()}</td>
+      `;
+      tbody.appendChild(row);
+    });
 
     // Tampilkan modal
     notaModal.classList.remove("hidden");

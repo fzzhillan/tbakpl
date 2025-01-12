@@ -67,55 +67,59 @@
 
         // Buat elemen untuk setiap penyewa
         const listItem = document.createElement("li");
-        listItem.className = "font-light flex text-center items-center";
+        listItem.className = "font-light flex text-center items-stretch";
+
         listItem.innerHTML = `
-          <div
-                  class="snap-start flex-shrink-0 w-[180px] border-y-2  border-black p-2"
-                >
-                  ${penyewa.namePenyewa}
-                </div>
-                <div
-                  class="snap-start flex-shrink-0 w-[180px] border-2  border-black p-2"
-                >
-                  ${penyewa.nik}
-                </div>
-                <div
-                  class="snap-start flex-shrink-0 w-[180px] border-y-2  border-black p-2"
-                >
-                  ${penyewa.status}
-                </div>
-                <div
-                  class="snap-start flex-shrink-0 w-[180px] border-2  border-black p-2"
-                >
-                  ${penyewa.alamat}
-                </div>
-                <div
-                  class="snap-start flex-shrink-0 w-[180px] border-y-2  border-black p-2"
-                >
-                  ${penyewa.noHpPenyewa}
-                </div>
-                <div
-                  class="snap-start flex-shrink-0 w-[180px] border-2  border-black p-2"
-                >
-                  ${
-                    penyewa.dateRegistered
-                      ? formatDate(penyewa.dateRegistered)
-                      : ""
-                  }
-                </div>
-                <div
-                  class="snap-start flex-shrink-0 w-[180px] border-y-2  border-black gap-x-2 p-2"
-                >
-                  <button class="edit-btn-penyewa px-4 rounded bg-blue-500" data-uid="${
-                    doc.id
-                  }">Edit</button>
-            <button class="delete-btn-penyewa px-4 rounded bg-red-500" data-uid="${
-              doc.id
-            }">Delete</button>
-                </div>
-              </div>
-              </div>
-        `;
+  <div class="snap-start flex-shrink-0 w-[180px] flex items-center justify-center border-black p-2">
+    <div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+      ${penyewa.namePenyewa}
+    </div>
+  </div>
+
+  <div class="snap-start flex-shrink-0 w-[180px] flex items-center justify-center border-x-2 border-black p-2">
+    <div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+      ${penyewa.nik}
+    </div>
+  </div>
+
+  <div class="snap-start flex-shrink-0 w-[180px] flex items-center justify-center  border-black p-2">
+    <div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+      ${penyewa.status}
+    </div>
+  </div>
+
+  <div class="snap-start flex-shrink-0 w-[180px] flex items-center justify-center border-x-2 border-black p-2">
+    <div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+      ${penyewa.alamat}
+    </div>
+  </div>
+
+  <div class="snap-start flex-shrink-0 w-[180px] flex items-center justify-center  border-black p-2">
+    <div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+      ${penyewa.noHpPenyewa}
+    </div>
+  </div>
+
+  <div class="snap-start flex-shrink-0 w-[180px] flex items-center justify-center border-x-2 border-black p-2">
+    <div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+      ${penyewa.dateRegistered ? formatDate(penyewa.dateRegistered) : ""}
+    </div>
+  </div>
+
+  <div class="snap-start flex-shrink-0 w-[180px] flex justify-center items-center border-r-2 border-black p-2">
+    <img class="h-[100px] rounded-xl" src="${penyewa.gambar}" alt="${penyewa.namePenyewa}"> 
+</div>
+
+  <div class="snap-start flex-shrink-0 w-[180px] flex items-center justify-center gap-x-2 border-black p-2">
+    <button class="edit-btn-penyewa px-4 rounded bg-[#177209] text-white" data-uid="${
+      doc.id
+    }">Edit</button>
+    <button class="delete-btn-penyewa px-4 rounded bg-[#FF0000] text-white" data-uid="${
+      doc.id
+    }">Hapus</button>
+  </div>
+`;
+
         list.appendChild(listItem);
       });
     } catch (error) {
@@ -133,10 +137,48 @@
     const status = document.getElementById("status").value;
     const alamat = document.getElementById("alamat").value;
     const noHpPenyewa = document.getElementById("noHpPenyewa").value;
+    const gambarFile = document.getElementById("gambar-user").files[0];
+
+  let gambarUrl = "";
+  if (gambarFile) {
+    gambarUrl = await uploadImageToServer(gambarFile);
+    if (!gambarUrl) {
+      alert("Gagal mengupload gambar.");
+      return;
+    }
+  }
 
     if (nik.length !== 16) {
       alert("NIK harus terdiri dari 16 karakter.");
       return;
+    }
+
+
+    async function uploadImageToServer(file) {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      try {
+        const response = await fetch(
+          "https://tbakpl.vercel.app/api/cloudinary",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error("Response Error:", errorText);
+          throw new Error(`Error: ${errorText}`);
+        }
+
+        const data = await response.json();
+        return data.url; // URL gambar dari Cloudinary
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        return null;
+      }
     }
 
     try {
@@ -292,4 +334,8 @@
     document.getElementById("delete-user-modal-penyewa").classList.add("hidden");
   });
 
-  reloadPenyewa();
+  document.getElementById("kelolaPenyewaBtn").addEventListener("click", function(){
+    fetchPenyewa();
+    console.log("reload penyewa");
+  });
+

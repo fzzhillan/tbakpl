@@ -16,6 +16,13 @@ import { renderCategories } from "./kategori.js";
 
 const resetBtn = document.getElementById("resetRusakBtn");
 
+document.getElementById("dashboardBtn").addEventListener("click", function() {
+  getTotalQty();
+  loadJumlahBarangRusak();
+  getTotalJumlah();
+  console.log("Refresh Berhasil")
+});
+
 resetBtn.addEventListener("click", async () => {
   const barangRusakRef = collection(db, "barangRusak"); // Referensi koleksi
   const snapshot = await getDocs(barangRusakRef);
@@ -171,6 +178,11 @@ async function fetchKategori(targetSelectId, selectedKategori = "") {
   }
 }
 
+document.getElementById("pengadaanBarangBtn").addEventListener("click",function(){
+  fetchPengadaanBarang();
+  console.log("reload pengadaan barang");
+});
+
 // Fungsi untuk memuat data pengadaan barang
 async function fetchPengadaanBarang(search = "") {
   pengadaanContainer.innerHTML = "";
@@ -212,41 +224,42 @@ async function fetchPengadaanBarang(search = "") {
       const row = document.createElement("div");
       row.className = "snap-start flex text-center gap-y-0 items-stretch";
       row.innerHTML = `
-      <div class="snap-start flex justify-center items-center flex-shrink-0 w-[240px] border-y-2 border-black">${
-        barang.nama
-      }</div>
-        <div class="snap-start p-0 flex justify-center items-center flex-shrink-0 w-[240px] border-y-2 border-l-2 border-black">${
-          kategoriMap[barang.kategori] || "Tidak Diketahui"
-        }</div>
-        <div class="snap-start flex justify-center items-center flex-shrink-0 w-[240px] border-2 border-black">${
-          barang.hargaSewa
-        }</div>
-        <div class="snap-start flex justify-center items-center flex-shrink-0 w-[240px] border-y-2 border-black">${
-          barang.dendaHilang
-        }</div>
-        <div class="snap-start flex justify-center items-center flex-shrink-0 w-[240px] border-2 border-black">${
-          barang.dendaRusakRingan
-        }</div>
-        <div class="snap-start flex justify-center items-center flex-shrink-0 w-[240px] border-y-2 border-black">${
-          barang.dendaRusakSedang
-        }</div>
-        <div class="snap-start flex justify-center items-center flex-shrink-0 w-[240px] border-2 border-black">${
-          barang.dendaRusakBerat
-        }</div>
-        <div class="snap-start flex justify-center items-center flex-shrink-0 w-[240px] border-y-2 border-black">${
-          barang.status
-        }</div>
-        <div class="snap-start flex justify-center items-center flex-shrink-0 w-[240px] border-2 border-black">${
-          barang.jumlah
-        }</div>
-        <div class="snap-start flex justify-center flex-shrink-0 w-[240px] border-y-2 border-r-2 border-black"><img src="${
+      <div class="p-2 snap-start flex justify-center items-center flex-shrink-0 w-[240px] border-black"><div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+      ${barang.nama}
+    </div></div>
+        <div class="p-2 snap-start  flex justify-center items-center flex-shrink-0 w-[240px] border-x-2 border-black"><div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+      ${kategoriMap[barang.kategori] || "Tidak Diketahui"}
+    </div></div>
+        <div class="p-2 snap-start flex justify-center items-center flex-shrink-0 w-[240px]  border-black"><div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+      ${barang.hargaSewa}
+    </div></div>
+        <div class="p-2 snap-start flex justify-center items-center flex-shrink-0 w-[240px] border-x-2 border-black"> <div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+      ${barang.dendaHilang}
+    </div></div>
+        <div class="p-2 snap-start flex justify-center items-center flex-shrink-0 w-[240px]  border-black"> <div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+      ${barang.dendaRusakRingan}
+    </div></div>
+        <div class="p-2 snap-start flex justify-center items-center flex-shrink-0 w-[240px] border-x-2 border-black"><div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+      ${barang.dendaRusakSedang}
+    </div></div>
+        <div class="p-2 snap-start flex justify-center items-center flex-shrink-0 w-[240px] border-black"><div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+      ${barang.dendaRusakBerat}
+    </div></div>
+        
+        <div class="p-2 snap-start flex justify-center items-center border-x-2 flex-shrink-0 w-[240px] border-x-w border-black"><div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+      ${barang.jumlah}
+    </div></div>
+        <div class="p-2 snap-start flex justify-center flex-shrink-0 w-[240px] border-black"><img src="${
           barang.gambar
-        }" alt="Gambar" class=" rounded flex justify-center h items-center object-cover p-1"></div>
-        <div class="snap-start flex justify-center gap-x-2 items-center flex-shrink-0 w-[240px] border-y-2 border-black">
-          <button class="edit-btn-pengadaan px-4 p-2 rounded bg-blue-500" data-id="${
+        }" alt="Gambar" class=" rounded flex justify-center h-[100px] items-center object-cover p-1"></div>
+        <div class="p-2 snap-start flex justify-center items-center flex-shrink-0 w-[240px] border-x-2 border-black"> <div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+      ${barang.status}
+    </div></div>
+        <div class="p-2 snap-start flex justify-center gap-x-2 items-center flex-shrink-0 w-[240px]  border-black">
+          <button class="edit-btn-pengadaan px-4 p-2 rounded text-white bg-[#177209]" data-id="${
             doc.id
           }">Edit</button>
-          <button class="delete-btn-pengadaan px-4 p-2 rounded bg-red-500" data-id="${
+          <button class="delete-btn-pengadaan px-4 p-2 rounded text-white bg-[#FF0000]" data-id="${
             doc.id
           }">Hapus</button>
         </div>

@@ -91,6 +91,10 @@ async function deleteDocFromTransaksi(namePenyewa, tanggalSewa) {
   }
 }
 
+document.getElementById("dataPengembalianBtn").addEventListener("click", function(){
+  fetchAndRenderData();
+  console.log("Refresh")
+});
 
 function renderDataPengembalian(dataPenyewaan) {
   const container = document.getElementById("barangList-dataPengembalian"); // Pastikan elemen ini ada di HTML

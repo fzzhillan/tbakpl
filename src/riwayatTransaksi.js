@@ -11,6 +11,11 @@ function parseDate(dateString) {
   return new Date(parts[2], parts[1] - 1, parts[0]); // new Date(year, month, day)
 }
 
+document.getElementById("riwayatTransaksiBtn").addEventListener("click", function () {
+  fetchData();
+  console.log("Refresh Berhasil");
+});
+
 async function fetchData() {
   const transaksiRef = collection(db, "riwayatTransaksi");
   const transaksiSnapshot = await getDocs(transaksiRef);

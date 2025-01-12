@@ -10,6 +10,11 @@ import {
   getDoc,
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
+
+document.getElementById("kategoriBtn").addEventListener("click", function() {
+  renderCategories();
+  console.log("Refresh Berhasil");
+});
 // Fungsi untuk menampilkan kategori dalam tabel
 async function renderCategories(search = "") {
   const kategoriTable = document.getElementById("kategoriTable");
@@ -27,21 +32,26 @@ async function renderCategories(search = "") {
     }
 
     // Tambahkan kategori ke tabel
-    const row = document.createElement("div");
-    row.classList.add("snap-start", "flex", "w-full");
+    const row = document.createElement("li");
+    row.className = "font-light flex text-center items-stretch";
 
     row.innerHTML = `
-      <div class="snap-start flex-shrink-0 w-1/3 border-y p-1 border-black text-center">
-        ${kategori.name}
-      </div>
-      <div class="snap-start flex-shrink-0 w-1/3 border p-1 border-black text-center">
-        ${kategori.jumlah}
-      </div>
-      <div class="snap-start flex-shrink-0 w-1/3 border-y  p-1 border-black text-center">
-        <button class="edit-btn-kategori px-4 rounded bg-blue-500" data-uid="${doc.id}">Edit</button>
-        <button class="delete-btn-kategori px-4 rounded bg-red-500" data-uid="${doc.id}">Hapus</button>
-      </div>
-    `;
+  <div class="snap-start flex-shrink-0 w-1/3 flex items-center justify-center border-black p-2">
+    <div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+      ${kategori.name}
+    </div>
+  </div>
+  <div class="snap-start flex-shrink-0 w-1/3 flex items-center justify-center border-x-2 border-black p-2">
+    <div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+      ${kategori.jumlah}
+    </div>
+  </div>
+  <div class="snap-start flex-shrink-0 w-1/3 items-center justify-center flex border-black gap-x-2 p-2">
+    <button class="edit-btn-kategori px-4 rounded-xl text-white bg-[#177209]" data-uid="${doc.id}">Edit</button>
+    <button class="delete-btn-kategori px-4 rounded-xl text-white bg-[#FF0000]" data-uid="${doc.id}">Hapus</button>
+  </div>
+`;
+
     kategoriTable.appendChild(row);
   });
 }

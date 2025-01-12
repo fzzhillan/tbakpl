@@ -33,7 +33,6 @@ document.addEventListener("click", (e) => {
   }
 });
 
-
 async function preserveSession(email, password) {
   await signInWithEmailAndPassword(auth, email, password);
 }
@@ -47,6 +46,11 @@ function formatDate(timestamp) {
 
   return `${day}-${month}-${year}`; // Format DD-MM-YYYY
 }
+
+document.getElementById("kelolaAdminBtn").addEventListener("click", function() {
+  fetchUsers();
+  console.log("Membuka Kelola Admin");
+})
 
 // Fungsi untuk memuat pengguna berdasarkan role dan pencarian
 async function fetchUsersByRole(role, search = "") {
@@ -74,37 +78,57 @@ async function fetchUsersByRole(role, search = "") {
       }
 
       const listItem = document.createElement("li");
-      listItem.className = "font-light flex text-center items-center";
+      listItem.className = "font-light flex text-center items-stretch";
       listItem.innerHTML = `
-        <div class="snap-start flex-shrink-0 w-[180px] border-y-2  border-black p-2">${
-          user.role
-        }</div>
-        <div class="snap-start flex-shrink-0 w-[180px] border-2 border-black p-2">${
-          user.username
-        }</div>
-        <div class="snap-start flex-shrink-0 w-[180px] border-y-2 border-black p-2">${
-          user.name
-        }</div>
-        <div class="snap-start flex-shrink-0 w-[180px] border-2 border-black p-2">${
-          user.email
-        }</div>
-        <div class="snap-start flex-shrink-0 w-[180px] border-y-2 border-black p-2">${
-          user.address
-        }</div>
-        <div class="snap-start flex-shrink-0 w-[180px] border-2 border-black p-2">${
-          user.phoneNumber
-        }</div>
-        <div class="snap-start flex-shrink-0 w-[180px] border-y-2 border-r-2 border-black p-2">
-          ${user.dateRegistered ? formatDate(user.dateRegistered) : ""}
+        <div class="snap-start flex-shrink-0 w-[180px] flex items-center justify-center border-black p-2">
+          <div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+            ${user.role}
+          </div>
+        
         </div>
-        <div class="snap-start flex-shrink-0 w-[180px] border-y-2 border-black gap-x-2 p-2">
-          <button class="edit-btn px-4 rounded bg-blue-500" data-uid="${
+        <div class="snap-start flex-shrink-0 w-[180px] flex items-center justify-center border-x-2 border-black p-2">
+        <div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+            ${user.username}
+          </div>
+        </div>
+        <div class="snap-start flex-shrink-0 w-[180px] flex items-center justify-center  border-black p-2">
+  <div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+    ${user.name}
+  </div>
+</div>
+<div class="snap-start flex-shrink-0 w-[180px] flex items-center justify-center border-x-2 border-black p-2">
+  <div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+    ${user.email}
+  </div>
+</div>
+<div class="snap-start flex-shrink-0 w-[180px] flex items-center  justify-center border-black p-2">
+  <div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+    ${user.address}
+  </div>
+</div>
+<div class="snap-start flex-shrink-0 w-[180px] flex items-center justify-center border-x-2 border-black p-2">
+  <div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+    ${user.phoneNumber}
+  </div>
+</div>
+<div class="snap-start flex-shrink-0 w-[180px] flex items-center justify-center border-r-2 border-black p-2">
+  <div class="bg-[#D9D9D9] w-full flex justify-center rounded-xl">
+    ${user.dateRegistered ? formatDate(user.dateRegistered) : ""}
+  </div>
+</div>
+<div class="snap-start flex-shrink-0 w-[180px] flex justify-center items-center border-r-2 border-black p-2">
+    <img class="h-[100px] rounded-xl" src="${user.gambar}" alt="${user.name}"> 
+</div>
+<div class="snap-start flex-shrink-0 w-[180px] items-center justify-center flex border-black gap-x-2 p-2">
+          <button class="edit-btn px-4 rounded-xl text-white bg-[#177209]" data-uid="${
             doc.id
           }">Edit</button>
-          <button class="delete-btn px-4 rounded bg-red-500" data-uid="${
+          <button class="delete-btn px-4 rounded-xl text-white bg-[#FF0000]" data-uid="${
             doc.id
-          }">Delete</button>
+          }">Hapus</button>
         </div>
+</div>
+
       `;
       list.appendChild(listItem);
     });
@@ -147,9 +171,32 @@ async function openEditModal(userId) {
     document.getElementById("edit-role").value = user.role;
 
     document.getElementById("edit-user-modal-admin").classList.remove("hidden");
-
   } catch (error) {
     console.error("Error fetching user data for edit:", error);
+  }
+}
+
+async function uploadImageToServer(file) {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  try {
+    const response = await fetch("https://tbakpl.vercel.app/api/cloudinary", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Response Error:", errorText);
+      throw new Error(`Error: ${errorText}`);
+    }
+
+    const data = await response.json();
+    return data.url; // URL gambar dari Cloudinary
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    return null;
   }
 }
 
@@ -165,6 +212,7 @@ document
     const address = document.getElementById("edit-address").value;
     const phoneNumber = document.getElementById("edit-phoneNumber").value;
     const role = document.getElementById("edit-role").value;
+    
 
     const userRef = doc(db, "users", selectedUserId);
     await updateDoc(userRef, {
@@ -195,13 +243,17 @@ async function openDeleteModal(userId) {
       document.getElementById("delete-user-name").textContent = user.name;
 
       // Tampilkan modal delete
-      document.getElementById("delete-user-modal-admin").classList.remove("hidden");
+      document
+        .getElementById("delete-user-modal-admin")
+        .classList.remove("hidden");
 
       // Menangani klik pada tombol hapus
       document.getElementById("confirm-delete-btn").onclick = async () => {
         await deleteDoc(docRef); // Menghapus pengguna
         alert("User berhasil dihapus!");
-        document.getElementById("delete-user-modal-admin").classList.add("hidden");
+        document
+          .getElementById("delete-user-modal-admin")
+          .classList.add("hidden");
         fetchUsers(); // Memuat ulang daftar pengguna
       };
     } else {
@@ -235,13 +287,9 @@ searchBar.addEventListener("input", (e) => {
 
 // Event: Tambah User
 
-
-
-
 // Event: Batal Tambah User
 cancelBtn.addEventListener("click", () => {
   document.getElementById("add-user-modal-admin").classList.add("hidden");
-
 });
 
 // Event: Form Tambah User
@@ -255,12 +303,15 @@ addUserForm.addEventListener("submit", async (e) => {
   const phoneNumber = document.getElementById("phoneNumber").value;
   const role = document.getElementById("role").value;
   const password = document.getElementById("password").value;
-  const confirmPassword = document.getElementById("confirm-password").value;
+  const gambarFile = document.getElementById("gambar-user").files[0];
 
-  // Validasi apakah password dan konfirmasi password cocok
-  if (password !== confirmPassword) {
-    alert("Password dan konfirmasi password tidak cocok.");
-    return;
+  let gambarUrl = "";
+  if (gambarFile) {
+    gambarUrl = await uploadImageToServer(gambarFile);
+    if (!gambarUrl) {
+      alert("Gagal mengupload gambar.");
+      return;
+    }
   }
 
   try {
@@ -279,9 +330,7 @@ addUserForm.addEventListener("submit", async (e) => {
 
     const currentUser = auth.currentUser;
     const currentEmail = currentUser.email;
-    const currentPassword = prompt(
-      "Konfirmasi password anda:"
-    );
+    const currentPassword = prompt("Konfirmasi password anda: (Akun yang sedang login)");
     if (!currentPassword) {
       alert("Password tidak boleh kosong.");
       return;
@@ -311,11 +360,12 @@ addUserForm.addEventListener("submit", async (e) => {
       phoneNumber,
       dateRegistered: serverTimestamp(),
       uid: user.uid,
+      gambar: gambarUrl,
     });
     if (currentEmail && currentPassword) {
       await preserveSession(currentEmail, currentPassword);
     }
-    
+
     alert("User berhasil ditambahkan!");
     fetchUsers();
     addUserModal.classList.add("hidden");
