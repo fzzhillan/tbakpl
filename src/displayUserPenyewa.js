@@ -189,6 +189,7 @@
         alamat,
         noHpPenyewa,
         dateRegistered: serverTimestamp(),
+        gambar : gambarUrl,
       });
 
       alert("Penyewa berhasil ditambahkan.");
