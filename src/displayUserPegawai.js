@@ -118,7 +118,7 @@ async function fetchUsersByRole(role, search = "") {
     ${user.dateRegistered ? formatDate(user.dateRegistered) : ""}
   </div>
 </div>
-<div class="snap-start flex-shrink-0 w-[180px] flex justify-center items-center border-r-2 border-black p-2">
+<div class="snap-start flex-shrink-0 w-[180px] flex justify-center items-center border-black p-2">
     <img class="h-[100px] rounded-xl" src="${user.gambar}" alt="${user.name}"> 
 </div>
 
