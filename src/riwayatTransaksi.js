@@ -39,17 +39,38 @@ function renderTransaksi(data) {
 
   data.forEach((transaksi) => {
     const item = document.createElement("div");
-    item.classList.add("border", "p-4", "rounded", "shadow-md", "bg-white", "flex", "flex-col");
+    item.classList.add(
+      "border",
+      "p-4",
+      "rounded-xl",
+      "shadow-md",
+      "bg-[#EBEBEB]",
+      "flex",
+      "flex-col"
+    );
 
     item.innerHTML = `
-      <p><strong>Nama Penyewa:</strong> ${transaksi.namePenyewa}</p>
-      <p><strong>Tanggal Sewa:</strong> ${transaksi.tanggalSewa}</p>
-      <p><strong>Tanggal Pengembalian:</strong> ${
-        transaksi.tanggalDikembalikanFormatted || "Belum Kembali"
+      <p><strong>Nama Penyewa:</strong></p>
+      <p class="bg-[white] p-2 rounded-lg shadow-md mb-2"> ${
+        transaksi.namePenyewa
       }</p>
-      <p><strong>Total Barang Disewa:</strong> ${transaksi.barang.length}</p>
-      <p><strong>Pencatat:</strong> ${transaksi.pencatat}</p>
-      <p><strong>Total Pembayaran:</strong> ${transaksi.total}</p>
+      <p><strong>Tanggal Sewa:</strong></p>
+<p class="bg-white p-2 rounded-lg shadow-md mb-2">${transaksi.tanggalSewa}</p>
+
+<p><strong>Tanggal Pengembalian:</strong></p>
+<p class="bg-white p-2 rounded-lg shadow-md mb-2">${
+      transaksi.tanggalDikembalikanFormatted || "Belum Kembali"
+    }</p>
+
+<p><strong>Total Barang Disewa:</strong></p>
+<p class="bg-white p-2 rounded-lg shadow-md mb-2">${transaksi.barang.length}</p>
+
+<p><strong>Pencatat:</strong></p>
+<p class="bg-white p-2 rounded-lg shadow-md mb-2">${transaksi.pencatat}</p>
+
+<p><strong>Total Pembayaran:</strong></p>
+<p class="bg-white p-2 rounded-lg shadow-md mb-2">${transaksi.total}</p>
+
       <button class="btn btn-info bg-blue-500 flex justify-center rounded-xl text-white" onclick="showDetailModal('${
         transaksi.id
       }')">Lihat Detail</button>
@@ -64,35 +85,65 @@ async function showDetailModal(transaksiId) {
   const modalBody = document.getElementById("modalBody-riwayatTransaksi");
 
   modalBody.innerHTML = `
-    <p><strong>Nama Penyewa:</strong> ${transaksi.namePenyewa}</p>
-    <p><strong>Tujuan:</strong> ${transaksi.tujuan}</p>
-    <p><strong>Jaminan:</strong> ${transaksi.jaminan}</p>
-    <p><strong>Barang yang Disewa:</strong></p>
-    <ul>
-      ${transaksi.barang
-        .map(
-          (b) => `
-        <li>${b.nama} (Kondisi: ${b.kondisi})</li>`
-        )
-        .join("")}
-    </ul>
-    <p><strong>Tanggal Sewa:</strong> ${transaksi.tanggalSewa}</p>
-    <p><strong>Tanggal Kembali:</strong> ${
-      transaksi.tanggalDikembalikanFormatted || "Belum Kembali"
-    }</p>
-    <p><strong>Keterangan Terlambat:</strong> ${
-      transaksi.keteranganTerlambat || "Tidak Terlambat"
-    }</p>
-    <p><strong>Denda:</strong> Rp ${transaksi.totalDenda}</p>
-    <p><strong>Total yang Dibayar:</strong> Rp ${
-      parseInt(transaksi.total.replace("Rp ", "").replace(",", "")) +
-      transaksi.totalDenda
-    }</p>
+    <div class="bg-white border border-gray-300 p-6 rounded-lg max-w-4xl w-full mx-auto">
+      <table class="w-full text-sm text-gray-700">
+        
+        <tr class="border-b">
+          <td class="py-2 font-bold">Nama Penyewa</td>
+          <td class="py-2">: ${transaksi.namePenyewa}</td>
+        </tr>
+        <tr class="border-b">
+          <td class="py-2 font-bold">Tujuan</td>
+          <td class="py-2">: ${transaksi.tujuan}</td>
+        </tr>
+        <tr class="border-b">
+          <td class="py-2 font-bold">Jaminan</td>
+          <td class="py-2">: ${transaksi.jaminan}</td>
+        </tr>
+        <tr class="border-b">
+          <td class="py-2 font-bold">Barang Yang Disewa</td>
+          <td class="py-2">
+            <ul class="list-disc list-inside">
+              ${transaksi.barang
+                .map(
+                  (b) => `
+                <li>${b.nama} (Kondisi: ${b.kondisi})</li>`
+                )
+                .join("")}
+            </ul>
+          </td>
+        </tr>
+        <tr class="border-b">
+          <td class="py-2 font-bold">Tanggal Di Sewa & Di Kembalikan</td>
+          <td class="py-2">: ${transaksi.tanggalSewa} & ${
+    transaksi.tanggalDikembalikanFormatted || "Belum Kembali"
+  }</td>
+        </tr>
+        <tr class="border-b">
+          <td class="py-2 font-bold">Kerusakan/Terlambat</td>
+          <td class="py-2">: ${
+            transaksi.keteranganTerlambat || "Tidak Terlambat"
+          }</td>
+        </tr>
+        <tr class="border-b">
+          <td class="py-2 font-bold">Denda</td>
+          <td class="py-2">: Rp ${transaksi.totalDenda}</td>
+        </tr>
+        <tr>
+          <td class="py-2 font-bold">Total yang Dibayar</td>
+          <td class="py-2">: Rp ${
+            parseInt(transaksi.total.replace("Rp ", "").replace(",", "")) +
+            transaksi.totalDenda
+          }</td>
+        </tr>
+      </table>
+    </div>
   `;
 
   const modal = document.getElementById("detailModal-riwayatTransaksi");
   modal.classList.remove("hidden"); // Show modal
 }
+
 
 function closeModal() {
   const modal = document.getElementById("detailModal-riwayatTransaksi");

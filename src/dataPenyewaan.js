@@ -32,26 +32,27 @@ export async function fetchAndDisplayTransaksi() {
       dataPenyewaanDiv.innerHTML =
         "" +
         `<div class="overflow-x-auto">
+        <div class="p-4 rounded-xl w-full min-w-max bg-[#D9D9D9]">
           <table class="table-auto w-full min-w-max mb-4">
             <thead>
               <tr>
-                <th class="border px-4 py-2 w-[200px] text-center">Nama Penyewa</th>
-                <th class="border px-4 py-2 w-[200px] text-center">No HP Penyewa</th>
-                <th class="border px-4 py-2 w-[200px] text-center">Tanggal Pengembalian</th>
-                <th class="border px-4 py-2 w-[200px] text-center">Tujuan</th>
-                <th class="border px-4 py-2 w-[200px] text-center">Nama Barang</th>
-                <th class="border px-4 py-2 w-[200px] text-center">Jumlah (Qty)</th>
-                <th class="border px-4 py-2 w-[200px] text-center">Pencatat</th>
-                <th class="border px-4 py-2 w-[200px] text-center">Diskon</th>
-                <th class="border px-4 py-2 w-[200px] text-center">Harga Sewa</th>
-                <th class="border px-4 py-2 w-[200px] text-center">Harga Total</th>
-                <th class="border px-4 py-2 w-[200px] text-center">Jaminan</th>
-                <th class="border px-4 py-2 w-[200px] text-center">Total Pembayaran</th>
-                <th class="border px-4 py-2 w-[200px] text-center">Aksi</th>
+                <th class="border border-black px-4 py-2 w-[200px] text-center">Nama Penyewa</th>
+                <th class="border border-black px-4 py-2 w-[200px] text-center">No HP Penyewa</th>
+                <th class="border border-black px-4 py-2 w-[200px] text-center">Tanggal Pengembalian</th>
+                <th class="border border-black px-4 py-2 w-[200px] text-center">Tujuan</th>
+                <th class="border border-black px-4 py-2 w-[200px] text-center">Nama Barang</th>
+                <th class="border border-black px-4 py-2 w-[200px] text-center">Jumlah (Qty)</th>
+                <th class="border border-black px-4 py-2 w-[200px] text-center">Pencatat</th>
+                <th class="border border-black px-4 py-2 w-[200px] text-center">Diskon</th>
+                <th class="border border-black px-4 py-2 w-[200px] text-center">Harga Sewa</th>
+                <th class="border border-black px-4 py-2 w-[200px] text-center">Harga Total</th>
+                <th class="border border-black px-4 py-2 w-[200px] text-center">Jaminan</th>
+                <th class="border border-black px-4 py-2 w-[200px] text-center">Total Pembayaran</th>
+                <th class="border border-black px-4 py-2 w-[200px] text-center">Aksi</th>
               </tr>
             </thead>
             <tbody id="transaksi-tbody"></tbody>
-          </table>
+          </table></div>
         </div>`;
     }
 
@@ -78,37 +79,47 @@ export async function fetchAndDisplayTransaksi() {
       // Menambahkan HTML untuk setiap data transaksi
       const transaksiHTML = `
         <tr >
-          <td class="border px-4 py-2 text-center">${
+          <td class="border border-black px-4 py-2 text-center">${
             data.namePenyewa || "-"
           }</td>
-          <td class="border px-4 py-2 text-center">${
+          <td class="border border-black px-4 py-2 text-center">${
             data.noHpPenyewa || "-"
           }</td>
-          <td class="border px-4 py-2 text-center"> ${
+          <td class="border border-black px-4 py-2 text-center"> ${
             data.tanggalSewa || "-"
           }</td>
-          <td class="border px-4 py-2 text-center">${data.tujuan || "-"}</td>
-          <td class="border px-4 py-2 text-center">
+          <td class="border border-black px-4 py-2 text-center">${
+            data.tujuan || "-"
+          }</td>
+          <td class="border border-black px-4 py-2 text-center">
             <ul>${namaBarang.map((item) => `<li>${item}</li>`).join("")}</ul>
           </td>
-          <td class="border px-4 py-2 text-center">
+          <td class="border border-black px-4 py-2 text-center">
             <ul>${qty.map((item) => `<li>${item}</li>`).join("")}</ul>
           </td>
-          <td class="border px-4 py-2 text-center">${data.pencatat || "-"}</td>
-          <td class="border px-4 py-2 text-center">${data.diskon || "-"}</td>
-          <td class="border px-4 py-2 text-center">
+          <td class="border border-black px-4 py-2 text-center">${
+            data.pencatat || "-"
+          }</td>
+          <td class="border border-black px-4 py-2 text-center">${
+            data.diskon || "-"
+          }</td>
+          <td class="border border-black px-4 py-2 text-center">
             <ul>${hargaSewa
               .map((item) => `<li>Rp ${item.toLocaleString()}</li>`)
               .join("")}</ul>
           </td>
-          <td class="border px-4 py-2 text-center">
+          <td class="border border-black px-4 py-2 text-center">
             <ul>${hargaTotal
               .map((item) => `<li>Rp ${item.toLocaleString()}</li>`)
               .join("")}</ul>
           </td>
-          <td class="border px-4 py-2 text-center">${data.jaminan || "-"}</td>
-          <td class="border px-4 py-2 text-center">${data.total || "-"}</td>
-          <td class="border px-4 py-2 text-center">
+          <td class="border border-black px-4 py-2 text-center">${
+            data.jaminan || "-"
+          }</td>
+          <td class="border border-black px-4 py-2 text-center">${
+            data.total || "-"
+          }</td>
+          <td class="border border-black px-4 py-2 text-center">
             <button data-transaksi-id="${
               doc.id
             }" data-nama-barang="${namaBarang.join(",")}, qty: ${qty.join(
@@ -246,7 +257,7 @@ async function createCekBarangModalWithData(dataPenyewa, namaBarang, transaksiId
           <p><strong>Tanggal Sewa:</strong> ${dataPenyewa.tanggalSewa}</p>
           <p><strong>Tujuan:</strong> ${dataPenyewa.tujuan}</p>
           <p><strong>Jaminan:</strong> ${dataPenyewa.jaminan}</p>
-          <p><strong>Keterangan:</strong> ${dataPenyewa.keterangan}</p>
+          <p class="hidden"><strong>Keterangan:</strong> ${dataPenyewa.keterangan}</p>
           <p><strong>Total Harga:</strong> ${dataPenyewa.total}</p>
           <p><strong>Pencatat:</strong> ${dataPenyewa.pencatat}</p>
         </div>
@@ -275,6 +286,7 @@ async function createCekBarangModalWithData(dataPenyewa, namaBarang, transaksiId
 
     document.getElementById("cancelButton").addEventListener("click", () => {
       document.body.removeChild(modalContainer);
+      fetchAndDisplayTransaksi();
     });
 
     function formatTanggal(tanggal) {

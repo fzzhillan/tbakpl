@@ -113,17 +113,17 @@ function renderDataPengembalian(dataPenyewaan) {
 
   // Membuat header kolom menggunakan format yang diminta
   header.innerHTML = `
-    <div class="snap-start flex-shrink-0 w-[200px] border-y-2 bg-[#D9D9D9] border-black">Name Penyewa</div>
+    <div class="snap-start flex-shrink-0 w-[200px] border-2 bg-[#D9D9D9] border-black">Name Penyewa</div>
     <div class="snap-start flex-shrink-0 w-[200px] border-2 bg-[#D9D9D9] border-black">No HP Penyewa</div>
-    <div class="snap-start flex-shrink-0 w-[200px] border-y-2 bg-[#D9D9D9] border-black">Jaminan</div>
+    <div class="snap-start flex-shrink-0 w-[200px] border-2 bg-[#D9D9D9] border-black">Jaminan</div>
     <div class="snap-start flex-shrink-0 w-[200px] border-2 bg-[#D9D9D9] border-black">Tanggal Sewa</div>
-    <div class="snap-start flex-shrink-0 w-[200px] border-y-2 bg-[#D9D9D9] border-black">Keterangan</div>
+    <div class="snap-start flex-shrink-0 w-[200px] border-2 bg-[#D9D9D9] border-black">Keterangan</div>
     <div class="snap-start flex-shrink-0 w-[200px] border-2 bg-[#D9D9D9] border-black">Total Denda</div>
-    <div class="snap-start flex-shrink-0 w-[200px] border-y-2 bg-[#D9D9D9] border-black">Total Harga</div>
+    <div class="snap-start flex-shrink-0 w-[200px] border-2 bg-[#D9D9D9] border-black">Total Harga</div>
     <div class="snap-start flex-shrink-0 w-[200px] border-2 bg-[#D9D9D9] border-black">Tujuan</div>
-    <div class="snap-start flex-shrink-0 w-[200px] border-y-2 bg-[#D9D9D9] border-black">Nama Barang</div>
+    <div class="snap-start flex-shrink-0 w-[200px] border-2 bg-[#D9D9D9] border-black">Nama Barang</div>
     <div class="snap-start flex-shrink-0 w-[200px] border-2 bg-[#D9D9D9] border-black">Kondisi Barang</div>
-    <div class="snap-start flex-shrink-0 w-[200px] border-y-2 bg-[#D9D9D9] border-black">Aksi</div>
+    <div class="snap-start flex-shrink-0 w-[200px] border-2 bg-[#D9D9D9] border-black">Aksi</div>
   `;
   table.appendChild(header);
 
@@ -138,14 +138,14 @@ function renderDataPengembalian(dataPenyewaan) {
 
     // Menambahkan data penyewa
     row.innerHTML = `
-    <div class="snap-start flex-shrink-0 w-[200px] border px-4 py-2">${penyewaan.namePenyewa}</div>
-    <div class="snap-start flex-shrink-0 w-[200px] border px-4 py-2">${penyewaan.noHpPenyewa}</div>
-    <div class="snap-start flex-shrink-0 w-[200px] border px-4 py-2">${penyewaan.jaminan}</div>
-    <div class="snap-start flex-shrink-0 w-[200px] border px-4 py-2">${penyewaan.tanggalSewa}</div>
-    <div class="snap-start flex-shrink-0 w-[200px] border px-4 py-2">${penyewaan.keteranganTerlambat}</div>
-    <div class="snap-start flex-shrink-0 w-[200px] border px-4 py-2">${penyewaan.totalDenda}</div>
-    <div class="snap-start flex-shrink-0 w-[200px] border px-4 py-2">${penyewaan.total}</div>
-    <div class="snap-start flex-shrink-0 w-[200px] border px-4 py-2">${penyewaan.tujuan}</div>
+    <div class="snap-start flex-shrink-0 w-[200px] border-black border px-4 py-2">${penyewaan.namePenyewa}</div>
+    <div class="snap-start flex-shrink-0 w-[200px] border-black border px-4 py-2">${penyewaan.noHpPenyewa}</div>
+    <div class="snap-start flex-shrink-0 w-[200px] border-black border px-4 py-2">${penyewaan.jaminan}</div>
+    <div class="snap-start flex-shrink-0 w-[200px] border-black border px-4 py-2">${penyewaan.tanggalSewa}</div>
+    <div class="snap-start flex-shrink-0 w-[200px] border-black border px-4 py-2">${penyewaan.keteranganTerlambat}</div>
+    <div class="snap-start flex-shrink-0 w-[200px] border-black border px-4 py-2">${penyewaan.totalDenda}</div>
+    <div class="snap-start flex-shrink-0 w-[200px] border-black border px-4 py-2">${penyewaan.total}</div>
+    <div class="snap-start flex-shrink-0 w-[200px] border-black border px-4 py-2">${penyewaan.tujuan}</div>
     
   `;
 
@@ -156,6 +156,7 @@ function renderDataPengembalian(dataPenyewaan) {
       "flex-shrink-0",
       "w-[200px]",
       "border",
+      "border-black",
       "px-4",
       "py-2"
     );
@@ -176,6 +177,7 @@ function renderDataPengembalian(dataPenyewaan) {
       "flex-shrink-0",
       "w-[200px]",
       "border",
+      "border-black",
       "px-4",
       "py-2"
     );
@@ -194,7 +196,7 @@ function renderDataPengembalian(dataPenyewaan) {
     row.appendChild(kondisiBarangCell);
 
     const buttonRow = document.createElement("div");
-    buttonRow.classList.add("snap-start", "flex-shrink-0", "w-[200px]", "border", "px-4", "py-2", "flex", "items-center");
+    buttonRow.classList.add("snap-start", "flex-shrink-0", "w-[200px]", "border", "border-black", "px-4", "py-2", "flex", "items-center");
 
     buttonRow.innerHTML = `
     <button class="selesai-btn bg-blue-500 text-white px-4 py-2 rounded " data-id="${penyewaan.id}">Selesai</button>
@@ -346,6 +348,7 @@ function renderDataPengembalian(dataPenyewaan) {
         // Hapus data dari UI
         target.closest(".flex").remove(); // Menghapus baris terkait
         alert("Data berhasil dihapus.");
+        fetchAndRenderData();
       } catch (error) {
         console.error("Error menghapus data:", error);
         alert("Gagal menghapus data.");

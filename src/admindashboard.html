@@ -1723,19 +1723,24 @@
         id="dataPenyewaan"
         class="content hidden flex w-[80%] mx-[10%] py-4n"
       >
-        <div class="flex flex-col w-full">
+        <div class="flex flex-col w-full mt-5">
           <!-- Search bar -->
-          <div class="mb-4 pt-4 flex w-full justify-between items-center">
-            <input
-              type="text"
-              id="searchInput-dataPenyewaan"
-              class="border border-gray-300 rounded-lg px-4 py-2 w-full max-w-md"
-              placeholder="Cari Nama Penyewa..."
-            />
-          </div>
+           <div class="flex w-full bg-[#C3C3C3] rounded-full ">
+             <div class="mb-4 pt-4 flex w-full justify-between items-center">
+               <input
+                 type="text"
+                 id="searchInput-dataPenyewaan"
+                 class="border border-gray-300 rounded-lg px-4 py-2 w-full flex mx-5"
+                 placeholder="Cari Nama Penyewa..."
+               />
+              
+              
+             </div>
+
+           </div>
 
           <!-- Kontainer Data Penyewaan -->
-          <div id="dataPenyewaanContainer" class="flex flex-col w-full">
+          <div id="dataPenyewaanContainer" class="flex flex-col w-full mt-5">
             <!-- Tabel akan di-render di sini melalui JavaScript -->
           </div>
         </div>
@@ -1745,17 +1750,28 @@
         class="content hidden flex w-[80%] mx-[10%] py-4"
       >
         <div class="flex flex-col w-full">
-          <input
-            id="searchBar-dataPengembalian"
-            type="text"
-            class="w-full mb-4 p-2 border rounded"
-            placeholder="Cari barang atau kondisi..."
-          />
+         <div class="flex w-full bg-[#C3C3C3] rounded-full ">
+             <div class="mb-4 pt-4 flex w-full justify-between items-center">
+               <input
+                 type="text"
+                 id="searchInput-dataPengembalian"
+                 class="border border-gray-300 rounded-lg px-4 py-2 w-full flex mx-5"
+                 placeholder="Cari Nama Penyewa..."
+               />
+              
+              
+             </div>
+
+           </div>
 
           <div
-            id="barangList-dataPengembalian"
-            class="w-full max-w-full flex bg-white rounded-xl shadow-md border-4 overflow-x-auto"
-          ></div>
+            id=""
+            class="w-full max-w-full flex bg-[#D9D9D9] p-4 rounded mt-5 overflow-x-auto"
+          >
+           <div id="barangList-dataPengembalian">
+
+           </div>
+        </div>
         </div>
       </div>
       <div
@@ -1789,18 +1805,35 @@
           </div>
 
           <!-- Table untuk menampilkan data -->
-          <table class="min-w-full table-auto">
+           <div class="flex w-full rounded-xl bg-[#808080]">
+            <div class="w-[30%] py-4 border-r-2 border-black font-bold text-center text-lg">
+              Nama Barang
+            </div>
+            <div class="w-[30%] py-4 border-r-2 border-black font-bold text-center text-lg">
+              Nama Pencatat
+            </div>
+            <div class="w-[30%] py-4 border-r-2 border-black font-bold text-center text-lg">
+              Tanggal
+            </div>
+            <div class="w-[10%] py-4  border-black font-bold text-center text-lg">
+              Aksi
+            </div>
+           </div>
+           <div id="pengadaanList" class="flex flex-col gap-y-4 mt-4">
+
+           </div>
+          <!-- <table class="min-w-full table-auto">
             <thead>
               <tr>
-                <th class="border border-black px-4 py-2">Aksi</th>
-                <th class="border border-black px-4 py-2">Tanggal</th>
-
                 <th class="border border-black px-4 py-2">Nama</th>
                 <th class="border border-black px-4 py-2">Nama Pencatat</th>
+                <th class="border border-black px-4 py-2">Tanggal</th>
+                <th class="border border-black px-4 py-2">Aksi</th>
+                
               </tr>
             </thead>
             <tbody id="pengadaanList"></tbody>
-          </table>
+          </table> -->
         </div>
       </div>
 
@@ -1965,27 +1998,27 @@
           <!-- <h2 class="text-xl font-bold mb-4">Nota Pembayaran</h2> -->
 
           <!-- Tabel Nota -->
-          <!-- <table class="w-full mb-4"> -->
+          <table class="hidden w-full mb-4">
             <!-- <tr>
               <td class="font-medium">No.</td>
               <td id="nota-nomor">222</td>
             </tr> -->
-            <!-- <tr>
+            <tr>
               <td class="font-medium">Nama Barang</td>
               <td id="nota-namaBarang">Nama Barang</td>
-            </tr> -->
-            <!-- <tr>
+            </tr>
+            <tr>
               <td class="font-medium">Harga Sewa</td>
               <td id="nota-hargaSewa">Harga Sewa Satuan</td>
-            </tr> -->
-            <!-- <tr>
+            </tr>
+            <tr>
               <td class="font-medium">Qty</td>
               <td id="nota-qty">QTY</td>
-            </tr> -->
-            <!-- <tr>
+            </tr>
+            <tr>
               <td class="font-medium">Harga Total</td>
               <td id="nota-hargaTotal">Harga Total</td>
-            </tr> -->
+            </tr>
             <!-- <tr>
               <td class="font-medium">Diskon</td>
               <td id="nota-diskon">Diskon</td>
@@ -2002,25 +2035,23 @@
               <td class="font-medium">Nama Penyewa</td>
               <td id="nota-namePenyewa">Nama Penyewa</td>
             </tr> -->
-            <!-- <tr>
+            <tr>
               <td class="font-medium">Admin Pencatat</td>
               <td id="thirdUserName"></td>
-            </tr> -->
-            <!-- <tr>
+            </tr>
+            <tr>
               <td class="font-medium">Tujuan</td>
               <td id="nota-tujuan">Tujuan</td>
-            </tr> -->
-            <!-- <tr>
+            </tr>
+            <tr>
               <td class="font-medium">Jaminan</td>
               <td id="nota-jaminan">Jaminan</td>
-            </tr> -->
+            </tr>
 
-            <!-- <tr>
-              <td class="font-medium">Tanggal Pengembalian</td>
-              <td id="">Tgl</td> -->
+            
               <!-- Baris untuk tanggal sewa -->
-            <!-- </tr>
-          </table> -->
+            </tr>
+          </table>
 
           <!-- Tombol Tutup Modal -->
           <div class="flex justify-end gap-x-2">
@@ -2867,9 +2898,9 @@
       </div>
       <div
         id="detailModal-riwayatTransaksi"
-        class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden"
+        class="fixed inset-0 flex items-center justify-center w-full bg-gray-900 bg-opacity-50 hidden"
       >
-        <div class="bg-white p-6 rounded shadow-lg w-96">
+        <div class="bg-white p-6 rounded shadow-lg w-full max-w-4xl">
           <h2
             class="text-xl font-semibold mb-4"
             id="detailModalLabel-riwayatTransaksi"

@@ -42,16 +42,33 @@ function renderPengadaan(data) {
   pengadaanList.innerHTML = ""; // Reset list
 
   data.forEach((pengadaan) => {
-    const tr = document.createElement("tr");
+    const tr = document.createElement("div");
 
     tr.innerHTML = `
-      <td class="border border-black px-4 py-2">${pengadaan.aksi}</td>
-      <td class="border border-black px-4 py-2">${formatDate(
-        pengadaan.date
-      )}</td>
-      
-      <td class="border border-black px-4 py-2">${pengadaan.nama}</td>
-      <td class="border border-black px-4 py-2">${pengadaan.namaPencatat}</td>
+    <div class="flex w-full rounded-xl bg-white shadow-md items-stretch">
+    <div class="w-[30%] py-4 px-2 border-r border-black flex text-center justify-center items-center text-sm justify-around">
+            <div>
+            <img src="${pengadaan.gambar}" class="h-[80px]">
+            </div>
+            <div>
+            ${pengadaan.nama}
+            
+            </div>
+            <div>
+            
+            </div>
+            </div>
+            <div class="w-[30%] py-4 border-r border-black  text-center justify-center flex items-center text-sm">
+              ${pengadaan.namaPencatat}
+            </div>
+            <div class="w-[30%] py-4 border-r border-black text-center justify-center flex items-center text-sm">
+              ${formatDate(pengadaan.date)}
+            </div>
+            <div class="w-[10%] py-4  text-center flex justify-center items-center text-sm">
+              ${pengadaan.aksi}
+            </div>
+            </div>
+  
     `;
 
     pengadaanList.appendChild(tr);

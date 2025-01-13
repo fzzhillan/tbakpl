@@ -679,17 +679,17 @@ function formatTanggal(tanggal) {
 
     // Isi modal dengan data transaksi dan penyewa
     // document.querySelector("#nota-nomor").textContent = notaNomor;
-    // document.querySelector("#nota-namaBarang").textContent = notaNamaBarang;
-    // document.querySelector("#nota-hargaSewa").textContent = notaHargaSewa;
-    // document.querySelector("#nota-qty").textContent = notaQty;
-    // document.querySelector("#nota-hargaTotal").textContent = notaHargaTotal;
-    // document.querySelector("#nota-diskon").textContent = `${notaDiskon}%`;
+    document.querySelector("#nota-namaBarang").textContent = notaNamaBarang;
+    document.querySelector("#nota-hargaSewa").textContent = notaHargaSewa;
+    document.querySelector("#nota-qty").textContent = notaQty;
+    document.querySelector("#nota-hargaTotal").textContent = notaHargaTotal;
+    document.querySelector("#nota-diskon").textContent = `${notaDiskon}%`;
     document.querySelector("#nota-total").textContent = `Rp ${notaTotal.toLocaleString()}`;
     document.querySelector("#nota-noHpPenyewa").textContent = notaNoHpPenyewa;
     document.querySelector("#nota-namePenyewa").textContent = notaNamePenyewa + ",";
     // document.querySelector("#nota-pencatat").textContent = pencatat;
-    // document.querySelector("#nota-tujuan").textContent = notaTujuan;
-    // document.querySelector("#nota-jaminan").textContent = notaJaminan;
+    document.querySelector("#nota-tujuan").textContent = notaTujuan;
+    document.querySelector("#nota-jaminan").textContent = notaJaminan;
     document.querySelector("#nota-tanggalSewa").textContent =
       formatTanggal(tanggalSewa) || "Tanggal tidak diatur";
     document.querySelector("#nota-tanggalDisewa").textContent = tanggalDisewa;
@@ -790,9 +790,16 @@ document
   .addEventListener("click", async () => {
     try {
       // Ambil data dari modal nota
+      const namePenyewaElement = document.querySelector("#nota-namePenyewa");
+      let namePenyewaText = namePenyewaElement.textContent.trim(); // Ambil teks dan hilangkan spasi di awal/akhir
+
+      // Hapus ", " di akhir teks jika ada
+      namePenyewaText = namePenyewaText.replace(/,\s*$/, ""); // RegEx untuk menghapus koma dan spasi di akhir
+
       
+
       const notaData = {
-        nomor: document.querySelector("#nota-nomor").textContent.trim(),
+        // nomor: document.querySelector("#nota-nomor").textContent.trim(),
         namaBarang: document
           .querySelector("#nota-namaBarang")
           .textContent.trim(),
@@ -803,13 +810,13 @@ document
           .textContent.trim(),
         diskon: document.querySelector("#nota-diskon").textContent.trim(),
         total: document.querySelector("#nota-total").textContent.trim(),
-        namePenyewa: document.querySelector("#nota-namePenyewa").textContent.trim(),
+        namePenyewa: namePenyewaText,
         noHpPenyewa: document
           .querySelector("#nota-noHpPenyewa")
           .textContent.trim(),
         pencatat: document.querySelector("#thirdUserName").textContent.trim(),
         tujuan: document.querySelector("#nota-tujuan").textContent.trim(),
-        
+
         jaminan: document.querySelector("#nota-jaminan").textContent.trim(),
         tanggalSewa: formatTanggal(
           document.querySelector("#transaksi-waktu").value.trim()
@@ -846,7 +853,7 @@ document
 
           // Perbarui jumlah barang
           const newJumlah = barangData.jumlah - qty;
-          const newJumlahSewa = barangData.jumlahSewa + qty; 
+          const newJumlahSewa = barangData.jumlahSewa + qty;
           if (newJumlah < 0) {
             console.warn(`Jumlah barang "${namaBarang}" tidak mencukupi.`);
           } else {
@@ -865,8 +872,7 @@ document
 
       // Tampilkan pesan sukses
       alert("Pembayaran berhasil diselesaikan dan data telah disimpan!");
-      // fetchPengadaanBarang(); 
-      
+      // fetchPengadaanBarang();
 
       // Reset tampilan dan modal seperti di kode Anda
       konfirmasiPembayaranSection.classList.add("hidden");
@@ -888,7 +894,6 @@ document
       });
 
       updateBadge();
-      
 
       const diskonInput = document.querySelector("#transaksi-diskon");
       const bayarInput = document.querySelector("#transaksi-bayar");
@@ -903,7 +908,6 @@ document
       if (waktuSewaInput) waktuSewaInput.value = "";
       if (waktuSewaHari) waktuSewaHari.textContent = "";
 
-      
       const transaksiSubtotalElement = document.querySelector(
         "#transaksi-subtotal"
       );

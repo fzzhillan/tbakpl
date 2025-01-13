@@ -10,6 +10,8 @@ import {
   updateDoc,
   increment,
   serverTimestamp,
+  query,
+  where
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 import { renderCategories } from "./kategori.js";
 
@@ -337,6 +339,7 @@ addBarangForm.addEventListener("submit", async (e) => {
       jumlah: parseInt(jumlah),
       date: serverTimestamp(),
       aksi: "Tambah",
+      gambar: gambarUrl,
     });
 
     const kategoriRef = doc(db, "kategori", kategori);
@@ -442,7 +445,21 @@ document
     const status = document.getElementById("edit-status-barang").value;
     const jumlah = document.getElementById("edit-jumlah-barang").value;
 
+    let gambarUrl = "";
+    
+
     try {
+
+      const querySnapshot = await getDocs(
+        query(collection(db, "pengadaanBarang"), where("nama", "==", nama))
+      );
+
+      if (!querySnapshot.empty) {
+        // Jika barang ditemukan, ambil field gambar dari dokumen pertama
+        const doc = querySnapshot.docs[0];
+        gambarUrl = doc.data().gambar; // Ambil URL gambar
+      }
+
       const docRef = doc(db, "pengadaanBarang", id);
       const docSnap = await getDoc(docRef);
 
@@ -486,6 +503,7 @@ document
         jumlah: parseInt(jumlah),
         date: serverTimestamp(),
         aksi: "Edit",
+        gambar: gambarUrl,
       });
 
       alert("Barang berhasil diperbarui!");
@@ -520,6 +538,7 @@ async function handleDeleteBarang(e) {
       const nama = barang.nama; // Ambil nama barang
       const kategori = barang.kategori; // Ambil kategori barang
       const kategoriRef = doc(db, "kategori", kategori);
+      const gambarUrl = barang.gambar;
 
       // Kurangi jumlah di kategori terkait
       await updateDoc(kategoriRef, {
@@ -528,17 +547,18 @@ async function handleDeleteBarang(e) {
 
       // Render ulang kategori
       renderCategories();
-
-      // Hapus dokumen barang
-      await deleteDoc(doc(db, "pengadaanBarang", id));
-
-      // Tambahkan log ke riwayatPengadaan
+      
       await addDoc(collection(db, "riwayatPengadaan"), {
         nama: nama, // Pastikan nama berasal dari barang
         namaPencatat: thirdUserName,
         date: serverTimestamp(),
         aksi: "Hapus",
+        gambarUrl: gambarUrl,
       });
+      // Hapus dokumen barang
+      await deleteDoc(doc(db, "pengadaanBarang", id));
+
+      // Tambahkan log ke riwayatPengadaan
 
       alert("Barang berhasil dihapus!");
       document.getElementById("delete-barang-modal").classList.add("hidden");
