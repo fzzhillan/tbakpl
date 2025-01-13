@@ -91,10 +91,14 @@ async function deleteDocFromTransaksi(namePenyewa, tanggalSewa) {
   }
 }
 
-document.getElementById("dataPengembalianBtn").addEventListener("click", function(){
-  fetchAndRenderData();
-  console.log("Refresh")
-});
+document
+  .getElementById("riwayatTransaksiBtn")
+  .addEventListener("click", async function () {
+    const dataPenyewaan = await fetchAndRenderData(); // Ambil data dari Firestore
+    renderDataPengembalian(dataPenyewaan); // Render data ke dalam HTML
+    console.log("Refresh Berhasil");
+  });
+
 
 function renderDataPengembalian(dataPenyewaan) {
   const container = document.getElementById("barangList-dataPengembalian"); // Pastikan elemen ini ada di HTML

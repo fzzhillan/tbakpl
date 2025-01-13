@@ -11,10 +11,14 @@ function parseDate(dateString) {
   return new Date(parts[2], parts[1] - 1, parts[0]); // new Date(year, month, day)
 }
 
-document.getElementById("riwayatTransaksiBtn").addEventListener("click", function () {
-  fetchData();
-  console.log("Refresh Berhasil");
-});
+document
+  .getElementById("riwayatTransaksiBtn")
+  .addEventListener("click", async function () {
+    const data = await fetchData(); // Ambil data dari Firestore
+    renderTransaksi(data); // Render data ke dalam HTML
+    console.log("Refresh Berhasil");
+  });
+
 
 async function fetchData() {
   const transaksiRef = collection(db, "riwayatTransaksi");

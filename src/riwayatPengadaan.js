@@ -20,11 +20,14 @@ async function fetchPengadaanData() {
   return data;
 }
 
-document.getElementById("riwayatPengadaanBtn").addEventListener("click", function() {
-  fetchPengadaanData();
-  console.log("Refresh Berhasil");
+document
+  .getElementById("riwayatPengadaanBtn")
+  .addEventListener("click", async function () {
+    const data = await fetchPengadaanData(); // Ambil data dari Firestore
+    renderPengadaan(data); // Render data ke dalam HTML
+    console.log("Refresh Berhasil");
+  });
 
-});
 
 function formatDate(date) {
   const d = new Date(date.seconds * 1000); // Mengambil timestamp dan mengkonversinya ke milidetik
