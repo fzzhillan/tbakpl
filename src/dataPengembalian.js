@@ -91,13 +91,7 @@ async function deleteDocFromTransaksi(namePenyewa, tanggalSewa) {
   }
 }
 
-document
-  .getElementById("riwayatTransaksiBtn")
-  .addEventListener("click", async function () {
-    const dataPenyewaan = await fetchAndRenderData(); // Ambil data dari Firestore
-    renderDataPengembalian(dataPenyewaan); // Render data ke dalam HTML
-    console.log("Refresh Berhasil");
-  });
+
 
 
 function renderDataPengembalian(dataPenyewaan) {
@@ -379,12 +373,24 @@ function renderDataPengembalian(dataPenyewaan) {
 
 
 // Function to filter data based on search input
-document
-  .getElementById("searchBar-dataPengembalian")
-  .addEventListener("input", (e) => {
-    const query = e.target.value; // Ambil nilai input dari search bar
-    fetchAndRenderData(query); // Panggil fungsi untuk fetch dan render data berdasarkan query
-  });
+document.addEventListener("DOMContentLoaded", () => {
+  document
+    .getElementById("searchBar-dataPengembalian")
+    .addEventListener("input", (e) => {
+      const query = e.target.value; // Ambil nilai input dari search bar
+      fetchAndRenderData(query); // Panggil fungsi untuk fetch dan render data berdasarkan query
+    });
+  document
+    .getElementById("riwayatTransaksiBtn")
+    .addEventListener("click", async function () {
+      const query = ""; // Mendefinisikan query sebagai string kosong
+      await fetchAndRenderData(query); // Render data ke dalam HTML
+      console.log("Refresh Berhasil");
+    });
+  
+
+});
+
 
 function filterDataBySearch(dataPenyewaan, query) {
   // Mengabaikan perbedaan huruf kapital dan memfilter berdasarkan nama barang, kondisi barang, dan nama penyewa
